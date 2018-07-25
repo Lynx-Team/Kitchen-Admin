@@ -16,7 +16,7 @@
                             <input type="text" class="form-control" id="profile_name" value="{{ Auth::user()->name }}">
                         </div>
                         <div class="form-group">
-                            <label for="profile_email">Email address</label>
+                            <label for="profile_email">{{ __('home.profile_email') }}</label>
                             <input type="email" class="form-control" id="profile_email" value="{{ Auth::user()->email }}">
                         </div>
                         <div class="form-group">

@@ -30,4 +30,16 @@ class User extends Authenticatable
     public function role() {
         return $this->belongsTo('App\Role');
     }
+
+    public function getIsAdminAttribute() {
+        return $this->role->name === 'admin';
+    }
+
+    public function getIsKitchenAttribute() {
+        return $this->role->name === 'kitchen';
+    }
+
+    public function getIsManagerAttribute()  {
+        return $this->role->name === 'manager';
+    }
 }
