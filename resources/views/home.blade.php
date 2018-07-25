@@ -19,6 +19,10 @@
                             <label for="profile_email">Email address</label>
                             <input type="email" class="form-control" id="profile_email" value="{{ Auth::user()->email }}">
                         </div>
+                        <div class="form-group">
+                            <label for="profile_role">{{ __('home.profile_role') }}</label>
+                            <input type="text" readonly class="form-control" id="profile_role" value="{{ Auth::user()->role->name }}">
+                        </div>
                         <button type="submit" class="btn btn-primary">{{ __('home.apply_btn') }}</button>
                     </form>
                 </div>
