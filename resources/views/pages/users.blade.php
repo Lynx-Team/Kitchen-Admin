@@ -19,7 +19,7 @@
                             <input type="email" class="form-control" name="email" id="new_email" placeholder="test@test.com">
                         </div>
                         <div class="form-group col">
-                            <label for="new_password">{{ __('home.new_password') }}</label>
+                            <label for="new_password">{{ __('users.password') }}</label>
                             <input type="password" class="form-control" name="password" id="new_password">
                         </div>
                         <div class="form-group col">
