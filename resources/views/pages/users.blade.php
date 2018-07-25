@@ -10,21 +10,34 @@
 
                 <div class="card-body">
                     @forelse ($users as $user)
-                        <form action="/" class="row">
+                        <form action="{{ route('users.update') }}" method="POST" class="row">
                             @csrf
+                            <input type="hidden" name="id" value="{{ $user->id }}">
                             <div class="form-group col">
-                                <input type="text" class="form-control" id="profile_name" value="{{ $user->name }}">
+                                <input type="text" class="form-control" name="name" value="{{ $user->name }}">
                             </div>
                             <div class="form-group col">
-                                <input type="email" class="form-control" id="profile_email" value="{{ $user->email }}">
+                                <input type="email" class="form-control" name="email" value="{{ $user->email }}">
                             </div>
                             <div class="form-group col">
-                                <input type="text" readonly class="form-control" id="profile_role" value="{{ $user->role->name }}">
+                                <select class="form-control" name="role">
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->id }}" {{ $role->id === $user->role_id ? 'selected' : '' }}>
+                                            {{ $role->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col">
                                 <button type="submit" class="btn btn-warning">{{ __('users.update_btn') }}</button>
-                                <button type="submit" class="btn btn-danger">{{ __('users.delete_btn') }}</button>
+                                <a role="button" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete_{{ $user->id }}').submit();">
+                                    {{ __('users.delete_btn') }}
+                                </a>
                             </div>
+                        </form>
+                        <form id="delete_{{ $user->id }}" action="{{ route('users.delete') }}" method="POST" style="display: none;">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $user->id }}">
                         </form>
                     @empty
                         <p>No users</p>

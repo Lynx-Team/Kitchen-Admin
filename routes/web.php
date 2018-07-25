@@ -21,3 +21,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/users', 'UserController@view')->name('users.view');
+Route::post('/users/update', 'UserController@update')->name('users.update');
+Route::post('/users/delete', 'UserController@delete')->name('users.delete');
