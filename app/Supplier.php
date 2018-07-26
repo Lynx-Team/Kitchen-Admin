@@ -8,6 +8,8 @@ class Supplier extends Model
 {
     public $timestamps = false;
 
+    protected $fillable = ['name', 'email'];
+
     public function items()
     {
         return $this->hasMany('App\Item');

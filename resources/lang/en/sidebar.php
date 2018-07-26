@@ -2,4 +2,5 @@
 
 return [
     'users' => 'Users',
+    'suppliers' => 'Suppliers',
 ];
