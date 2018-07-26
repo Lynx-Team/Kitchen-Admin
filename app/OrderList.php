@@ -8,8 +8,8 @@ class OrderList extends Model
 {
     public $timestamps = false;
 
-    public function order_list()
+    public function orderListItems()
     {
-        return $this->hasMany('App\Item');
+        return $this->hasMany('App\OrderListItems');
     }
 }

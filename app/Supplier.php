@@ -14,4 +14,9 @@ class Supplier extends Model
     {
         return $this->hasMany('App\Item');
     }
+
+    public function orderListItems()
+    {
+        return $this->hasMany('App\OrderListItem');
+    }
 }

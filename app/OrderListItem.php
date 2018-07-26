@@ -4,16 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Item extends Model
+class OrderListItem extends Model
 {
     public $timestamps = false;
 
-    public function category()
+    public function orderList()
     {
-        return $this->belongsTo('App\ItemCategory');
+        return $this->belongsTo('App\OrderList');
     }
 
-    public function defaultSupplier()
+    public function supplier()
     {
         return $this->belongsTo('App\Supplier');
     }
