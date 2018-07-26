@@ -81,9 +81,7 @@ class UserController extends Controller
                 'email' => 'required|string|email|max:255|unique:users,email,' . $request->id
             ]);
             if ($validator->fails())
-            {
                 return redirect()->back()->withErrors($validator, 'profile');
-            }
 
             $userToUpdate->update(['name' => $request->name, 'email' => $request->email]);
             return redirect()->back();
@@ -95,9 +93,21 @@ class UserController extends Controller
     public function change_password(Request $request)
     {
         $userToChangePassword = User::where('id', $request->id)->firstOrFail();
-        if (Auth::user()->can('change_password', $userToChangePassword) &&
-            Hash::check($request->old_password, $userToChangePassword->password))
+        if (Auth::user()->can('change_password', $userToChangePassword))
         {
+            $validator = Validator::make($request->all(), [
+                'old_password' => 'required|string|min:4',
+                'new_password' => 'required|string|min:4'
+            ]);
+            $validator->after(function ($validator) use($request, $userToChangePassword) {
+                if (!Hash::check($request->old_password, $userToChangePassword->password)) {
+                    $validator->errors()->add('old_password', 'Invalid password.');
+                }
+            });
+
+            if ($validator->fails())
+                return redirect()->back()->withErrors($validator, 'change_password');
+
             $userToChangePassword->update(['password' => Hash::make($request->new_password)]);
             return redirect()->back();
         }

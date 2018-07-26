@@ -49,11 +49,21 @@
                         <input type="hidden" name="id" value="{{ Auth::user()->id }}">
                         <div class="form-group">
                             <label for="profile_old_password">{{ __('home.old_password') }}</label>
-                            <input type="password" class="form-control" name="old_password" id="profile_old_password">
+                            <input type="password" class="form-control" name="old_password" id="profile_old_password" aria-describedby="old_password_error">
+                            @if($errors->change_password->has('old_password'))
+                                <p id="old_password_error" class="form-text text-danger">
+                                    {{ $errors->change_password->first('old_password') }}
+                                </p>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="profile_new_password">{{ __('home.new_password') }}</label>
-                            <input type="password" class="form-control" name="new_password" id="profile_new_password">
+                            <input type="password" class="form-control" name="new_password" id="profile_new_password" aria-describedby="new_password_error">
+                            @if($errors->change_password->has('new_password'))
+                                <p id="new_password_error" class="form-text text-danger">
+                                    {{ $errors->change_password->first('new_password') }}
+                                </p>
+                            @endif
                         </div>
                         <button type="submit" class="btn btn-primary">{{ __('home.apply_btn') }}</button>
                     </form>
