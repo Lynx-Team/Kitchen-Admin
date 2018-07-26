@@ -7,6 +7,7 @@ use App\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Validator;
 
 class UserController extends Controller
 {
@@ -75,6 +76,15 @@ class UserController extends Controller
         $userToUpdate = User::where('id', $request->id)->firstOrFail();
         if (Auth::user()->can('update_profile', $userToUpdate))
         {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users,email,' . $request->id
+            ]);
+            if ($validator->fails())
+            {
+                return redirect()->back()->withErrors($validator, 'profile');
+            }
+
             $userToUpdate->update(['name' => $request->name, 'email' => $request->email]);
             return redirect()->back();
         }

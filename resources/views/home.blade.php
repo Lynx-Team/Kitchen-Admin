@@ -14,11 +14,21 @@
                         <input type="hidden" name="id" value="{{ Auth::user()->id }}">
                         <div class="form-group">
                             <label for="profile_name">{{ __('home.profile_name') }}</label>
-                            <input type="text" class="form-control" name="name" id="profile_name" value="{{ Auth::user()->name }}">
+                            <input type="text" class="form-control" name="name" id="profile_name" value="{{ Auth::user()->name }}" aria-describedby="name_error">
+                            @if($errors->profile->has('name'))
+                                <p id="name_error" class="form-text text-danger">
+                                    {{ $errors->profile->first('name') }}
+                                </p>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="profile_email">{{ __('home.profile_email') }}</label>
-                            <input type="email" class="form-control" name="email" id="profile_email" value="{{ Auth::user()->email }}">
+                            <input type="email" class="form-control" name="email" id="profile_email" value="{{ Auth::user()->email }}" aria-describedby="email_error">
+                            @if($errors->profile->has('email'))
+                                <p id="email_error" class="form-text text-danger">
+                                    {{ $errors->profile->first('email') }}
+                                </p>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="profile_role">{{ __('home.profile_role') }}</label>
