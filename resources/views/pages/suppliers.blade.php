@@ -12,7 +12,7 @@
                         @csrf
                         <div class="form-group col">
                             <label for="new_name">{{ __('suppliers.name') }}</label>
-                            <input type="text" class="form-control" name="name" id="new_name" placeholder="Login">
+                            <input type="text" class="form-control" name="name" id="new_name" placeholder="{{ __('suppliers.name') }}">
                         </div>
                         <div class="form-group col">
                             <label for="new_email">{{ __('suppliers.email') }}</label>
