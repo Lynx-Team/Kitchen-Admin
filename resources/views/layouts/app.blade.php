@@ -14,7 +14,13 @@
         </header>
         <div class="app-body">
             <div class="sidebar">
-                @include('partials.admin_sidebar')
+                @if(Auth::user()->is_admin)
+                    @include('partials.admin_sidebar')
+                @elseif(Auth::user()->is_kitchen)
+                    @include('partials.kitchen_sidebar')
+                @elseif(Auth::user()->is_manager)
+                    @include('partials.manager_sidebar')
+                @endif
             </div>
             <main class="main">
                 <div class="container pt-2">
