@@ -24,6 +24,8 @@ Route::get('/users', 'UserController@view')->name('users.view');
 Route::post('/users/create', 'UserController@create')->name('users.create');
 Route::post('/users/update', 'UserController@update')->name('users.update');
 Route::post('/users/delete', 'UserController@delete')->name('users.delete');
+Route::post('/users/update_profile', 'UserController@update_profile')->name('users.update_profile');
+Route::post('/users/change_password', 'UserController@change_password')->name('users.change_password');
 
 Route::get('/suppliers', 'SupplierController@view')->name('suppliers.view');
 Route::post('/suppliers/create', 'SupplierController@create')->name('suppliers.create');

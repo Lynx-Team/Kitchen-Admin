@@ -69,4 +69,29 @@ class UserController extends Controller
 
         return view('errors.403');
     }
+
+    public function update_profile(Request $request)
+    {
+        $userToUpdate = User::where('id', $request->id)->firstOrFail();
+        if (Auth::user()->can('update_profile', $userToUpdate))
+        {
+            $userToUpdate->update(['name' => $request->name, 'email' => $request->email]);
+            return redirect()->back();
+        }
+
+        return view('errors.403');
+    }
+
+    public function change_password(Request $request)
+    {
+        $userToChangePassword = User::where('id', $request->id)->firstOrFail();
+        if (Auth::user()->can('change_password', $userToChangePassword) &&
+            Hash::check($request->old_password, $userToChangePassword->password))
+        {
+            $userToChangePassword->update(['password' => Hash::make($request->new_password)]);
+            return redirect()->back();
+        }
+
+        return view('errors.403');
+    }
 }

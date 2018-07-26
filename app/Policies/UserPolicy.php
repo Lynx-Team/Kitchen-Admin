@@ -28,4 +28,14 @@ class UserPolicy
     {
         return $user->is_admin;
     }
+
+    public function update_profile(User $user, User $model)
+    {
+        return $user->id === $model->id;
+    }
+
+    public function change_password(User $user, User $model)
+    {
+        return $user->id === $model->id;
+    }
 }
