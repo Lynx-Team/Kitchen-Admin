@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\User;
 use App\Role;
@@ -29,19 +30,14 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    public function create(Request $request)
+    public function create(CreateUserRequest $request)
     {
-        if (Auth::user()->can('create', User::class))
-        {
-            User::updateOrCreate(['email' => $request->email], [
-                'name' => $request->name,
-                'password' => Hash::make($request->password),
-                'role_id' => $request->role,
-            ]);
-
-            return redirect()->back();
-        }
-
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role_id' => $request->role,
+        ]);
         return redirect()->back();
     }
 

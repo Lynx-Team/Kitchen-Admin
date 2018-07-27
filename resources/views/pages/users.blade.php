@@ -12,25 +12,45 @@
                         @csrf
                         <div class="form-group col">
                             <label for="new_name">{{ __('home.profile_name') }}</label>
-                            <input type="text" class="form-control" name="name" id="new_name" placeholder="{{ __('home.profile_name') }}">
+                            <input type="text" class="form-control" name="name" id="new_name" placeholder="{{ __('home.profile_name') }}" aria-describedby="create_name_error">
+                            @if($errors->create_user->has('name'))
+                                <p id="create_name_error" class="form-text text-danger">
+                                    {{ $errors->create_user->first('name') }}
+                                </p>
+                            @endif
                         </div>
                         <div class="form-group col">
                             <label for="new_email">{{ __('home.profile_email') }}</label>
-                            <input type="email" class="form-control" name="email" id="new_email" placeholder="test@test.com">
+                            <input type="email" class="form-control" name="email" id="new_email" placeholder="test@test.com" aria-describedby="create_email_error">
+                            @if($errors->create_user->has('email'))
+                                <p id="create_email_error" class="form-text text-danger">
+                                    {{ $errors->create_user->first('email') }}
+                                </p>
+                            @endif
                         </div>
                         <div class="form-group col">
                             <label for="new_password">{{ __('users.password') }}</label>
-                            <input type="password" class="form-control" name="password" id="new_password">
+                            <input type="password" class="form-control" name="password" id="new_password" aria-describedby="create_password_error">
+                            @if($errors->create_user->has('password'))
+                                <p id="create_password_error" class="form-text text-danger">
+                                    {{ $errors->create_user->first('password') }}
+                                </p>
+                            @endif
                         </div>
                         <div class="form-group col">
-                            <label for="new_role">{{ __('home.profile_role') }}</label>
-                            <select class="form-control" name="role" id="new_role">
+                            <label for="role">{{ __('home.profile_role') }}</label>
+                            <select class="form-control" name="role" id="role" aria-describedby="create_role_error">
                                 @foreach($roles as $role)
                                     <option value="{{ $role->id }}">
                                         {{ $role->name }}
                                     </option>
                                 @endforeach
                             </select>
+                            @if($errors->create_user->has('role'))
+                                <p id="create_role_error" class="form-text text-danger">
+                                    {{ $errors->create_user->first('role') }}
+                                </p>
+                            @endif
                         </div>
                         <div class="form-group col">
                             <label for="add_user_btn">&nbsp;</label>
