@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateProfileRequest;
 use App\User;
 use App\Role;
 use Illuminate\Http\Request;
@@ -71,23 +72,10 @@ class UserController extends Controller
         return view('errors.403');
     }
 
-    public function update_profile(Request $request)
+    public function update_profile(UpdateProfileRequest $request)
     {
-        $userToUpdate = User::where('id', $request->id)->firstOrFail();
-        if (Auth::user()->can('update_profile', $userToUpdate))
-        {
-            $validator = Validator::make($request->all(), [
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users,email,' . $request->id
-            ]);
-            if ($validator->fails())
-                return redirect()->back()->withErrors($validator, 'profile');
-
-            $userToUpdate->update(['name' => $request->name, 'email' => $request->email]);
-            return redirect()->back();
-        }
-
-        return view('errors.403');
+        User::find($request->id)->update(['name' => $request->name, 'email' => $request->email]);
+        return redirect()->back();
     }
 
     public function change_password(Request $request)
