@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\User;
 use App\Role;
 use Illuminate\Http\Request;
@@ -41,18 +42,13 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    public function update(Request $request)
+    public function update(UpdateUserRequest $request)
     {
-        $userToUpdate = User::where('id', $request->id)->firstOrFail();
-
-        if (Auth::user()->can('update', $userToUpdate))
-        {
-            User::where('id', $request->id)->update(['name' => $request->name, 'email' => $request->email,
-                'role_id' => $request->role]);
-
-            return redirect()->back();
-        }
-
+        User::find($request->id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role_id' => $request->role
+        ]);
         return redirect()->back();
     }
 
