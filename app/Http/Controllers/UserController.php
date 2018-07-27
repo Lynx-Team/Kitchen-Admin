@@ -26,7 +26,7 @@ class UserController extends Controller
             return view('pages.users', ['users' => User::all(), 'roles' => $roles]);
         }
 
-        return view('errors.403');
+        return redirect()->back();
     }
 
     public function create(Request $request)
@@ -42,7 +42,7 @@ class UserController extends Controller
             return redirect()->back();
         }
 
-        return view('errors.403');
+        return redirect()->back();
     }
 
     public function update(Request $request)
@@ -57,7 +57,7 @@ class UserController extends Controller
             return redirect()->back();
         }
 
-        return view('errors.403');
+        return redirect()->back();
     }
 
     public function delete(Request $request)
@@ -70,7 +70,7 @@ class UserController extends Controller
             return redirect()->back();
         }
 
-        return view('errors.403');
+        return redirect()->back();
     }
 
     public function update_profile(UpdateProfileRequest $request)
