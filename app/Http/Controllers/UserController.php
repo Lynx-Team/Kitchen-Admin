@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\User;
 use App\Role;
@@ -78,28 +79,9 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    public function change_password(Request $request)
+    public function change_password(ChangePasswordRequest $request)
     {
-        $userToChangePassword = User::where('id', $request->id)->firstOrFail();
-        if (Auth::user()->can('change_password', $userToChangePassword))
-        {
-            $validator = Validator::make($request->all(), [
-                'old_password' => 'required|string|min:4',
-                'new_password' => 'required|string|min:4'
-            ]);
-            $validator->after(function ($validator) use($request, $userToChangePassword) {
-                if (!Hash::check($request->old_password, $userToChangePassword->password)) {
-                    $validator->errors()->add('old_password', 'Invalid password.');
-                }
-            });
-
-            if ($validator->fails())
-                return redirect()->back()->withErrors($validator, 'change_password');
-
-            $userToChangePassword->update(['password' => Hash::make($request->new_password)]);
-            return redirect()->back();
-        }
-
-        return view('errors.403');
+        User::find($request->id)->update(['password' => Hash::make($request->new_password)]);
+        return redirect()->back();
     }
 }
