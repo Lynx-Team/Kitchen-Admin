@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateSupplierRequest;
+use App\Http\Requests\UpdateSupplierRequest;
 use App\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,38 +18,24 @@ class SupplierController extends Controller
         return view('errors.403');
     }
 
-    public function create(Request $request)
+    public function create(CreateSupplierRequest $request)
     {
-        if (Auth::user()->can('create', Supplier::class))
-        {
-            Supplier::updateOrCreate(['email' => $request->email], ['name' => $request->name]);
-            return redirect()->back();
-        }
-
-        return view('errors.403');
+        Supplier::create(['name' => $request->name, 'email' => $request->email]);
+        return redirect()->back();
     }
 
-    public function update(Request $request)
+    public function update(UpdateSupplierRequest $request)
     {
-        $supplierToUpdate = Supplier::where('id', $request->id)->firstOrFail();
-        if (Auth::user()->can('update', $supplierToUpdate))
-        {
-            Supplier::where('id', $request->id)->update(['name' => $request->name, 'email' => $request->email]);
-            return redirect()->back();
-        }
-
-        return view('errors.403');
+        Supplier::find($request->id)->update(['name' => $request->name, 'email' => $request->email]);
+        return redirect()->back();
     }
 
     public function delete(Request $request)
     {
-        $supplierToDelete = Supplier::where('id', $request->id)->firstOrFail();
+        $supplierToDelete = Supplier::find($request->id)->firstOrFail();
         if (Auth::user()->can('delete', $supplierToDelete))
-        {
-            Supplier::where('id', $request->id)->delete();
-            return redirect()->back();
-        }
+            $supplierToDelete->delete();
 
-        return view('errors.403');
+        return redirect()->back();
     }
 }
