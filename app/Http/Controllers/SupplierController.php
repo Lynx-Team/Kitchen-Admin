@@ -15,7 +15,7 @@ class SupplierController extends Controller
         if (Auth::user()->can('view', Supplier::class))
             return view('pages.suppliers', ['suppliers' => Supplier::all()]);
 
-        return view('errors.403');
+        return redirect()->back();
     }
 
     public function create(CreateSupplierRequest $request)
