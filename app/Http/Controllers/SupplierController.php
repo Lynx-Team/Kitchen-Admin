@@ -32,7 +32,7 @@ class SupplierController extends Controller
 
     public function delete(Request $request)
     {
-        $supplierToDelete = Supplier::find($request->id)->firstOrFail();
+        $supplierToDelete = Supplier::findOrFail($request->id);
         if (Auth::user()->can('delete', $supplierToDelete))
             $supplierToDelete->delete();
 

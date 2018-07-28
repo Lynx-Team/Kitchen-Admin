@@ -54,10 +54,9 @@ class UserController extends Controller
 
     public function delete(Request $request)
     {
-        $userToDelete = User::find($request->id)->firstOrFail();
-
+        $userToDelete = User::findOrFail($request->id);
         if (Auth::user()->can('delete', $userToDelete))
-            User::where('id', $request->id)->delete();
+            $userToDelete->delete();
 
         return redirect()->back();
     }
