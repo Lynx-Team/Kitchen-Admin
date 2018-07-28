@@ -12,11 +12,21 @@
                         @csrf
                         <div class="form-group col">
                             <label for="new_name">{{ __('suppliers.name') }}</label>
-                            <input type="text" class="form-control" name="name" id="new_name" placeholder="{{ __('suppliers.name') }}">
+                            <input type="text" class="form-control" name="name" id="new_name" placeholder="{{ __('suppliers.name') }}" aria-describedby="create_name_error">
+                            @if($errors->create_supplier->has('name'))
+                                <p id="create_name_error" class="form-text text-danger">
+                                    {{ $errors->create_supplier->first('name') }}
+                                </p>
+                            @endif
                         </div>
                         <div class="form-group col">
                             <label for="new_email">{{ __('suppliers.email') }}</label>
-                            <input type="email" class="form-control" name="email" id="new_email" placeholder="test@test.com">
+                            <input type="email" class="form-control" name="email" id="new_email" placeholder="test@test.com" aria-describedby="create_email_error">
+                            @if($errors->create_supplier->has('email'))
+                                <p id="create_email_error" class="form-text text-danger">
+                                    {{ $errors->create_supplier->first('email') }}
+                                </p>
+                            @endif
                         </div>
                         <div class="form-group col">
                             <label for="add_user_btn">&nbsp;</label>
@@ -37,10 +47,20 @@
                             @csrf
                             <input type="hidden" name="id" value="{{ $supplier->id }}">
                             <div class="form-group col">
-                                <input type="text" class="form-control" name="name" value="{{ $supplier->name }}">
+                                <input type="text" class="form-control" name="name" value="{{ $supplier->name }}" aria-describedby="update_name_error">
+                                @if($errors->update_supplier->has('name') && $errors->update_supplier->first('row_id') == $supplier->id)
+                                    <p id="update_name_error" class="form-text text-danger">
+                                        {{ $errors->update_supplier->first('name') }}
+                                    </p>
+                                @endif
                             </div>
                             <div class="form-group col">
-                                <input type="email" class="form-control" name="email" value="{{ $supplier->email }}">
+                                <input type="email" class="form-control" name="email" value="{{ $supplier->email }}" aria-describedby="update_email_error">
+                                @if($errors->update_supplier->has('email') && $errors->update_supplier->first('row_id') == $supplier->id)
+                                    <p id="update_email_error" class="form-text text-danger">
+                                        {{ $errors->update_supplier->first('email') }}
+                                    </p>
+                                @endif
                             </div>
                             <div class="col">
                                 <button type="submit" class="btn btn-warning">{{ __('users.update_btn') }}</button>

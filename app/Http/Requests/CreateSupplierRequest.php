@@ -7,6 +7,8 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class CreateSupplierRequest extends FormRequest
 {
+    protected $errorBag = 'create_supplier';
+
     public function authorize()
     {
         return $this->user()->can('create', Supplier::class);
@@ -16,7 +18,7 @@ class CreateSupplierRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255'
+            'email' => 'required|string|email|max:255|unique:suppliers,email'
         ];
     }
 }
