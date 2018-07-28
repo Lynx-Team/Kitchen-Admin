@@ -27,7 +27,7 @@ class UpdateUserRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        $validator->getMessageBag()->add('id', $this->id);
+        $validator->getMessageBag()->add('row_id', $this->id);
         parent::failedValidation($validator);
     }
 }

@@ -72,7 +72,7 @@
                             <input type="hidden" name="id" value="{{ $user->id }}">
                             <div class="form-group col">
                                 <input type="text" class="form-control" name="name" value="{{ $user->name }}" aria-describedby="update_name_error">
-                                @if($errors->update_user->has('name') && $errors->update_user->first('id') == $user->id)
+                                @if($errors->update_user->has('name') && $errors->update_user->first('row_id') == $user->id)
                                     <p id="update_name_error" class="form-text text-danger">
                                         {{ $errors->update_user->first('name') }}
                                     </p>
@@ -80,7 +80,7 @@
                             </div>
                             <div class="form-group col">
                                 <input type="email" class="form-control" name="email" value="{{ $user->email }}" aria-describedby="update_email_error">
-                                @if($errors->update_user->has('email')  && $errors->update_user->first('id') == $user->id)
+                                @if($errors->update_user->has('email')  && $errors->update_user->first('row_id') == $user->id)
                                     <p id="update_email_error" class="form-text text-danger">
                                         {{ $errors->update_user->first('email') }}
                                     </p>
@@ -94,7 +94,7 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                @if($errors->update_user->has('role')  && $errors->update_user->first('id') == $user->id)
+                                @if($errors->update_user->has('role')  && $errors->update_user->first('row_id') == $user->id)
                                     <p id="update_role_error" class="form-text text-danger">
                                         {{ $errors->update_user->first('role') }}
                                     </p>
