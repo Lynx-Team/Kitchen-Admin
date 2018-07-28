@@ -8,6 +8,8 @@ class ItemCategory extends Model
 {
     public $timestamps = false;
 
+    protected $fillable = ['name'];
+
     public function Items()
     {
         return $this->hasMany('App\Items');

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\ItemCategory;
+use App\Policies\ItemCategoryPolicy;
 use App\Policies\SupplierPolicy;
 use App\Policies\UserPolicy;
 use App\Supplier;
@@ -18,6 +20,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         User::class => UserPolicy::class,
         Supplier::class => SupplierPolicy::class,
+        ItemCategory::class => ItemCategoryPolicy::class,
     ];
 
     /**

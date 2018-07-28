@@ -31,3 +31,8 @@ Route::get('/suppliers', 'SupplierController@view')->name('suppliers.view');
 Route::post('/suppliers/create', 'SupplierController@create')->name('suppliers.create');
 Route::post('/suppliers/update', 'SupplierController@update')->name('suppliers.update');
 Route::post('/suppliers/delete', 'SupplierController@delete')->name('suppliers.delete');
+
+Route::get('/item_categories', 'ItemCategoryController@view')->name('item_categories.view');
+Route::post('/item_categories/create', 'ItemCategoryController@create')->name('item_categories.create');
+Route::post('/item_categories/update', 'ItemCategoryController@update')->name('item_categories.update');
+Route::post('/item_categories/delete', 'ItemCategoryController@delete')->name('item_categories.delete');
