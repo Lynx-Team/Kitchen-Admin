@@ -38,4 +38,9 @@ class UserPolicy
     {
         return $user->id === $model->id;
     }
+
+    public function view_kitchens(User $user)
+    {
+        return $user->isAdmin || $user->isManager;
+    }
 }

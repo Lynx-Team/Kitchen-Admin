@@ -17,4 +17,9 @@ class OrderListItem extends Model
     {
         return $this->belongsTo('App\Supplier');
     }
+
+    public function item()
+    {
+        return $this->belongsTo('App\Item');
+    }
 }

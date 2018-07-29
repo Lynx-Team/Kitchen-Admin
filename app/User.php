@@ -42,4 +42,8 @@ class User extends Authenticatable
     public function getIsManagerAttribute()  {
         return $this->role->name === 'manager';
     }
+
+    public function orderLists() {
+        return $this->hasMany('App\OrderList');
+    }
 }
