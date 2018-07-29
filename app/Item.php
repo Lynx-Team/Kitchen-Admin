@@ -19,4 +19,9 @@ class Item extends Model
     {
         return $this->belongsTo('App\Supplier');
     }
+
+    public function orderListItems()
+    {
+        return $this->hasMany('App\OrderListItem');
+    }
 }

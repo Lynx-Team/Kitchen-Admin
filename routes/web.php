@@ -41,3 +41,5 @@ Route::get('/items', 'ItemController@view')->name('items.view');
 Route::post('/items/create', 'ItemController@create')->name('items.create');
 Route::post('/items/update', 'ItemController@update')->name('items.update');
 Route::post('/items/delete', 'ItemController@delete')->name('items.delete');
+
+Route::get('/kitchens', 'KitchensController@view')->name('kitchens.view');

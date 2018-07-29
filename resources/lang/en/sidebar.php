@@ -5,4 +5,5 @@ return [
     'suppliers' => 'Suppliers',
     'item_categories' => 'Item categories',
     'items' => 'Items',
+    'kitchens' => 'Kitchens',
 ];

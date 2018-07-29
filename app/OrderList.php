@@ -10,6 +10,11 @@ class OrderList extends Model
 
     public function orderListItems()
     {
-        return $this->hasMany('App\OrderListItems');
+        return $this->hasMany('App\OrderListItem');
+    }
+
+    public function kitchen()
+    {
+        return $this->belongsTo('App\User');
     }
 }
