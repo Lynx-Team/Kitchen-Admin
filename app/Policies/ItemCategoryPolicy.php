@@ -12,21 +12,21 @@ class ItemCategoryPolicy
 
     public function view(User $user)
     {
-        return $user->isAdmin;
+        return $user->is_admin;
     }
 
     public function create(User $user)
     {
-        return $user->isAdmin;
+        return $user->is_admin;
     }
 
     public function update(User $user, ItemCategory $itemCategory)
     {
-        return $user->isAdmin;
+        return $user->is_admin;
     }
 
     public function delete(User $user, ItemCategory $itemCategory)
     {
-        return $user->isAdmin;
+        return $user->is_admin;
     }
 }
