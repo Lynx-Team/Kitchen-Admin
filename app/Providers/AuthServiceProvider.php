@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Item;
 use App\ItemCategory;
 use App\Policies\ItemCategoryPolicy;
+use App\Policies\ItemPolicy;
 use App\Policies\SupplierPolicy;
 use App\Policies\UserPolicy;
 use App\Supplier;
@@ -21,6 +23,7 @@ class AuthServiceProvider extends ServiceProvider
         User::class => UserPolicy::class,
         Supplier::class => SupplierPolicy::class,
         ItemCategory::class => ItemCategoryPolicy::class,
+        Item::class => ItemPolicy::class,
     ];
 
     /**

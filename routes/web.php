@@ -36,3 +36,8 @@ Route::get('/item_categories', 'ItemCategoryController@view')->name('item_catego
 Route::post('/item_categories/create', 'ItemCategoryController@create')->name('item_categories.create');
 Route::post('/item_categories/update', 'ItemCategoryController@update')->name('item_categories.update');
 Route::post('/item_categories/delete', 'ItemCategoryController@delete')->name('item_categories.delete');
+
+Route::get('/items', 'ItemController@view')->name('items.view');
+Route::post('/items/create', 'ItemController@create')->name('items.create');
+Route::post('/items/update', 'ItemController@update')->name('items.update');
+Route::post('/items/delete', 'ItemController@delete')->name('items.delete');

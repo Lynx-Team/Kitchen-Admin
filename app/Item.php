@@ -8,6 +8,8 @@ class Item extends Model
 {
     public $timestamps = false;
 
+    protected $fillable = ['short_name', 'full_name', 'default_supplier_id', 'category_id'];
+
     public function category()
     {
         return $this->belongsTo('App\ItemCategory');
