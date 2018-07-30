@@ -13,5 +13,8 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('items.view') }}">{{ __('sidebar.items') }}</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('order_lists.view') }}">{{ __('sidebar.order_lists') }}</a>
+        </li>
     </ul>
 </nav>

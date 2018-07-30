@@ -42,4 +42,9 @@ Route::post('/items/create', 'ItemController@create')->name('items.create');
 Route::post('/items/update', 'ItemController@update')->name('items.update');
 Route::post('/items/delete', 'ItemController@delete')->name('items.delete');
 
+Route::get('/order_lists', 'OrderListController@view')->name('order_lists.view');
+Route::post('/order_lists/create', 'OrderListController@create')->name('order_lists.create');
+Route::post('/order_lists/update', 'OrderListController@update')->name('order_lists.update');
+Route::post('/order_lists/delete', 'OrderListController@delete')->name('order_lists.delete');
+
 Route::get('/kitchens', 'KitchensController@view')->name('kitchens.view');
