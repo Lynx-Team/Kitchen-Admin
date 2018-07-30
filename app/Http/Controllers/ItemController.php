@@ -14,7 +14,7 @@ class ItemController extends Controller
 {
     public function view()
     {
-        if (Auth::user()->can('view', Item::class))
+        if (Auth::check() && Auth::user()->can('view', Item::class))
             return view('pages.items', ['items' => Item::all(), 'suppliers' => Supplier::all(), 'categories' => ItemCategory::all()]);
         return redirect()->back();
     }

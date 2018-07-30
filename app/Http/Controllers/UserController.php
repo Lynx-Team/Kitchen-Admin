@@ -22,7 +22,7 @@ class UserController extends Controller
 
     public function view()
     {
-        if (Auth::user()->can('view', User::class))
+        if (Auth::check() && Auth::user()->can('view', User::class))
             return view('pages.users', ['users' => User::all(), 'roles' => Role::all()]);
         return redirect()->back();
     }

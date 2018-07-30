@@ -12,7 +12,7 @@ class ItemCategoryController extends Controller
 {
     public function view()
     {
-        if (Auth::user()->can('view', ItemCategory::class))
+        if (Auth::check() && Auth::user()->can('view', ItemCategory::class))
             return view('pages.item_categories', ['item_categories' => ItemCategory::all()]);
 
         return redirect()->back();

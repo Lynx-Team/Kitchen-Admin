@@ -12,7 +12,7 @@ class SupplierController extends Controller
 {
     public function view()
     {
-        if (Auth::user()->can('view', Supplier::class))
+        if (Auth::check() && Auth::user()->can('view', Supplier::class))
             return view('pages.suppliers', ['suppliers' => Supplier::all()]);
 
         return redirect()->back();

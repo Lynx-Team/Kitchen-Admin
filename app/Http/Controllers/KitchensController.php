@@ -14,7 +14,7 @@ class KitchensController extends Controller
 {
     public function view()
     {
-        if (Auth::user()->can('view_kitchens', User::class))
+        if (Auth::check() && Auth::user()->can('view_kitchens', User::class))
         {
             $kitchens = DB::select("
               select users.name, count(order_lists .id) as order_lists_number
