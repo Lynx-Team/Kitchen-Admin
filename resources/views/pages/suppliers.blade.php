@@ -64,7 +64,9 @@
                             </div>
                             <div class="col">
                                 <button type="submit" class="btn btn-warning">{{ __('users.update_btn') }}</button>
-                                <a role="button" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete_{{ $supplier->id }}').submit();">
+                                <a role="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete"
+                                   data-title="Delete supplier" data-message="Are you sure you want to delete this supplier?"
+                                   data-form-id="delete_{{ $supplier->id }}">
                                     {{ __('users.delete_btn') }}
                                 </a>
                             </div>
@@ -80,4 +82,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    @include('partials.delete_confirm')
 @endsection
