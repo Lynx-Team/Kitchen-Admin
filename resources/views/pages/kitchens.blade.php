@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', __('suppliers.title'))
+@section('title', __('kitchens.title'))
 
 @section('main')
     <div class="row justify-content-center">
