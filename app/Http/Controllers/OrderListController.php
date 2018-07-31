@@ -26,7 +26,6 @@ class OrderListController extends Controller
         OrderList::create([
             'note' => $request->note,
             'kitchen_id' => $request->kitchen,
-            'completed' => true,
         ]);
         return redirect()->back();
     }
