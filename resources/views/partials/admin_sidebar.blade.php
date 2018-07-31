@@ -5,6 +5,9 @@
             <a class="nav-link" href="{{ route('users.view') }}">{{ __('sidebar.users') }}</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('kitchens.view') }}">{{ __('sidebar.kitchens') }}</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ route('suppliers.view') }}">{{ __('sidebar.suppliers') }}</a>
         </li>
         <li class="nav-item">
