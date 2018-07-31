@@ -122,7 +122,9 @@
                             </div>
                             <div class="form-group col">
                                 <button type="submit" class="btn btn-warning">{{ __('items.update_btn') }}</button>
-                                <a role="button" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete_{{ $item->id }}').submit();">
+                                <a role="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete"
+                                   data-title="Delete item" data-message="Are you sure you want to delete this item?"
+                                   data-form-id="delete_{{ $item->id }}">
                                     {{ __('items.delete_btn') }}
                                 </a>
                             </div>
@@ -138,4 +140,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    @include('partials.delete_confirm')
 @endsection
