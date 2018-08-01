@@ -48,3 +48,5 @@ Route::post('/order_lists/update', 'OrderListController@update')->name('order_li
 Route::post('/order_lists/delete', 'OrderListController@delete')->name('order_lists.delete');
 
 Route::get('/kitchens', 'KitchensController@view')->name('kitchens.view');
+
+Route::get('/kitchen/{kitchen_id}', 'KitchenController@view')->where(['kitchen_id' => '[0-9]+'])->name('kitchen.view');

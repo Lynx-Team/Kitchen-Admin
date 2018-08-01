@@ -10,7 +10,7 @@ class OrderList extends Model
 
     protected $fillable = ['note', 'kitchen_id', 'completed'];
 
-    public function orderListItems()
+    public function order_list_items()
     {
         return $this->hasMany('App\OrderListItem');
     }

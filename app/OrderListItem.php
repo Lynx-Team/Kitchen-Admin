@@ -8,7 +8,7 @@ class OrderListItem extends Model
 {
     public $timestamps = false;
 
-    public function orderList()
+    public function order_list()
     {
         return $this->belongsTo('App\OrderList');
     }
