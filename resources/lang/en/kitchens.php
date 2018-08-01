@@ -1,5 +1,6 @@
 <?php
 
 return [
-  'title' => 'Kitchens'
+    'title' => 'Kitchens',
+    'empty' => 'No kitchens with order lists.',
 ];
