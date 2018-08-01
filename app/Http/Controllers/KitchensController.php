@@ -20,7 +20,7 @@ class KitchensController extends Controller
               select users.name, count(order_lists .id) as order_lists_number
               from users
               join roles on roles.id = users.role_id 
-              join order_lists on order_lists.kitchen_id = users.id 
+              left join order_lists on order_lists.kitchen_id = users.id 
               where roles.name = 'kitchen' 
               group  by users.name");
             return view('pages.kitchens', ['kitchens' => $kitchens]);
