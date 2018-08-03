@@ -50,3 +50,7 @@ Route::post('/order_lists/delete', 'OrderListController@delete')->name('order_li
 Route::get('/kitchens', 'KitchensController@view')->name('kitchens.view');
 
 Route::get('/kitchen/{kitchen_id}', 'KitchenController@view')->where(['kitchen_id' => '[0-9]+'])->name('kitchen.view');
+
+Route::post('/order_list_item/create', 'OrderListItemController@create')->name('order_list_item.create');
+Route::post('/order_list_item/update', 'OrderListItemController@update')->name('order_list_item.update');
+Route::post('/order_list_item/delete', 'OrderListItemController@delete')->name('order_list_item.delete');
