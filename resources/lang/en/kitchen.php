@@ -1,12 +1,13 @@
 <?php
 
 return [
-    'order_list' => 'Order list',
-    'sort_order' => 'Sort order',
-    'kitchen_sort' => 'Kitchen',
-    'category_sort' => 'Category',
-    'show_btn' => 'Show',
+    'short_name' => 'Short Name',
+    'supplier' => 'Supplier',
+    'cost' => 'Cost',
+    'quantity' => 'Quantity',
+    'supplier_sort_order' => 'Supplier order',
+    'kitchen_sort_order' => 'Kitchen order',
+    'completed' => 'Completed',
     'update_item' => 'Update',
     'empty_order_list' => 'Order list is empty',
-    'no_order_list' => 'No order list.',
 ];

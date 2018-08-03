@@ -13,7 +13,6 @@ class KitchenController extends Controller
 {
     public function view(Request $request, $id)
     {
-
         if (Auth::check() && Auth::user()->can('view_kitchen', User::class))
         {
             $grouped = $request->input('grouped', false) === "true";

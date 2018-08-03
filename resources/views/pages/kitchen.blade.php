@@ -21,6 +21,18 @@
                         <span class="badge badge-primary badge-pill">{{ count($order_list->order_list_items) }}</span>
                     </a>
                     <div class="list-group collapse" id="list-{{ $order_list->id }}">
+                        <div class="list-group-item">
+                            <div class="row">
+                                <div class="col small">{{ __('kitchen.short_name') }}</div>
+                                <div class="col small">{{ __('kitchen.supplier') }}</div>
+                                <div class="col small">{{ __('kitchen.cost') }}</div>
+                                <div class="col small">{{ __('kitchen.quantity') }}</div>
+                                <div class="col small">{{ __('kitchen.supplier_sort_order') }}</div>
+                                <div class="col small">{{ __('kitchen.kitchen_sort_order') }}</div>
+                                <div class="col small">{{ __('kitchen.completed') }}</div>
+                                <div class="col small"></div>
+                            </div>
+                        </div>
                         @foreach($order_list->order_list_items as $item)
                             <div class="list-group-item">
                                 @include('components.kitchen_form')
@@ -41,9 +53,7 @@
     <script>
         $(function() {
             $('.list-group-item').on('click', function() {
-                $('.fas', this)
-                    .toggleClass('fa-chevron-right')
-                    .toggleClass('fa-chevron-down');
+                $('.fas', this).toggleClass('fa-chevron-right').toggleClass('fa-chevron-down');
             });
         });
     </script>
