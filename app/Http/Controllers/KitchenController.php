@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\OrderList;
+use App\Supplier;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +34,7 @@ class KitchenController extends Controller
                         }]);
                 }])->get();
             return view('pages.kitchen', ['grouped' => $grouped,
-                'kitchen' => $kitchen, 'order_lists' => $order_lists]);
+                'kitchen' => $kitchen, 'order_lists' => $order_lists, 'suppliers' => Supplier::all()]);
         }
         return redirect()->back();
     }
