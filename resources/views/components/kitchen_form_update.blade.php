@@ -62,6 +62,13 @@
         @endif
     </div>
     <div class="form-group col">
-        <button type="submit" class="btn btn-warning form-control">{{ __('kitchen.update_item') }}</button>
+        <button type="submit" class="btn btn-warning">{{ __('users.update_btn') }}</button>
+    </div>
+    <div class="form-group col">
+        <a role="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete"
+           data-title="Delete item?" data-message="Are you sure you want to delete this item?"
+           data-form-id="delete_{{ $item->id }}">
+            {{ __('users.delete_btn') }}
+        </a>
     </div>
 </form>

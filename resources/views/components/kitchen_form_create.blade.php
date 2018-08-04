@@ -73,4 +73,6 @@
     <div class="form-group col">
         <button type="submit" class="btn btn-success form-control">{{ __('kitchen.create_item') }}</button>
     </div>
+    <div class="form-group col">
+    </div>
 </form>

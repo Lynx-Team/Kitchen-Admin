@@ -31,6 +31,7 @@
                                 <div class="col small">{{ __('kitchen.kitchen_sort_order') }}</div>
                                 <div class="col small">{{ __('kitchen.completed') }}</div>
                                 <div class="col small"></div>
+                                <div class="col small"></div>
                             </div>
                         </div>
                         <div class="list-group-item">
@@ -39,6 +40,10 @@
                         @foreach($order_list->order_list_items as $item)
                             <div class="list-group-item">
                                 @include('components.kitchen_form_update')
+                                <form id="delete_{{ $item->id }}" action="{{ route('order_list_item.delete') }}" method="POST" style="display: none;">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $item->id }}">
+                                </form>
                             </div>
                         @endforeach
                     </div>
@@ -53,6 +58,7 @@
 @endsection
 
 @section('js')
+    @include('partials.delete_confirm')
     <script>
         $(function() {
             $('.list-group-item').on('click', function() {

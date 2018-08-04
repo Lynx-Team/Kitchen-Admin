@@ -59,7 +59,7 @@ class OrderListItemController extends Controller
 
     public function delete(Request $request)
     {
-        $order_list_item = OrderList::findOrFail($request->id);
+        $order_list_item = OrderListItem::findOrFail($request->id);
         if (Auth::user()->can('delete', $order_list_item))
             $order_list_item->delete();
         return redirect()->back();
