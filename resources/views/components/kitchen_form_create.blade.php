@@ -71,6 +71,6 @@
         @endif
     </div>
     <div class="form-group col">
-        <button type="submit" class="btn btn-primary form-control">{{ __('kitchen.create_item') }}</button>
+        <button type="submit" class="btn btn-success form-control">{{ __('kitchen.create_item') }}</button>
     </div>
 </form>

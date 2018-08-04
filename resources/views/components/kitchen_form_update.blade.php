@@ -62,6 +62,6 @@
         @endif
     </div>
     <div class="form-group col">
-        <button type="submit" class="btn btn-success form-control">{{ __('kitchen.update_item') }}</button>
+        <button type="submit" class="btn btn-warning form-control">{{ __('kitchen.update_item') }}</button>
     </div>
 </form>
