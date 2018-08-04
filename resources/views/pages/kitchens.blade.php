@@ -6,7 +6,7 @@
         @forelse($kitchens as $kitchen)
             <div class="row justify-content-center mb-2">
                 <div class="col">
-                    <a href="#" class="list-group-item list-group-item-action">
+                    <a href="{{ route('kitchen.view', ['kitchen_id' => $kitchen->id]) }}" class="list-group-item list-group-item-action">
                         {{ $kitchen->name }}
                         <span class="badge badge-primary badge-pill">{{ $kitchen->order_lists_number }}</span>
                     </a>

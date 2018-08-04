@@ -17,12 +17,12 @@ class KitchensController extends Controller
         if (Auth::check() && Auth::user()->can('view_kitchens', User::class))
         {
             $kitchens = DB::select("
-              select users.name, count(order_lists .id) as order_lists_number
+              select users.id, users.name, count(order_lists.id) as order_lists_number
               from users
               join roles on roles.id = users.role_id 
               left join order_lists on order_lists.kitchen_id = users.id 
               where roles.name = 'kitchen' 
-              group  by users.name");
+              group by users.id, users.name");
             return view('pages.kitchens', ['kitchens' => $kitchens]);
         }
         return redirect()->back();
