@@ -54,3 +54,6 @@ Route::get('/kitchen/{kitchen_id}', 'KitchenController@view')->where(['kitchen_i
 Route::post('/order_list_item/create', 'OrderListItemController@create')->name('order_list_item.create');
 Route::post('/order_list_item/update', 'OrderListItemController@update')->name('order_list_item.update');
 Route::post('/order_list_item/delete', 'OrderListItemController@delete')->name('order_list_item.delete');
+
+Route::get('/supplier/{supplier_id}', 'SuppliersPerspectiveController@view')->where(['supplier_id' => '[0-9]+'])
+    ->name('suppliers_perspective.view');
