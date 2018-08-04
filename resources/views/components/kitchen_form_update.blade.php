@@ -9,7 +9,7 @@
     <div class="form-group col">
         <select class="form-control" name="supplier_id" aria-describedby="update_supplier_id_error">
             @foreach($suppliers as $supplier)
-                <option value="{{ $supplier->id }}">
+                <option value="{{ $supplier->id }}" {{ $supplier->id == $item->supplier_id ? 'selected' : '' }}>
                     {{ $supplier->name }}
                 </option>
             @endforeach

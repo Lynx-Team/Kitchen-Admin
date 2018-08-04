@@ -33,9 +33,12 @@
                                 <div class="col small"></div>
                             </div>
                         </div>
+                        <div class="list-group-item">
+                            @include('components.kitchen_form_create')
+                        </div>
                         @foreach($order_list->order_list_items as $item)
                             <div class="list-group-item">
-                                @include('components.kitchen_form')
+                                @include('components.kitchen_form_update')
                             </div>
                         @endforeach
                     </div>
