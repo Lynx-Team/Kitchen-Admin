@@ -48,13 +48,11 @@ class OrderListItemController extends Controller
     {
         OrderListItem::find($request->id)->update([
             'cost' => $request->cost,
-            'completed' => $request->completed,
+            'completed' => $request->completed === 'on' ? 1 : 0,
             'quantity' => $request->quantity,
             'supplier_sort_order' => $request->supplier_sort_order,
             'kitchen_sort_order' => $request->kitchen_sort_order,
-            'supplier_id' => $request->supplier_id,
-            'order_list_id' => $request->order_list_id,
-            'item_id' => $request->item_id,
+            'supplier_id' => $request->supplier_id
         ]);
         return redirect()->back();
     }

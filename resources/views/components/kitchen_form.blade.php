@@ -1,4 +1,4 @@
-<form action="<some>" method="POST" class="row">
+<form action="{{ route('order_list_item.update')  }}" method="POST" class="row">
     @csrf
     <input type="hidden" name="id" value="{{ $item->id }}">
     <input type="hidden" name="item_id" value="{{ $item->item_id }}}">
@@ -7,16 +7,16 @@
         <input type="text" class="form-control" readonly value="{{ $item->item->short_name }}">
     </div>
     <div class="form-group col">
-        <select class="form-control" name="supplier" aria-describedby="update_supplier_error">
+        <select class="form-control" name="supplier_id" aria-describedby="update_supplier_id_error">
             @foreach($suppliers as $supplier)
                 <option value="{{ $supplier->id }}">
                     {{ $supplier->name }}
                 </option>
             @endforeach
         </select>
-        @if($errors->update->has('supplier') && $errors->update->first('row_id') == $item->id)
+        @if($errors->update->has('supplier_id') && $errors->update->first('row_id') == $item->id)
             <p id="select_sort_order_error" class="form-text text-danger">
-                {{ $errors->update->first('supplier') }}
+                {{ $errors->update->first('supplier_id') }}
             </p>
         @endif
     </div>
