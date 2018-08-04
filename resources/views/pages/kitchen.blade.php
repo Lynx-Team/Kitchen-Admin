@@ -52,7 +52,47 @@
         @endforeach
     @elseif($grouped)
         @foreach($order_lists as $order_list)
-
+            <div class="row justify-content-center">
+                <div class="list-group list-group-root well col-md-10 mb-3">
+                    <a href="#list-{{ $order_list->id }}" class="list-group-item" data-toggle="collapse" role="button">
+                        <i class="fas fa-chevron-right"></i>
+                        {{ $order_list->note }}
+                        <span class="badge badge-primary badge-pill">{{ count($order_list->order_list_items) }}</span>
+                    </a>
+                    <div class="list-group collapse" id="list-{{ $order_list->id }}">
+                        <div class="list-group-item">
+                            <div class="row">
+                                <div class="col small">{{ __('kitchen.short_name') }}</div>
+                                <div class="col small">{{ __('kitchen.supplier') }}</div>
+                                <div class="col small">{{ __('kitchen.cost') }}</div>
+                                <div class="col small">{{ __('kitchen.quantity') }}</div>
+                                <div class="col small">{{ __('kitchen.supplier_sort_order') }}</div>
+                                <div class="col small">{{ __('kitchen.kitchen_sort_order') }}</div>
+                                <div class="col small">{{ __('kitchen.completed') }}</div>
+                                <div class="col small"></div>
+                            </div>
+                        </div>
+                        @php($items = $order_list->order_list_items)
+                        @php($current_category = null)
+                        @php($i = 0)
+                        @while($i < count($items))
+                            <a href="#category-{{ $order_list->id }}-{{ $items[$i]->item->category_id }}" class="list-group-item" data-toggle="collapse" role="button">
+                                <i class="fas fa-chevron-right"></i>
+                                {{ $items[$i]->item->category->name }}
+                            </a>
+                            <div class="list-group collapse" id="category-{{ $order_list->id }}-{{ $items[$i]->item->category_id }}">
+                                @php($current_category = $items[$i]->item->category->name)
+                                @while($i < count($items) && $current_category == $items[$i]->item->category->name)
+                                    <div class="list-group-item">
+                                        {{ $items[$i]->id }}
+                                    </div>
+                                    @php($i++)
+                                @endwhile
+                            </div>
+                        @endwhile
+                    </div>
+                </div>
+            </div>
         @endforeach
     @endif
 @endsection
