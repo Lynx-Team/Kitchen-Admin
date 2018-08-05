@@ -22,6 +22,7 @@ class KitchenController extends Controller
                 ->join('suppliers', 'suppliers.id', '=', 'order_list_items.supplier_id')
                 ->join('items', 'items.id', '=', 'order_list_items.item_id')
                 ->join('item_categories', 'item_categories.id', '=', 'items.category_id')
+                ->where('order_list_items.kitchen_id', '=', $kitchen->id)
                 ->orderBy('order_lists.note')
                 ->select('*',
                     DB::raw('(select count(*) from order_list_items t where t.order_list_id = `order_lists`.id) as count'));
