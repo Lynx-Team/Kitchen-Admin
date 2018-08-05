@@ -3,6 +3,18 @@
 @section('title', $kitchen->name)
 
 @section('main')
+    <div class="row justify-content-center mb-2">
+        <div class="col-md-10">
+            <div class="row justify-content-around">
+                <a href="{{ route('kitchen.view', ['kitchen_id' => $kitchen->id]) }}" class="col-3 btn btn-primary" role="button">
+                    {{ __('kitchen.simple_view') }}
+                </a>
+                <a href="{{ route('kitchen.view', ['kitchen_id' => $kitchen->id]) . '?grouped=true' }}" class="col-3 btn btn-primary" role="button">
+                    {{ __('kitchen.group_by_category_view') }}
+                </a>
+            </div>
+        </div>
+    </div>
     @if(empty($order_lists))
         <div class="row justify-content-center">
             <div class="col">

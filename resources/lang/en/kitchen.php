@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'simple_view' => 'Simple view',
+    'group_by_category_view' => 'Grouped by category view',
     'short_name' => 'Short Name',
     'supplier' => 'Supplier',
     'cost' => 'Cost',
