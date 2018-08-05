@@ -43,11 +43,11 @@
                             </div>
                         </div>
                         <div class="list-group-item">
-                            @include('partials.kitchen_form_create')
+                            @include('partials.order_list_item_form_create')
                         </div>
                         @foreach($order_list->order_list_items as $item)
                             <div class="list-group-item">
-                                @include('partials.kitchen_form_update')
+                                @include('partials.order_list_item_form_update')
                                 <form id="delete_{{ $item->id }}" action="{{ route('order_list_item.delete') }}" method="POST" style="display: none;">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $item->id }}">
