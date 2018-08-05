@@ -27,7 +27,7 @@ class SuppliersPerspectiveController extends Controller
                             }]);
                         }]);
                     }, function ($q) {
-                        return $q->orderBy('kitchen_sort_order', 'asc');
+                        return $q->orderBy('supplier_sort_order', 'asc');
                     })->with('supplier')
                         ->with(['item' => function ($q) {
                             return $q->with('category');
