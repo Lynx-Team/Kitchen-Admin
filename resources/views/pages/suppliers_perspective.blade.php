@@ -65,18 +65,6 @@
                 <div class="list-group list-group-root well col-md-10 mb-3">
                     @include('partials.order_list_header')
                     <div class="list-group collapse" id="list-{{ $order_list->id }}">
-                        <div class="list-group-item">
-                            <div class="row">
-                                <div class="col small">{{ __('kitchen.short_name') }}</div>
-                                <div class="col small">{{ __('kitchen.supplier') }}</div>
-                                <div class="col small">{{ __('kitchen.cost') }}</div>
-                                <div class="col small">{{ __('kitchen.quantity') }}</div>
-                                <div class="col small">{{ __('kitchen.supplier_sort_order') }}</div>
-                                <div class="col small">{{ __('kitchen.kitchen_sort_order') }}</div>
-                                <div class="col small">{{ __('kitchen.completed') }}</div>
-                                <div class="col small"></div>
-                            </div>
-                        </div>
                         @php($current_category = null)
                         @php($i = 0)
                         @while($i < count($items))
@@ -85,6 +73,15 @@
                                 {{ $items[$i]->item->category->name }}
                             </a>
                             <div class="list-group collapse" id="category-{{ $order_list->id }}-{{ $items[$i]->item->category_id }}">
+                                <div class="list-group-item">
+                                    <div class="row">
+                                        @if(count($order_list->order_list_items) != 0)
+                                            @include('partials.order_list_item_fields_update', ['item' => $order_list->order_list_items[0]])
+                                        @endif
+                                        <div class="col small"></div>
+                                        <div class="col small"></div>
+                                    </div>
+                                </div>
                                 @php($current_category = $items[$i]->item->category->name)
                                 @while($i < count($items) && $current_category == $items[$i]->item->category->name)
                                     <div class="list-group-item">
