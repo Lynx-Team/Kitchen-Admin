@@ -13,10 +13,10 @@ class KitchenController extends Controller
 {
     public function view(Request $request, $id)
     {
-        if (Auth::check() && Auth::user()->can('view_kitchen', User::class))
+        $kitchen = User::findOrFail($id);
+        if (Auth::check() && Auth::user()->can('view_kitchen', $kitchen))
         {
             $grouped = $request->input('grouped', false) === "true";
-            $kitchen = User::findOrFail($id);
             $order_lists = OrderList::where('kitchen_id', $kitchen->id)
                 ->with(['order_list_items' => function ($q) use ($grouped) {
                     $q->when($grouped, function ($q) {

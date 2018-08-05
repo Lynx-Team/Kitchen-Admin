@@ -44,8 +44,8 @@ class UserPolicy
         return $user->is_admin || $user->is_manager;
     }
 
-    public function view_kitchen(User $user)
+    public function view_kitchen(User $user, User $kitchen)
     {
-        return $user->is_admin || $user->is_manager;
+        return $user->is_admin || $user->is_manager || $user->id === $kitchen->id;
     }
 }
