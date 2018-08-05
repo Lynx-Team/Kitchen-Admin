@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class SuppliersPerspectiveController extends Controller
 {
@@ -38,5 +39,12 @@ class SuppliersPerspectiveController extends Controller
                 'all_items' => Item::all()]);
         }
         return redirect()->back();
+    }
+
+    public function downloadPDF($id)
+    {
+        $order_lists = [];
+        $pdf = PDF::loadView('pdf.supplier_view', ['order_lists' => $order_lists]);
+        return $pdf->download(Supplier::findOrFail($id)->name . '.pdf');
     }
 }

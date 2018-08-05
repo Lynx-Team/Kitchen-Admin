@@ -58,5 +58,8 @@ Route::post('/order_list_item/delete', 'OrderListItemController@delete')->name('
 
 Route::get('/suppliers_view', 'SuppliersViewController@view')->name('suppliers_view.view');
 
-Route::get('/supplier/{supplier_id}', 'SuppliersPerspectiveController@view')->where(['supplier_id' => '[0-9]+'])
-    ->name('suppliers_perspective.view');
+Route::get('/supplier/{supplier_id}', 'SuppliersPerspectiveController@view')->where(['supplier_id' => '[0-9]+'])->
+    name('suppliers_perspective.view');
+
+Route::get('/download_supplier_pdf/{supplier_id}', 'SuppliersPerspectiveController@downloadPDF')->
+    where(['supplier_id' => '[0-9]+'])->name('download_supplier_pdf');

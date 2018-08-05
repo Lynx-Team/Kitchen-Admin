@@ -5,6 +5,14 @@
 @section('main')
     <div class="row justify-content-center mb-2">
         <div class="col-md-10">
+            <div class="row justify-content-around mb-3">
+                <a href="{{ action('SuppliersPerspectiveController@downloadPDF', $supplier->id) }}" class="col-3 btn btn-primary" role="button">
+                    Download pdf
+                </a>
+                <a href="#" class="col-3 btn btn-primary" role="button">
+                    Send E-Mail
+                </a>
+            </div>
             <div class="row justify-content-around">
                 <a href="{{ route('suppliers_perspective.view', ['supplier_id' => $supplier->id]) }}" class="col-3 btn btn-primary" role="button">
                     {{ __('kitchen.simple_view') }}
