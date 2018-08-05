@@ -25,6 +25,11 @@ class OrderListPolicy
         return $user->is_admin;
     }
 
+    public function update_completed(User $user, OrderList $orderList)
+    {
+        return $user->is_admin || $user->is_manager || $user->id === $orderList->kitchen_id;
+    }
+
     public function delete(User $user, OrderList $orderList)
     {
         return $user->is_admin;

@@ -40,6 +40,14 @@ class OrderListController extends Controller
         return redirect()->back();
     }
 
+    public function update_completed(Request $request)
+    {
+        $orderListToUpdate = OrderList::findOrFail($request->id);
+        if (Auth::user()->can('update_completed', $orderListToUpdate))
+            $orderListToUpdate->update(['completed' => $request->completed === 'on' ? true : false]);
+        return redirect()->back();
+    }
+
     public function delete(Request $request)
     {
         $orderListToDelete = OrderList::findOrFail($request->id);
