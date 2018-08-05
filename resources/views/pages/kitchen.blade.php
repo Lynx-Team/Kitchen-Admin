@@ -31,19 +31,22 @@
                     <div class="list-group collapse" id="list-{{ $order_list->id }}">
                         <div class="list-group-item">
                             <div class="row">
-                                <div class="col small">{{ __('kitchen.short_name') }}</div>
-                                <div class="col small">{{ __('kitchen.supplier') }}</div>
-                                <div class="col small">{{ __('kitchen.cost') }}</div>
-                                <div class="col small">{{ __('kitchen.quantity') }}</div>
-                                <div class="col small">{{ __('kitchen.supplier_sort_order') }}</div>
-                                <div class="col small">{{ __('kitchen.kitchen_sort_order') }}</div>
-                                <div class="col small">{{ __('kitchen.completed') }}</div>
+                                @include('partials.order_list_item_fields_create')
                                 <div class="col small"></div>
                                 <div class="col small"></div>
                             </div>
                         </div>
                         <div class="list-group-item">
                             @include('partials.order_list_item_form_create')
+                        </div>
+                        <div class="list-group-item">
+                            <div class="row">
+                                @if(count($order_list->order_list_items) != 0)
+                                    @include('partials.order_list_item_fields_update', ['item' => $order_list->order_list_items[0]])
+                                @endif
+                                <div class="col small"></div>
+                                <div class="col small"></div>
+                            </div>
                         </div>
                         @foreach($order_list->order_list_items as $item)
                             <div class="list-group-item">

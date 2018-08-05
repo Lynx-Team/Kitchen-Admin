@@ -46,14 +46,22 @@ class OrderListItemController extends Controller
 
     public function update(UpdateOrderListItemRequest $request)
     {
-        OrderListItem::find($request->id)->update([
-            'cost' => $request->cost,
-            'completed' => $request->completed === 'on' ? 1 : 0,
-            'quantity' => $request->quantity,
-            'supplier_sort_order' => $request->supplier_sort_order,
-            'kitchen_sort_order' => $request->kitchen_sort_order,
-            'supplier_id' => $request->supplier_id
-        ]);
+        $updatedFields = [];
+        $itemToUpdate = OrderListItem::findOrFail($request->id);
+        if(Auth::user()->can('update_cost', $itemToUpdate))
+            $updatedFields['cost'] = $request->cost;
+        if(Auth::user()->can('update_completed', $itemToUpdate))
+            $updatedFields['completed'] = $request->completed === 'on';
+        if(Auth::user()->can('update_quantity', $itemToUpdate))
+            $updatedFields['quantity'] = $request->quantity;
+        if(Auth::user()->can('update_supplier_sort_order', $itemToUpdate))
+            $updatedFields['supplier_sort_order'] = $request->supplier_sort_order;
+        if(Auth::user()->can('update_kitchen_sort_order', $itemToUpdate))
+            $updatedFields['kitchen_sort_order'] = $request->kitchen_sort_order;
+        if(Auth::user()->can('update_supplier_id', $itemToUpdate))
+            $updatedFields['supplier_id'] = $request->supplier_id;
+
+        $itemToUpdate->update($updatedFields);
         return redirect()->back();
     }
 
