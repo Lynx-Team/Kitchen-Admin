@@ -20,12 +20,12 @@ class SuppliersPerspectiveController extends Controller
             $supplier = Supplier::findOrFail($id);
             $order_lists = OrderList::has('order_list_items')
                 ->with(['order_list_items' => function ($q) use ($grouped, $supplier) {
-                    $q->when($grouped, function ($q) use ($supplier) {
+                    $q->where('supplier_id', $supplier->id)->when($grouped, function ($q) use ($supplier) {
                         return $q->with(['item' => function ($q) {
                             return $q->with(['category' => function ($q) {
                                 return $q->orderBy('name', 'asc');
                             }]);
-                        }])->where('supplier_id', $supplier->id);
+                        }]);
                     }, function ($q) {
                         return $q->orderBy('kitchen_sort_order', 'asc');
                     })->with('supplier')

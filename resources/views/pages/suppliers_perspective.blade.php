@@ -25,6 +25,10 @@
         </div>
     @elseif(!$grouped)
         @foreach($order_lists as $order_list)
+            @php($items = 1)
+            @if(count($order_list->order_list_items) <= 0)
+                @continue
+            @endif
             <div class="row justify-content-center">
                 <div class="list-group list-group-root well col-md-10 mb-3">
                     @include('partials.order_list_header')
@@ -53,6 +57,10 @@
         @endforeach
     @elseif($grouped)
         @foreach($order_lists as $order_list)
+            @php($items = $order_list->order_list_items)
+            @if(count($items) <= 0)
+                @continue
+            @endif
             <div class="row justify-content-center">
                 <div class="list-group list-group-root well col-md-10 mb-3">
                     @include('partials.order_list_header')
@@ -69,7 +77,6 @@
                                 <div class="col small"></div>
                             </div>
                         </div>
-                        @php($items = $order_list->order_list_items)
                         @php($current_category = null)
                         @php($i = 0)
                         @while($i < count($items))
