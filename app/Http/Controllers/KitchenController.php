@@ -8,6 +8,7 @@ use App\Supplier;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class KitchenController extends Controller
 {
@@ -17,23 +18,17 @@ class KitchenController extends Controller
         if (Auth::check() && Auth::user()->can('view_kitchen', $kitchen))
         {
             $grouped = $request->input('grouped', false) === "true";
-            $order_lists = OrderList::where('kitchen_id', $kitchen->id)
-                ->with(['order_list_items' => function ($q) use ($grouped) {
-                    $q->when($grouped, function ($q) {
-                        return $q->with(['item' => function ($q) {
-                            return $q->with(['category' => function ($q) {
-                                return $q->orderBy('name', 'asc');
-                            }]);
-                        }]);
-                    }, function ($q) {
-                        return $q->orderBy('kitchen_sort_order', 'asc');
-                    })->with('supplier')
-                        ->with(['item' => function ($q) {
-                            return $q->with('category');
-                        }]);
-                }])->get();
+            $rows = OrderList::join('order_list_items', 'order_list_items.order_list_id', '=', 'order_lists.id')
+                ->join('suppliers', 'suppliers.id', '=', 'order_list_items.supplier_id')
+                ->join('items', 'items.id', '=', 'order_list_items.item_id')
+                ->join('item_categories', 'item_categories.id', '=', 'items.category_id')
+                ->orderBy('order_lists.note')
+                ->select('*',
+                    DB::raw('(select count(*) from order_list_items t where t.order_list_id = `order_lists`.id) as count'));
+            $rows = ($grouped ? $rows->orderBy('item_categories.name', 'asc') : $rows);
+            $rows = $rows->orderBy('order_list_items.kitchen_sort_order', 'asc')->get();
             return view('pages.kitchen', ['grouped' => $grouped,
-                'kitchen' => $kitchen, 'order_lists' => $order_lists, 'suppliers' => Supplier::all(),
+                'kitchen' => $kitchen, 'rows' => $rows, 'suppliers' => Supplier::all(),
                 'all_items' => Item::all()]);
         }
         return redirect()->back();
