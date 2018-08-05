@@ -48,4 +48,9 @@ class UserPolicy
     {
         return $user->is_admin || $user->is_manager || $user->id === $kitchen->id;
     }
+
+    public function view_supplier(User $user)
+    {
+        return $user->is_admin || $user->is_manager;
+    }
 }
