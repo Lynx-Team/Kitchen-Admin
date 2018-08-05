@@ -15,27 +15,23 @@ class SuppliersPerspectiveController extends Controller
 {
     public function view(Request $request, $id)
     {
+        $supplier = Supplier::findOrFail($id);
         if (Auth::check() && Auth::user()->can('view_supplier', User::class))
         {
             $grouped = $request->input('grouped', false) === "true";
-            $supplier = Supplier::findOrFail($id);
-            $order_lists = OrderList::has('order_list_items')
-                ->with(['order_list_items' => function ($q) use ($grouped, $supplier) {
-                    $q->where('supplier_id', $supplier->id)->when($grouped, function ($q) use ($supplier) {
-                        return $q->with(['item' => function ($q) {
-                            return $q->with(['category' => function ($q) {
-                                return $q->orderBy('name', 'asc');
-                            }]);
-                        }]);
-                    }, function ($q) {
-                        return $q->orderBy('supplier_sort_order', 'asc');
-                    })->with('supplier')
-                        ->with(['item' => function ($q) {
-                            return $q->with('category');
-                          }]);
-                }])->with('kitchen')->get();
+            $rows = OrderList::join('order_list_items', 'order_list_items.order_list_id', '=', 'order_lists.id')
+                ->join('suppliers', 'suppliers.id', '=', 'order_list_items.supplier_id')
+                ->join('items', 'items.id', '=', 'order_list_items.item_id')
+                ->join('item_categories', 'item_categories.id', '=', 'items.category_id')
+                ->where('suppliers.id', '=', $supplier->id)
+                ->orderBy('order_lists.note')
+                ->select('*',
+                    DB::raw('(select count(*) from order_list_items t where t.order_list_id = `order_lists`.id) as count'));
+            $rows = ($grouped ? $rows->orderBy('item_categories.name', 'asc') : $rows);
+            $rows = $rows->orderBy('order_list_items.supplier_sort_order', 'asc');
+            $sql = $rows->toSql();
             return view('pages.suppliers_perspective', ['grouped' => $grouped,
-                'supplier' => $supplier, 'order_lists' => $order_lists, 'suppliers' => Supplier::all(),
+                'supplier' => $supplier, 'rows' => $rows, 'suppliers' => Supplier::all(),
                 'all_items' => Item::all()]);
         }
         return redirect()->back();
