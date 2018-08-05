@@ -15,6 +15,11 @@ class SupplierPolicy
         return $user->is_admin;
     }
 
+    public function view_list(User $user)
+    {
+        return $user->is_admin || $user->is_manager;
+    }
+
     public function create(User $user)
     {
         return $user->is_admin;

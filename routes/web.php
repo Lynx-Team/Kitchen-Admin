@@ -56,5 +56,7 @@ Route::post('/order_list_item/create', 'OrderListItemController@create')->name('
 Route::post('/order_list_item/update', 'OrderListItemController@update')->name('order_list_item.update');
 Route::post('/order_list_item/delete', 'OrderListItemController@delete')->name('order_list_item.delete');
 
+Route::get('/suppliers_view', 'SuppliersViewController@view')->name('suppliers_view.view');
+
 Route::get('/supplier/{supplier_id}', 'SuppliersPerspectiveController@view')->where(['supplier_id' => '[0-9]+'])
     ->name('suppliers_perspective.view');
