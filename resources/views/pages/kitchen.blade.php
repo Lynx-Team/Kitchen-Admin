@@ -50,7 +50,7 @@
                         </div>
                         @foreach($order_list->order_list_items as $item)
                             <div class="list-group-item">
-                                @include('partials.order_list_item_form_update')
+                                @include('partials.order_list_item_form_update', ['item' => $item, 'suppliers' => $suppliers, 'errors' => $errors])
                                 <form id="delete_{{ $item->id }}" action="{{ route('order_list_item.delete') }}" method="POST" style="display: none;">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $item->id }}">
@@ -91,7 +91,7 @@
                                 @php($current_category = $items[$i]->item->category->name)
                                 @while($i < count($items) && $current_category == $items[$i]->item->category->name)
                                     <div class="list-group-item">
-                                        {{ $items[$i]->id }}
+                                        @include('partials.order_list_item_form_update', ['item' => $items[$i], 'suppliers' => $suppliers, 'errors' => $errors])
                                     </div>
                                     @php($i++)
                                 @endwhile
