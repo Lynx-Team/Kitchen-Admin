@@ -18,7 +18,6 @@ class CreateOrderListItemRequest extends FormRequest
     {
         return [
             'cost' => 'required|integer|min:0',
-            'completed' => 'boolean',
             'quantity' => 'required|integer|min:1',
             'supplier_sort_order' => 'required|integer',
             'kitchen_sort_order' => 'required|integer',

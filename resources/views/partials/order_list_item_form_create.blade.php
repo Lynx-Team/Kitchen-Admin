@@ -1,6 +1,6 @@
 <form action="{{ route('order_list_item.create')  }}" method="POST" class="row">
     @csrf
-    <input type="hidden" name="order_list_id" value="{{ $order_list->id }}">
+    <input type="hidden" name="order_list_id" value="{{ $order_list_id }}">
     <div class="form-group col">
         <select class="form-control" name="item_id" aria-describedby="create_item_id_error">
             @foreach($all_items as $item)
@@ -62,8 +62,8 @@
         @endif
     </div>
     <div class="form-group col">
-        <input type="checkbox" class="form-check-input" name="completed" id="create_completed_{{ $order_list->id }}" aria-describedby="create_completed_error">
-        <label class="form-check-label" for="create_completed_{{ $order_list->id }}">{{ __('kitchen.completed') }}</label>
+        <input type="checkbox" class="form-check-input" name="completed" id="create_completed_{{ $order_list_id }}" aria-describedby="create_completed_error">
+        <label class="form-check-label" for="create_completed_{{ $order_list_id }}">{{ __('kitchen.completed') }}</label>
         @if($errors->create->has('completed'))
             <p id="create_completed_error" class="form-text text-danger">
                 {{ $errors->create->first('completed') }}

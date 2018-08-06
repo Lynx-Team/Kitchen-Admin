@@ -25,4 +25,10 @@ class OrderListItem extends Model
     {
         return $this->belongsTo('App\Item');
     }
+
+    public function category()
+    {
+        return $this->hasManyThrough(ItemCategory::class, Item::class,
+            'id', 'id', 'item_id', 'category_id');
+    }
 }
