@@ -40,16 +40,15 @@ class SuppliersPerspectiveController extends Controller
 
     public function downloadPDF($id)
     {
-
         $supplier = Supplier::findOrFail($id);
-        $order_lists = OrderListItem::where('supplier_id', '=', $supplier->id)
-            ->where('completed', '=', 0)
+        $order_list_items = OrderListItem::where('supplier_id', $supplier->id)
+            ->where('completed', 0)
             ->with('order_list')
             ->with('supplier')
+            ->with('item')
             ->orderBy('supplier_sort_order')
             ->get();
-//        $order_lists = [];
-        $pdf = PDF::loadView('pdf.supplier_view', ['order_lists' => $order_lists]);
+        $pdf = PDF::loadView('pdf.supplier_view', ['supplier_name' => $supplier->name, 'order_list_items' => $order_list_items]);
         return $pdf->download(Supplier::findOrFail($id)->name . '.pdf');
     }
 }
