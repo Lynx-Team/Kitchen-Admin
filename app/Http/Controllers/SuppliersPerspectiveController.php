@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Item;
 use App\OrderList;
+use App\OrderListItem;
 use App\Supplier;
 use App\User;
 use Illuminate\Http\Request;
@@ -39,7 +40,15 @@ class SuppliersPerspectiveController extends Controller
 
     public function downloadPDF($id)
     {
-        $order_lists = [];
+
+        $supplier = Supplier::findOrFail($id);
+        $order_lists = OrderListItem::where('supplier_id', '=', $supplier->id)
+            ->where('completed', '=', 0)
+            ->with('order_list')
+            ->with('supplier')
+            ->orderBy('supplier_sort_order')
+            ->get();
+//        $order_lists = [];
         $pdf = PDF::loadView('pdf.supplier_view', ['order_lists' => $order_lists]);
         return $pdf->download(Supplier::findOrFail($id)->name . '.pdf');
     }
