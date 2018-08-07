@@ -22,19 +22,20 @@ class SuppliersPerspectiveController extends Controller
         if (Auth::check() && Auth::user()->can('view_supplier', User::class))
         {
             $grouped = $request->input('grouped', false) === "true";
-            $rows = OrderList::join('order_list_items', 'order_list_items.order_list_id', '=', 'order_lists.id')
-                ->join('suppliers', 'suppliers.id', '=', 'order_list_items.supplier_id')
-                ->join('items', 'items.id', '=', 'order_list_items.item_id')
-                ->join('item_categories', 'item_categories.id', '=', 'items.category_id')
-                ->where('suppliers.id', '=', $supplier->id)
-                ->orderBy('order_lists.note')
-                ->select('*',
-                    DB::raw('(select count(*) from order_list_items t where t.order_list_id = `order_lists`.id) as count'));
-            $rows = ($grouped ? $rows->orderBy('item_categories.name', 'asc') : $rows);
-            $rows = $rows->orderBy('order_list_items.supplier_sort_order', 'asc');
-            $sql = $rows->toSql();
+            $order_lists = OrderList::with(['order_list_items' => function ($q) use ($supplier, $grouped) {
+                    $q->where('supplier_id', $supplier->id)->when($grouped, function ($q) {
+                        return $q->withCount(['category as category_name' => function ($q) {
+                            $q->select('item_categories.name');
+                        }])->orderBy('category_name');
+                    }, function ($q) {
+                        return $q->orderBy('supplier_sort_order', 'asc');
+                    })->with('supplier')
+                        ->with(['item' => function ($q) {
+                            return $q->with('category');
+                        }]);
+                }])->get();
             return view('pages.suppliers_perspective', ['grouped' => $grouped,
-                'supplier' => $supplier, 'rows' => $rows, 'suppliers' => Supplier::all(),
+                'supplier' => $supplier, 'order_lists' => $order_lists, 'suppliers' => Supplier::all(),
                 'all_items' => Item::all()]);
         }
         return redirect()->back();
