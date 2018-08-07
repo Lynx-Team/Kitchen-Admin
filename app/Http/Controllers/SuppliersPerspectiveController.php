@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Item;
+use App\Mail\SupplierMail;
 use App\OrderList;
 use App\OrderListItem;
 use App\Supplier;
@@ -10,6 +11,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use PDF;
 
 class SuppliersPerspectiveController extends Controller
@@ -41,14 +43,29 @@ class SuppliersPerspectiveController extends Controller
     public function downloadPDF($id)
     {
         $supplier = Supplier::findOrFail($id);
-        $order_list_items = OrderListItem::where('supplier_id', $supplier->id)
+        $pdf = $this->generatePDF($supplier->id, $supplier->name);
+        return $pdf->download($supplier->name . '.pdf');
+    }
+
+    public function sendEmail($id)
+    {
+        $supplier = Supplier::findOrFail($id);
+        $pdf = $this->generatePDF($supplier->id, $supplier->name);
+        Mail::to($supplier->email)->send(new SupplierMail($pdf, $supplier->name));
+        return redirect()->back();
+    }
+
+    private function generatePDF($id, $name)
+    {
+        $order_list_items = OrderListItem::where('supplier_id', $id)
             ->where('completed', 0)
             ->with('order_list')
             ->with('supplier')
             ->with('item')
             ->orderBy('supplier_sort_order')
             ->get();
-        $pdf = PDF::loadView('pdf.supplier_view', ['supplier_name' => $supplier->name, 'order_list_items' => $order_list_items]);
-        return $pdf->download(Supplier::findOrFail($id)->name . '.pdf');
+
+        return PDF::loadView('pdf.supplier', ['supplier_name' => $name,
+            'order_list_items' => $order_list_items]);
     }
 }

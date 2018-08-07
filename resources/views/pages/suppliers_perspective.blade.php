@@ -9,7 +9,7 @@
                 <a href="{{ action('SuppliersPerspectiveController@downloadPDF', $supplier->id) }}" class="col-3 btn btn-primary" role="button">
                     Download pdf
                 </a>
-                <a href="#" class="col-3 btn btn-primary" role="button">
+                <a href="{{ action('SuppliersPerspectiveController@sendEmail', $supplier->id) }}" class="col-3 btn btn-primary" role="button">
                     Send E-Mail
                 </a>
             </div>
