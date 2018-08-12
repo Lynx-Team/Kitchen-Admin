@@ -31,4 +31,9 @@ class OrderListItem extends Model
         return $this->hasManyThrough(ItemCategory::class, Item::class,
             'id', 'id', 'item_id', 'category_id');
     }
+
+    public function availableItem()
+    {
+        return $this->hasOne('App\AvailableItemList');
+    }
 }
