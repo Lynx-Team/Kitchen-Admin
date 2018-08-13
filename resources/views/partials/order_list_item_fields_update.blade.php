@@ -2,9 +2,6 @@
 @if(Auth::user()->can('update_supplier_id', $item))
     <div class="col small">{{ __('kitchen.supplier') }}</div>
 @endif
-@if(Auth::user()->can('update_cost', $item))
-    <div class="col small">{{ __('kitchen.cost') }}</div>
-@endif
 @if(Auth::user()->can('update_quantity', $item))
     <div class="col small">{{ __('kitchen.quantity') }}</div>
 @endif

@@ -19,7 +19,6 @@ class UpdateOrderListItemRequest extends FormRequest
     {
         return [
             'id' => 'required|exists:order_list_items,id',
-            'cost' => 'required|integer|min:0',
             'quantity' => 'required|integer|min:1',
             'supplier_sort_order' => 'required|integer',
             'kitchen_sort_order' => 'required|integer',

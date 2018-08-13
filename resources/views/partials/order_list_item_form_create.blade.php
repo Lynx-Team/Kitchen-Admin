@@ -30,14 +30,6 @@
         @endif
     </div>
     <div class="form-group col">
-        <input type="number" class="form-control" name="cost" min="0" aria-describedby="create_cost_error">
-        @if($errors->create->has('cost'))
-            <p id="create_cost_error" class="form-text text-danger">
-                {{ $errors->create->first('cost') }}
-            </p>
-        @endif
-    </div>
-    <div class="form-group col">
         <input type="number" class="form-control" name="quantity" min="1" aria-describedby="create_quantity_error">
         @if($errors->create->has('quantity'))
             <p id="create_quantity_error" class="form-text text-danger">

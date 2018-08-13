@@ -24,18 +24,6 @@
     @else
         <input type="hidden" name="supplier_id" value="{{ $item->supplier_id }}">
     @endif
-    @if(Auth::user()->can('update_cost', $item))
-        <div class="form-group col">
-            <input type="number" class="form-control" name="cost" min="0" value="{{ $item->cost }}" aria-describedby="update_cost_error">
-            @if($errors->update->has('cost') && $errors->update->first('row_id') == $item->id)
-                <p id="update_cost_error" class="form-text text-danger">
-                    {{ $errors->update->first('cost') }}
-                </p>
-            @endif
-        </div>
-    @else
-        <input type="hidden" name="cost" value="{{ $item->cost }}">
-    @endif
     @if(Auth::user()->can('update_quantity', $item))
         <div class="form-group col">
             <input type="number" class="form-control" name="quantity" min="1" value="{{ $item->quantity }}" aria-describedby="update_quantity_error">

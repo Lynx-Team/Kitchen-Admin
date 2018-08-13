@@ -18,7 +18,6 @@ class OrderListItemController extends Controller
     private function fill(Request $request)
     {
         return [
-            'cost' => $request->cost,
             'completed' => $request->completed === 'on' ? 1 : 0,
             'quantity' => $request->quantity,
             'supplier_sort_order' => $request->supplier_sort_order,
@@ -32,7 +31,6 @@ class OrderListItemController extends Controller
     public function create(CreateOrderListItemRequest $request)
     {
         OrderListItem::create([
-            'cost' => $request->cost,
             'completed' => $request->completed === 'on' ? 1 : 0,
             'quantity' => $request->quantity,
             'supplier_sort_order' => $request->supplier_sort_order,
