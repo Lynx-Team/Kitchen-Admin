@@ -5,11 +5,13 @@
 @section('main')
         @forelse($kitchens as $kitchen)
             <div class="row justify-content-center mb-2">
-                <div class="col">
-                    <a href="{{ route('kitchen.view', ['kitchen_id' => $kitchen->id]) }}" class="list-group-item list-group-item-action">
-                        {{ $kitchen->name }}
-                        <span class="badge badge-primary badge-pill">{{ $kitchen->order_lists_number }}</span>
-                    </a>
+                <div class="col-10">
+                    <h5>
+                        <a href="{{ route('view_order_lists.view', ['kitchen_id' => $kitchen->id]) }}" class="list-group-item list-group-item-action">
+                            {{ $kitchen->name }}
+                            <span class="badge badge-primary badge-pill">Order lists: {{ $kitchen->order_lists_number }}</span>
+                        </a>
+                    </h5>
                 </div>
             </div>
         @empty
