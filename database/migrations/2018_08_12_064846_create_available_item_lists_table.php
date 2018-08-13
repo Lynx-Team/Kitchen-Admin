@@ -13,10 +13,10 @@ class CreateAvailableItemListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('available_item_lists', function (Blueprint $table) {
+        Schema::create('available_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('order_list_item_id');
-            $table->foreign('order_list_item_id')->references('id')->on('order_list_items')->onDelete('cascade');
+            $table->unsignedInteger('order_list_id');
+            $table->foreign('order_list_id')->references('id')->on('order_lists')->onDelete('cascade');
             $table->unsignedInteger('item_id');
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
         });
@@ -29,6 +29,6 @@ class CreateAvailableItemListsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('available_item_lists');
+        Schema::dropIfExists('available_items');
     }
 }

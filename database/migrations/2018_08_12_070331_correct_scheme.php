@@ -20,8 +20,8 @@ class CorrectScheme extends Migration
             $table->dropColumn('cost');
             $table->integer('supplier_sort_order')->default(0)->change();
             $table->integer('kitchen_sort_order')->default(0)->change();
-            $table->unsignedInteger('avaiable_item_id');
-            $table->foreign('avaiable_item_id')->references('id')->on('available_item_lists')->onDelete('cascade');
+            $table->unsignedInteger('available_item_id');
+            $table->foreign('available_item_id')->references('id')->on('available_items')->onDelete('cascade');
         });
     }
 
@@ -33,7 +33,7 @@ class CorrectScheme extends Migration
     public function down()
     {
         Schema::table('items', function (Blueprint $table) {
-            $table->dropColumn('cost');
+            $table->dropColumn(['cost']);
         });
         Schema::table('order_list_items', function (Blueprint $table) {
             $table->integer('kitchen_sort_order')->default(NULL)->change();
