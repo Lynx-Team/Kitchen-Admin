@@ -1,0 +1,99 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\AvailableItem;
+use App\Http\Requests\CreateItemCategoryRequest;
+use App\Http\Requests\UpdateItemCategoryRequest;
+use App\ItemCategory;
+use App\OrderList;
+use App\OrderListItem;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class OrderListItemsController extends Controller
+{
+    private function _view($kitchen_id, $order_list_id, $orderListItems, $viewName)
+    {
+        if (Auth::check() && Auth::user()->can('view', OrderListItem::class) &&
+            OrderList::where('id', $order_list_id)->where('kitchen_id', $kitchen_id)->exists())
+        {
+            $orderList = OrderList::findOrFail($order_list_id);
+            $availableItems = AvailableItem::where('order_list_id', $order_list_id)->with('item')->get();
+            $orderListItems = OrderListItem::where('id', $order_list_id)->orderBy('kitchen_sort_order')
+                ->with('item')->with('supplier')->get();
+            return view($viewName, [
+                'order_list' => $orderList,
+                'available_items' => $availableItems,
+                'order_list_items' => $orderListItems,
+            ]);
+
+        }
+
+        return redirect()->back();
+    }
+
+    public function view(Request $request, $kitchen_id, $order_list_id)
+    {
+        return $this->_view($kitchen_id, $order_list_id, OrderListItem::where('id', $order_list_id)->orderBy('kitchen_sort_order')
+            ->with('item')->with('supplier')->get(), 'view');
+    }
+
+    public function view_categorized(Request $request, $kitchen_id, $order_list_id)
+    {
+        $orderListItems = OrderListItem::where('order_list_id', $order_list_id)
+            ->withCount(['category as category_name' => function ($q) {
+                $q->select('item_categories.name');
+            }])->orderBy('category_name')->with('item')->with('category')->with('supplier')->get();
+        return $this->_view($kitchen_id, $order_list_id, $orderListItems, 'view');
+    }
+
+    public function view_grouped_by_supplier(Request $request, $kitchen_id, $order_list_id)
+    {
+        $orderListItems = OrderListItem::where('order_list_id', $order_list_id)
+            ->withCount(['supplier as supplier_name' => function ($q) {
+                $q->select('suppliers.name');
+            }])->orderBy('supplier_name')->with('item')->with('category')->with('supplier')->get();
+        return $this->_view($kitchen_id, $order_list_id, $orderListItems, 'view');
+    }
+
+    public function create(CreateItemCategoryRequest $request)
+    {
+        OrderListItem::create([
+            'completed' => $request->completed === 'on' ? 1 : 0,
+            'quantity' => $request->quantity,
+            'supplier_sort_order' => $request->supplier_sort_order,
+            'kitchen_sort_order' => $request->kitchen_sort_order,
+            'supplier_id' => $request->supplier_id,
+            'order_list_id' => $request->order_list_id,
+            'item_id' => $request->item_id,
+        ]);
+        return redirect()->back();
+    }
+
+    public function update(UpdateItemCategoryRequest $request)
+    {
+        $updatedFields = [];
+        $item = OrderListItem::find($request->id);
+        if(Auth::user()->can('update_completed', $item))
+            $updatedFields['completed'] = $request->completed === 'on';
+        if(Auth::user()->can('update_quantity', $item))
+            $updatedFields['quantity'] = $request->quantity;
+        if(Auth::user()->can('update_supplier_sort_order', $item))
+            $updatedFields['supplier_sort_order'] = $request->supplier_sort_order;
+        if(Auth::user()->can('update_kitchen_sort_order', $item))
+            $updatedFields['kitchen_sort_order'] = $request->kitchen_sort_order;
+        if(Auth::user()->can('update_supplier_id', $item))
+            $updatedFields['supplier_id'] = $request->supplier_id;
+        return redirect()->back();
+    }
+
+    public function delete(Request $request)
+    {
+        $orderListItem = OrderListItem::findOrFail($request->id);
+        if (Auth::user()->can('delete', $orderListItem))
+            $orderListItem->delete();
+
+        return redirect()->back();
+    }
+}
