@@ -14,9 +14,11 @@
                         </h5>
                     </div>
                     <div class="col-2">
-                        <a href="{{ route('available_item.view', ['kitchen_id' => Request::segment(2),'order_list_id' => $order_list->id]) }}" class="btn btn-primary">
-                            Available items
-                        </a>
+                        @if(\Illuminate\Support\Facades\Auth::user()->can('view', \App\AvailableItem::class))
+                            <a href="{{ route('available_item.view', ['kitchen_id' => Request::segment(2),'order_list_id' => $order_list->id]) }}" class="btn btn-primary">
+                                Available items
+                            </a>
+                        @endif
                     </div>
                     <div class="col-2">
                         <a href="#" class="btn btn-success">
