@@ -7,18 +7,19 @@ use App\AvailableItemList;
 use App\Http\Requests\CreateAvailableItemRequest;
 use App\Http\Requests\CreateItemCategoryRequest;
 use App\Http\Requests\UpdateItemCategoryRequest;
+use App\Item;
 use App\ItemCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AvailableItemController extends Controller
 {
-    public function view()
+    public function view(Request $request, $id)
     {
         if (Auth::check() && Auth::user()->can('view', AvailableItem::class))
         {
-            // view
-            return;
+            return view('pages.available_item', ['all_items' => Item::all(),
+                'items' => AvailableItem::where('order_list_id', $id)->with('item')]);
         }
 
         return redirect()->back();

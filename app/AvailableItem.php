@@ -8,7 +8,7 @@ class AvailableItem extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['order_list_item_id', 'item_id'];
+    protected $fillable = ['order_list_id', 'item_id'];
 
     public function orderListItem()
     {
