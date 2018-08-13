@@ -12,11 +12,11 @@ class AvailableItem extends Model
 
     public function orderListItem()
     {
-        return $this->hasOne('App\OrderListItem');
+        return $this->belongsTo('App\OrderListItem');
     }
 
     public function item()
     {
-        return $this->hasOne('App\Item');
+        return $this->belongsTo('App\Item');
     }
 }

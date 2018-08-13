@@ -24,4 +24,9 @@ class Item extends Model
     {
         return $this->hasMany('App\OrderListItem');
     }
+
+    public function availableItems()
+    {
+        return $this->hasMany('App\AvailableItem');
+    }
 }

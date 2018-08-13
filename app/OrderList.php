@@ -19,4 +19,9 @@ class OrderList extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function availableItems()
+    {
+        return $this->hasMany('App\AvailableItem');
+    }
 }

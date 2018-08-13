@@ -8,12 +8,12 @@
             <div class="card">
                 <div class="card-header">{{ __('available_item.add_title') }}</div>
                 <div class="card-body">
-                    <form action="{{ route('available_items.create') }}" method="POST" class="row">
+                    <form action="{{ route('available_item.create') }}" method="POST" class="row">
                         @csrf
                         <input type="hidden" name="order_list_id" value="{{ $order_list_id }}">
                         <div class="form-group col">
                             <label for="item">{{ __('available_item.item') }}</label>
-                            <select class="form-control" name="item" id="item" aria-describedby="create_item_error">
+                            <select class="form-control" name="item_id" id="item_id" aria-describedby="create_item_error">
                                 @foreach($all_items as $item)
                                     <option value="{{ $item->id }}">
                                         {{ $item->short_name }}
@@ -41,7 +41,7 @@
                 <div class="card-header">{{ __('items.title') }}</div>
                 <div class="card-body">
                     @forelse($items as $item)
-                        <form id="delete_{{ $item->id }}" action="{{ route('available_items.delete') }}" method="POST" class="row">
+                        <form id="delete_{{ $item->id }}" action="{{ route('available_item.delete') }}" method="POST" class="row">
                             @csrf
                             <input type="hidden" name="id" value="{{ $item->id }}">
                             <div class="form-group col">

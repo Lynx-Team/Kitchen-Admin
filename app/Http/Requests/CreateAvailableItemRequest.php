@@ -17,7 +17,7 @@ class CreateAvailableItemRequest extends FormRequest
     public function rules()
     {
         return [
-            'order_list_id' => 'required|exists:order_list_items,id',
+            'order_list_id' => 'required|exists:order_lists,id',
             'item_id' => 'required|exists:items,id'
         ];
     }
