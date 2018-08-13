@@ -25,7 +25,8 @@ class ItemController extends Controller
             'short_name' => $request->short_name,
             'full_name' => $request->full_name,
             'default_supplier_id' => $request->default_supplier,
-            'category_id' => $request->category
+            'category_id' => $request->category,
+            'cost' => $request->cost
         ]);
         return redirect()->back();
     }
@@ -36,7 +37,8 @@ class ItemController extends Controller
             'short_name' => $request->short_name,
             'full_name' => $request->full_name,
             'default_supplier_id' => $request->default_supplier,
-            'category_id' => $request->category
+            'category_id' => $request->category,
+            'cost' => $request->cost
         ]);
         return redirect()->back();
     }

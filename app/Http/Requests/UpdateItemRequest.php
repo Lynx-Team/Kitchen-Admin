@@ -22,7 +22,8 @@ class UpdateItemRequest extends FormRequest
             'short_name' => 'required|string|max:255',
             'full_name' => 'required|string|max:255',
             'default_supplier' => 'required|exists:suppliers,id',
-            'category' => 'required|exists:item_categories,id'
+            'category' => 'required|exists:item_categories,id',
+            'cost' => 'required|int|min:0'
         ];
     }
 

@@ -59,6 +59,15 @@
                             @endif
                         </div>
                         <div class="form-group col">
+                            <label for="new_cost">{{ __('items.cost') }}</label>
+                            <input type="number" min="0" class="form-control" name="cost" id="new_cost" placeholder="{{ __('items.cost') }}" aria-describedby="create_cost_error">
+                            @if($errors->create->has('cost'))
+                                <p id="create_cost_error" class="form-text text-danger">
+                                    {{ $errors->create->first('cost') }}
+                                </p>
+                            @endif
+                        </div>
+                        <div class="form-group col">
                             <label for="add_item_btn">&nbsp;</label>
                             <button type="submit" class="btn btn-success form-control" id="add_item_btn">{{ __('items.add_btn') }}</button>
                         </div>
@@ -121,11 +130,19 @@
                                 @endif
                             </div>
                             <div class="form-group col">
+                                <input type="number" min="0" class="form-control" name="cost" value="{{ $item->cost }}" placeholder="{{ __('items.cost') }}" aria-describedby="update_cost_error">
+                                @if($errors->update->has('cost') && $errors->update->first('row_id') == $item->id)
+                                    <p id="update_cost_error" class="form-text text-danger">
+                                        {{ $errors->update->first('cost') }}
+                                    </p>
+                                @endif
+                            </div>
+                            <div class="form-group col">
                                 <button type="submit" class="btn btn-warning">{{ __('items.update_btn') }}</button>
                                 <a role="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete"
                                    data-title="Delete item" data-message="Are you sure you want to delete this item?"
                                    data-form-id="delete_{{ $item->id }}">
-                                    {{ __('items.delete_btn') }}
+                                    {!! __('items.delete_btn') !!}
                                 </a>
                             </div>
                         </form>

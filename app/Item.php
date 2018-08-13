@@ -8,7 +8,7 @@ class Item extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['short_name', 'full_name', 'default_supplier_id', 'category_id'];
+    protected $fillable = ['short_name', 'full_name', 'default_supplier_id', 'category_id', 'cost'];
 
     public function category()
     {
