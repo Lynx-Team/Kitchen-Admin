@@ -26,9 +26,6 @@
     @elseif(!$grouped)
         @foreach($order_lists as $order_list)
             @php($items = $order_list->order_list_items)
-            @if(count($items) == 0)
-                @continue
-            @endif
             <div class="row justify-content-center">
                 <div class="list-group list-group-root well col-md-10 mb-3">
                     @include('partials.order_list_header', ['order_list' => $order_list])
@@ -44,6 +41,9 @@
                             @include('partials.order_list_item_form_create', ['order_list_id' => $order_list->id,
                                     'all_items' => $all_items, 'suppliers' => $suppliers, 'errors' => $errors])
                         </div>
+                        @if(count($items) == 0)
+                            @continue
+                        @endif
                         <div class="list-group-item">
                             <div class="row">
                                 @include('partials.order_list_item_fields_update', ['item' => $items[0]])
