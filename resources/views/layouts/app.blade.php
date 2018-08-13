@@ -1,8 +1,11 @@
 @extends('layouts.base')
 
 @section('content')
-    <div class="app header-fixed sidebar-show">
+    <div class="app header-fixed">
         <header class="app-header navbar">
+            <button class="navbar-toggler sidebar-toggler" type="button" data-toggle="sidebar-show">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item px-3">
                     <a class="nav-link" href="{{ route('home') }}">{{ __('header.home') }}</a>
