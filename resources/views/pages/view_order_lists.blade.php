@@ -15,13 +15,13 @@
                     </div>
                     <div class="col-2">
                         @if(\Illuminate\Support\Facades\Auth::user()->can('view', \App\AvailableItem::class))
-                            <a href="{{ route('available_item.view', ['kitchen_id' => Request::segment(2),'order_list_id' => $order_list->id]) }}" class="btn btn-primary">
+                            <a href="{{ route('available_item.view', ['kitchen_id' => Request::segment(2), 'order_list_id' => $order_list->id]) }}" class="btn btn-primary">
                                 Available items
                             </a>
                         @endif
                     </div>
                     <div class="col-2">
-                        <a href="#" class="btn btn-success">
+                        <a href="{{ route('order_list_items.view', ['kitchen_id' => Request::segment(2), 'order_list_id' => $order_list->id]) }}" class="btn btn-success">
                             Items
                         </a>
                     </div>

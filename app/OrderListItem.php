@@ -9,7 +9,7 @@ class OrderListItem extends Model
     public $timestamps = false;
 
     protected $fillable = ['completed', 'quantity', 'supplier_sort_order', 'kitchen_sort_order',
-                           'supplier_id', 'order_list_id', 'item_id'];
+                           'supplier_id', 'order_list_id', 'item_id', 'available_item_id'];
 
     public function order_list()
     {

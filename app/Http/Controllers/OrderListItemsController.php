@@ -7,6 +7,7 @@ use App\Http\Requests\CreateOrderListItemRequest;
 use App\Http\Requests\UpdateOrderListItemRequest;
 use App\OrderList;
 use App\OrderListItem;
+use App\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,6 +24,7 @@ class OrderListItemsController extends Controller
                 'order_list' => $orderList,
                 'available_items' => $availableItems,
                 'order_list_items' => $orderListItems,
+                'suppliers' => Supplier::all(),
             ]);
         }
         return redirect()->back();
@@ -63,6 +65,7 @@ class OrderListItemsController extends Controller
             'supplier_id' => $request->supplier_id,
             'order_list_id' => $request->order_list_id,
             'item_id' => $request->item_id,
+            'available_item_id' => $request->available_item_id,
         ]);
         return redirect()->back();
     }
