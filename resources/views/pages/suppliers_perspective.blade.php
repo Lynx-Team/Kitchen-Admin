@@ -33,14 +33,13 @@
         </div>
     @elseif(!$grouped)
         @foreach($order_lists as $order_list)
-            @php($items = 1)
             @if(count($order_list->order_list_items) <= 0)
                 @continue
             @endif
             <div class="row justify-content-center">
                 <div class="list-group list-group-root well col-md-10 mb-3">
                     @include('partials.order_list_header')
-                    <div class="list-group collapse" id="list-{{ $order_list->id }}">
+                    <div class="list-group">
                         <div class="list-group-item">
                             <div class="row">
                                 @if(count($order_list->order_list_items) != 0)
@@ -72,7 +71,7 @@
             <div class="row justify-content-center">
                 <div class="list-group list-group-root well col-md-10 mb-3">
                     @include('partials.order_list_header')
-                    <div class="list-group collapse" id="list-{{ $order_list->id }}">
+                    <div class="list-group">
                         @php($current_category = null)
                         @php($i = 0)
                         @while($i < count($items))
@@ -110,7 +109,7 @@
     @include('partials.delete_confirm')
     <script>
         $(function() {
-            $('.collapse-href').on('click', function() {
+            $('.list-group-item').on('click', function() {
                 $('.fas', this).toggleClass('fa-chevron-right').toggleClass('fa-chevron-down');
             });
         });

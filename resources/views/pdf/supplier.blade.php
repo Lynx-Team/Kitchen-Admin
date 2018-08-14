@@ -23,7 +23,7 @@
                 <th scope="row">{{ $i }}</th>
                 <td>{{ $order_list_item->item->full_name }}</td>
                 <td>{{ $order_list_item->quantity }}</td>
-                <td>{{ $order_list_item->cost }}</td>
+                <td>{{ $order_list_item->item->cost }}</td>
             </tr>
             @php($i++)
         @endforeach
