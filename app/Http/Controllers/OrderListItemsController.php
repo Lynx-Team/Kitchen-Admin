@@ -84,8 +84,6 @@ class OrderListItemsController extends Controller
             $updatedFields['kitchen_sort_order'] = $request->kitchen_sort_order;
         if(Auth::user()->can('update_supplier_id', $item))
             $updatedFields['supplier_id'] = $request->supplier_id;
-        if(Auth::user()->can('update_available_item_id', $item))
-            $updatedFields['available_item_id'] = $request->available_item_id;
 
         $item->update($updatedFields);
         return redirect()->back();

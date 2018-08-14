@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\OrderList;
 use App\OrderListItem;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -15,53 +16,43 @@ class OrderListItemPolicy
         return $user->is_admin || $user->is_manager || $user->is_kitchen;
     }
 
-    public function create(User $user)
+    public function create(User $user, OrderList $orderList)
     {
-        return $user->is_admin || $user->is_manager;
+        return $user->id == $orderList->kitchen_id;
     }
 
     public function update(User $user, OrderListItem $orderListItem)
     {
-        return $user->is_admin || $user->is_manager || $user->id == $orderListItem->order_list->kitchen_id;
+        return $user->is_manager || $user->id == $orderListItem->order_list->kitchen_id;
     }
 
     public function delete(User $user, OrderListItem $orderListItem)
     {
-        return $user->is_admin || $user->is_manager;
-    }
-
-    public function update_cost(User $user, OrderListItem $orderListItem)
-    {
-        return $user->is_admin || $user->is_manager;
+        return $user->is_manager || $user->id == $orderListItem->order_list->kitchen_id;
     }
 
     public function update_completed(User $user, OrderListItem $orderListItem)
     {
-        return $user->is_admin || $user->is_manager || $user->id == $orderListItem->order_list->kitchen_id;
+        return $user->is_manager;
     }
 
     public function update_quantity(User $user, OrderListItem $orderListItem)
     {
-        return $user->is_admin || $user->is_manager || $user->id == $orderListItem->order_list->kitchen_id;
+        return $user->is_manager || $user->id == $orderListItem->order_list->kitchen_id;
     }
 
     public function update_supplier_sort_order(User $user, OrderListItem $orderListItem)
     {
-        return $user->is_admin || $user->is_manager;
+        return $user->is_manager;
     }
 
     public function update_kitchen_sort_order(User $user, OrderListItem $orderListItem)
     {
-        return $user->is_admin || $user->is_manager || $user->id == $orderListItem->order_list->kitchen_id;
+        return $user->is_manager;
     }
 
     public function update_supplier_id(User $user, OrderListItem $orderListItem)
     {
-        return $user->is_admin || $user->is_manager;
-    }
-
-    public function update_available_item_id(User $user, OrderListItem $orderListItem)
-    {
-        return $user->is_admin || $user->is_manager;
+        return $user->is_manager;
     }
 }
