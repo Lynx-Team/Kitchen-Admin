@@ -5,13 +5,15 @@
 @section('main')
     <div class="row justify-content-center mb-3">
         <div class="col-10">
-            <div class="row justify-content-between">
+            <div class="row justify-content-around">
                 <a href="{{ route('order_list_items.view', ['kitchen_id' => Request::segment(2), 'order_list_id' => Request::segment(4)]) }}" class="col-3 btn btn-primary">
                     Kitchen sort order
                 </a>
-                <a href="{{ route('order_list_items.view_supplier', ['kitchen_id' => Request::segment(2), 'order_list_id' => Request::segment(4)]) }}" class="col-3 btn btn-primary">
-                    Supplier grouped
-                </a>
+                @if(Auth::user()->is_manager)
+                    <a href="{{ route('order_list_items.view_supplier', ['kitchen_id' => Request::segment(2), 'order_list_id' => Request::segment(4)]) }}" class="col-3 btn btn-primary">
+                        Supplier grouped
+                    </a>
+                @endif
                 <a href="{{ route('order_list_items.view_category', ['kitchen_id' => Request::segment(2), 'order_list_id' => Request::segment(4)]) }}" class="col-3 btn btn-primary">
                     Category grouped
                 </a>
@@ -48,8 +50,7 @@
                         <div class="list-group-item">
                             <div class="row">
                                 @include('partials.order_list_item_fields_update', ['item' => $order_list_items[0]])
-                                <div class="col small"></div>
-                                <div class="col small"></div>
+                                <div class="col-3 small"></div>
                             </div>
                         </div>
 
