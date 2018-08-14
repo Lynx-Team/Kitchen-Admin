@@ -12,7 +12,7 @@ class OrderListItemPolicy
 
     public function view(User $user)
     {
-        return $user->is_admin || $user->is_manager;
+        return $user->is_admin || $user->is_manager || $user->is_kitchen;
     }
 
     public function create(User $user)

@@ -15,7 +15,7 @@ class OrderListItemsController extends Controller
 {
     private function _view($kitchen_id, $order_list_id, $orderListItems, $viewName)
     {
-        if (Auth::check() && Auth::user()->can('view', OrderListItem::class) &&
+        if (Auth::check() && Auth::user()->id == $kitchen_id && Auth::user()->can('view', OrderListItem::class) &&
             OrderList::where('id', $order_list_id)->where('kitchen_id', $kitchen_id)->exists())
         {
             $orderList = OrderList::findOrFail($order_list_id);
