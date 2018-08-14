@@ -78,8 +78,6 @@
         @if(Auth::user()->can('update', $item))
             <button type="submit" class="btn btn-warning">{{ __('users.update_btn') }}</button>
         @endif
-    </div>
-    <div class="form-group col">
         @if(Auth::user()->can('delete', $item))
             <a role="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete"
                data-title="Delete item?" data-message="Are you sure you want to delete this item?"
