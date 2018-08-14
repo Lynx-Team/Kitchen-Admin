@@ -59,4 +59,9 @@ class OrderListItemPolicy
     {
         return $user->is_admin || $user->is_manager;
     }
+
+    public function update_available_item_id(User $user, OrderListItem $orderListItem)
+    {
+        return $user->is_admin || $user->is_manager;
+    }
 }
