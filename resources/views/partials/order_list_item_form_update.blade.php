@@ -75,7 +75,9 @@
         <input type="hidden" name="completed" value="{{ $item->completed }}">
     @endif
     <div class="form-group col">
-        <button type="submit" class="btn btn-warning">{{ __('users.update_btn') }}</button>
+        @if(Auth::user()->can('update', $item))
+            <button type="submit" class="btn btn-warning">{{ __('users.update_btn') }}</button>
+        @endif
     </div>
     <div class="form-group col">
         @if(Auth::user()->can('delete', $item))

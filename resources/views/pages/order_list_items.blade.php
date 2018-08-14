@@ -31,17 +31,19 @@
             <div class="list-group list-group-root well col-md-10 mb-3">
                 @include('partials.order_list_header', ['order_list' => $order_list])
                 <div class="list-group">
-                    <div class="list-group-item">
-                        <div class="row">
-                            @include('partials.order_list_item_fields_create')
-                            <div class="col small"></div>
-                            <div class="col small"></div>
+                    @if(Auth::user()->can('create', \App\OrderListItem::class))
+                        <div class="list-group-item">
+                            <div class="row">
+                                @include('partials.order_list_item_fields_create')
+                                <div class="col small"></div>
+                                <div class="col small"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="list-group-item">
-                        @include('partials.order_list_item_form_create', ['order_list_id' => $order_list->id,
-                                'available_items' => $available_items, 'suppliers' => $suppliers, 'errors' => $errors])
-                    </div>
+                        <div class="list-group-item">
+                            @include('partials.order_list_item_form_create', ['order_list_id' => $order_list->id,
+                                    'available_items' => $available_items, 'suppliers' => $suppliers, 'errors' => $errors])
+                        </div>
+                    @endif
                     @if(count($order_list_items) != 0)
                         <div class="list-group-item">
                             <div class="row">
