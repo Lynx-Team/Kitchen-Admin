@@ -16,9 +16,9 @@ class OrderListItemPolicy
         return $user->is_admin || $user->is_manager;
     }
 
-    public function create(User $user, OrderList $orderList)
+    public function create(User $user)
     {
-        return $user->id == $orderList->kitchen_id;
+        return $user->is_kitchen;
     }
 
     public function update(User $user, OrderListItem $orderListItem)
