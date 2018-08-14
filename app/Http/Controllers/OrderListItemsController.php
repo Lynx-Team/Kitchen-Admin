@@ -34,7 +34,7 @@ class OrderListItemsController extends Controller
     {
         $orderListItems = OrderListItem::where('order_list_id', $order_list_id)->orderBy('kitchen_sort_order')
             ->with('item')->with('supplier')->get();
-        return $this->_view($kitchen_id, $order_list_id, $orderListItems, 'pages.order_list_items');
+        return $this->_view($kitchen_id, $order_list_id, $orderListItems, 'pages.order_list_items_kitchen');
     }
 
     public function view_categorized(Request $request, $kitchen_id, $order_list_id)
@@ -43,7 +43,7 @@ class OrderListItemsController extends Controller
             ->withCount(['category as category_name' => function ($q) {
                 $q->select('item_categories.name');
             }])->orderBy('category_name')->with('item')->with('category')->with('supplier')->get();
-        return $this->_view($kitchen_id, $order_list_id, $orderListItems, 'pages.order_list_items');
+        return $this->_view($kitchen_id, $order_list_id, $orderListItems, 'pages.order_list_items_categorized');
     }
 
     public function view_grouped_by_supplier(Request $request, $kitchen_id, $order_list_id)
@@ -52,7 +52,7 @@ class OrderListItemsController extends Controller
             ->withCount(['supplier as supplier_name' => function ($q) {
                 $q->select('suppliers.name');
             }])->orderBy('supplier_name')->with('item')->with('category')->with('supplier')->get();
-        return $this->_view($kitchen_id, $order_list_id, $orderListItems, 'pages.order_list_items');
+        return $this->_view($kitchen_id, $order_list_id, $orderListItems, 'pages.order_list_items_supplier');
     }
 
     public function create(CreateOrderListItemRequest $request)

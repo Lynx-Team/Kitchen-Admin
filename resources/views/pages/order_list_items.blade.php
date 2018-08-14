@@ -3,6 +3,21 @@
 @section('title', $order_list->note)
 
 @section('main')
+    <div class="row justify-content-center mb-3">
+        <div class="col-10">
+            <div class="row justify-content-between">
+                <a href="{{ route('order_list_items.view', ['kitchen_id' => Request::segment(2), 'order_list_id' => Request::segment(4)]) }}" class="col-3 btn btn-primary">
+                    Kitchen sort order
+                </a>
+                <a href="{{ route('order_list_items.view_supplier', ['kitchen_id' => Request::segment(2), 'order_list_id' => Request::segment(4)]) }}" class="col-3 btn btn-primary">
+                    Supplier grouped
+                </a>
+                <a href="{{ route('order_list_items.view_category', ['kitchen_id' => Request::segment(2), 'order_list_id' => Request::segment(4)]) }}" class="col-3 btn btn-primary">
+                    Category grouped
+                </a>
+            </div>
+        </div>
+    </div>
     @if(empty($order_list_items))
         <div class="row justify-content-center">
             <div class="col">
@@ -35,15 +50,8 @@
                                 <div class="col small"></div>
                             </div>
                         </div>
-                        @foreach($order_list_items as $item)
-                            <div class="list-group-item">
-                                @include('partials.order_list_item_form_update', ['item' => $item, 'suppliers' => $suppliers, 'errors' => $errors])
-                                <form id="delete_{{ $item->id }}" action="{{ route('order_list_item.delete') }}" method="POST" style="display: none;">
-                                    @csrf
-                                    <input type="hidden" name="id" value="{{ $item->id }}">
-                                </form>
-                            </div>
-                        @endforeach
+
+                        @yield('order_list_items')
                     @endif
                 </div>
             </div>
