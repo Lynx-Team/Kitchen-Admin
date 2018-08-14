@@ -9,7 +9,7 @@ return [
     'category' => 'Category',
     'cost' => 'Cost',
     'add_btn' => 'Add',
-    'update_btn' => 'Update',
+    'update_btn' => 'Edit',
     'delete_btn' => '<i class="fas fa-trash-alt"></i>',
     'no_items' => 'No items',
 ];

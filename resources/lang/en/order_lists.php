@@ -7,7 +7,7 @@ return [
     'kitchen' => 'Kitchen',
     'add_btn' => 'Add',
     'completed' => 'Completed',
-    'update_btn' => 'Update',
+    'update_btn' => 'Edit',
     'delete_btn' => 'Delete',
     'no_order_lists' => 'No order lists'
 ];

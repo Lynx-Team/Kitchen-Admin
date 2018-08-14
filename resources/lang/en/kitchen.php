@@ -10,7 +10,7 @@ return [
     'supplier_sort_order' => 'Supplier order',
     'kitchen_sort_order' => 'Kitchen order',
     'completed' => 'Completed',
-    'create_item' => 'Create',
-    'update_item' => 'Update',
+    'create_item' => 'Save',
+    'update_item' => 'Edit',
     'empty_order_list' => 'Order list is empty',
 ];
