@@ -48,7 +48,7 @@ class OrderListItemsController extends Controller
 
     public function view_grouped_by_supplier(Request $request, $kitchen_id, $order_list_id)
     {
-        if (!Auth::user()->is_manager)
+        if (!Auth::check() || !Auth::user()->is_manager)
             return redirect()->back();
         $orderListItems = OrderListItem::where('order_list_id', $order_list_id)
             ->withCount(['supplier as supplier_name' => function ($q) {
