@@ -65,6 +65,12 @@
     @include('partials.delete_confirm')
     <script>
         $(function() {
+            $('.list-group-item').on('click', function() {
+                $('.fas', this)
+                    .toggleClass('fa-angle-right')
+                    .toggleClass('fa-angle-down');
+            });
+
             $('#select_item').change(function() {
                 var fields = JSON.parse($(this).val());
                 $('#available_item_id').val(fields.available_item_id);

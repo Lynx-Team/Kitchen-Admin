@@ -55,4 +55,9 @@ class OrderListItemPolicy
     {
         return $user->is_manager;
     }
+
+    public function finilize(User $user, OrderListItem $orderListItem)
+    {
+        return $user->is_manager;
+    }
 }

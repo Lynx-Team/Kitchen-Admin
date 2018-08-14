@@ -4,6 +4,10 @@
     @foreach($order_list_items as $item)
         <div class="list-group-item">
             @include('partials.order_list_item_form_update', ['item' => $item, 'suppliers' => $suppliers, 'errors' => $errors])
+            <form id="finilize_{{ $item->id }}" action="{{ route('order_list_item.finilize')  }}" method="POST" style="display: none;">
+                @csrf
+                <input type="hidden" name="id" value="{{ $item->id }}">
+            </form>
             <form id="delete_{{ $item->id }}" action="{{ route('order_list_item.delete') }}" method="POST" style="display: none;">
                 @csrf
                 <input type="hidden" name="id" value="{{ $item->id }}">

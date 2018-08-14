@@ -74,9 +74,14 @@
     @else
         <input type="hidden" name="completed" value="{{ $item->completed }}">
     @endif
-    <div class="form-group col">
+    <div class="form-group col-3">
         @if(Auth::user()->can('update', $item))
             <button type="submit" class="btn btn-warning">{{ __('users.update_btn') }}</button>
+        @endif
+        @if(Auth::user()->can('finilize', $item))
+            <a role="button" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('finilize_{{ $item->id }}').submit();">
+                {{ __('users.finilize_btn') }}
+            </a>
         @endif
         @if(Auth::user()->can('delete', $item))
             <a role="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete"

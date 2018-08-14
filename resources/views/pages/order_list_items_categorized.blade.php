@@ -5,7 +5,7 @@
     @while($i < count($order_list_items))
         @php($current_category = $order_list_items[$i]->item->category)
         <a href="#category-{{ $current_category->id }}" class="list-group-item" data-toggle="collapse">
-            <i class="fas fa-angle-right"></i>{{ $current_category->name }}
+            <i class="fas fa-angle-right"></i> {{ $current_category->name }}
         </a>
         <div class="list-group-item collapse" id="category-{{ $current_category->id }}">
             @while($i < count($order_list_items) && $order_list_items[$i]->item->category->id == $current_category->id)

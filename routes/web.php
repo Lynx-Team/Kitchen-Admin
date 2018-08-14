@@ -76,6 +76,8 @@ Route::get('/kitchen/{kitchen_id}/order_list/{order_list_id}/supplier_view', 'Or
     ->where(['kitchen_id' => '[0-9]+', 'order_list_id' => '[0-9]+'])->name('order_list_items.view_supplier');
 Route::get('/kitchen/{kitchen_id}/order_list/{order_list_id}/category_view', 'OrderListItemsController@view_categorized')
     ->where(['kitchen_id' => '[0-9]+', 'order_list_id' => '[0-9]+'])->name('order_list_items.view_category');
+
 Route::post('/order_list_item/create', 'OrderListItemsController@create')->name('order_list_item.create');
 Route::post('/order_list_item/update', 'OrderListItemsController@update')->name('order_list_item.update');
 Route::post('/order_list_item/delete', 'OrderListItemsController@delete')->name('order_list_item.delete');
+Route::post('order_list_item/finilize', 'OrderListItemsController@finilize')->name('order_list_item.finilize');

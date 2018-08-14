@@ -7,4 +7,5 @@ return [
     'add_btn' => 'Add',
     'update_btn' => 'Edit',
     'delete_btn' => 'Delete',
+    'finilize_btn' => 'Finilize',
 ];
