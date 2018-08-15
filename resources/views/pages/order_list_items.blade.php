@@ -74,7 +74,6 @@
 
             $('#select_item').change(function() {
                 var fields = JSON.parse($(this).val());
-                $('#available_item_id').val(fields.available_item_id);
                 $('#supplier_id').val(fields.supplier_id);
                 $('#item_id').val(fields.item_id);
             });

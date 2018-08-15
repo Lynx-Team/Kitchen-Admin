@@ -2,15 +2,14 @@
     @csrf
     <input type="hidden" name="order_list_id" value="{{ $order_list_id }}">
     @if(count($available_items) != 0)
-        <input type="hidden" name="available_item_id" id="available_item_id" value="{{ $available_items[0]->id }}">
-        <input type="hidden" name="supplier_id" id="supplier_id" value="{{$available_items[0]->item->default_supplier_id}}">
-        <input type="hidden" name="item_id" id="item_id" value="{{ $available_items[0]->item_id }}">
+        <input type="hidden" name="supplier_id" id="supplier_id" value="{{$available_items[0]->default_supplier_id}}">
+        <input type="hidden" name="item_id" id="item_id" value="{{ $available_items[0]->id }}">
     @endif
     <div class="form-group col">
         <select class="form-control" id="select_item" aria-describedby="create_item_id_error">
             @foreach($available_items as $item)
-                <option value='{"item_id":{{ $item->item_id }}, "available_item_id":{{ $item->id }}, "supplier_id": {{ $item->item->default_supplier_id }} }'>
-                    {{ $item->item->short_name }}
+                <option value='{"item_id":{{ $item->id }}, "supplier_id": {{ $item->default_supplier_id }} }'>
+                    {{ $item->short_name }}
                 </option>
             @endforeach
         </select>
