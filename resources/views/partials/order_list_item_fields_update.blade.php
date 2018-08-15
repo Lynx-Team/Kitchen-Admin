@@ -11,6 +11,3 @@
 @if(Auth::user()->can('update_kitchen_sort_order', $item))
     <div class="col small">{{ __('kitchen.kitchen_sort_order') }}</div>
 @endif
-@if(Auth::user()->can('update_completed', $item))
-    <div class="col small">{{ __('kitchen.completed') }}</div>
-@endif

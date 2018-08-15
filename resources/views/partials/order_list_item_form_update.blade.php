@@ -61,19 +61,6 @@
     @else
         <input type="hidden" name="kitchen_sort_order" value="{{ $item->kitchen_sort_order }}">
     @endif
-    @if(Auth::user()->can('update_completed', $item))
-        <div class="form-group col">
-            <input type="checkbox" class="form-check-input" name="completed" id="update_completed_{{ $item->id }}" aria-describedby="update_completed_error" {{ $item->completed ? 'checked' : '' }}>
-            <label class="form-check-label" for="update_completed_{{ $item->id }}">{{ __('kitchen.completed') }}</label>
-            @if($errors->update->has('completed') && $errors->update->first('row_id') == $item->id)
-                <p id="update_completed_error" class="form-text text-danger">
-                    {{ $errors->update->first('completed') }}
-                </p>
-            @endif
-        </div>
-    @else
-        <input type="hidden" name="completed" value="{{ $item->completed }}">
-    @endif
     <div class="form-group col-3">
         @if(Auth::user()->can('update', $item))
             <button type="submit" class="btn btn-warning">{{ __('users.update_btn') }}</button>

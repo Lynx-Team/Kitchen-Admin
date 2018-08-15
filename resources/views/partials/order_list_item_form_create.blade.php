@@ -45,15 +45,6 @@
         @endif
     </div>
     <div class="form-group col">
-        <input type="checkbox" class="form-check-input" name="completed" id="create_completed_{{ $order_list_id }}" aria-describedby="create_completed_error">
-        <label class="form-check-label" for="create_completed_{{ $order_list_id }}">{{ __('kitchen.completed') }}</label>
-        @if($errors->create->has('completed'))
-            <p id="create_completed_error" class="form-text text-danger">
-                {{ $errors->create->first('completed') }}
-            </p>
-        @endif
-    </div>
-    <div class="form-group col">
         <button type="submit" class="btn btn-success form-control">{{ __('kitchen.create_item') }}</button>
     </div>
     <div class="form-group col">
