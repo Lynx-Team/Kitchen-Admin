@@ -23,7 +23,7 @@ class OrderListItemPolicy
 
     public function update(User $user, OrderListItem $orderListItem)
     {
-        return $user->is_manager || $user->id == $orderListItem->order_list->kitchen_id;
+        return $user->is_admin || $user->is_manager || $user->id == $orderListItem->order_list->kitchen_id;
     }
 
     public function delete(User $user, OrderListItem $orderListItem)
@@ -43,12 +43,12 @@ class OrderListItemPolicy
 
     public function update_supplier_sort_order(User $user, OrderListItem $orderListItem)
     {
-        return $user->is_manager;
+        return $user->is_admin;
     }
 
     public function update_kitchen_sort_order(User $user, OrderListItem $orderListItem)
     {
-        return $user->is_manager;
+        return $user->is_admin;
     }
 
     public function update_supplier_id(User $user, OrderListItem $orderListItem)
