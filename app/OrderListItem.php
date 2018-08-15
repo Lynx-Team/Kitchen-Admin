@@ -8,7 +8,7 @@ class OrderListItem extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['completed', 'quantity', 'supplier_sort_order', 'kitchen_sort_order',
+    protected $fillable = ['quantity', 'supplier_sort_order', 'kitchen_sort_order',
                            'supplier_id', 'order_list_id', 'item_id', 'available_item_id'];
 
     public function order_list()
@@ -30,10 +30,5 @@ class OrderListItem extends Model
     {
         return $this->hasManyThrough(ItemCategory::class, Item::class,
             'id', 'id', 'item_id', 'category_id');
-    }
-
-    public function availableItem()
-    {
-        return $this->hasOne('App\AvailableItemList');
     }
 }

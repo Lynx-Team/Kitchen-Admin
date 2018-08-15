@@ -29,4 +29,9 @@ class Item extends Model
     {
         return $this->hasMany('App\AvailableItem');
     }
+
+    public function kitchen()
+    {
+        return $this->belongsTo('App\User');
+    }
 }
