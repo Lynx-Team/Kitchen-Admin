@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\AvailableItem;
 use App\Http\Requests\CreateOrderListItemRequest;
 use App\Http\Requests\UpdateOrderListItemRequest;
+use App\Item;
 use App\OrderList;
 use App\OrderListItem;
 use App\Supplier;
@@ -19,7 +19,7 @@ class OrderListItemsController extends Controller
             (Auth::user()->can('view', OrderListItem::class) || (Auth::user()->is_kitchen && Auth::user()->id == $kitchen_id)))
         {
             $orderList = OrderList::findOrFail($order_list_id);
-            $availableItems = AvailableItem::where('order_list_id', $order_list_id)->with('item')->get();
+            $availableItems = Item::where('kitchen_id', $kitchen_id)->get();
             return view($viewName, [
                 'order_list' => $orderList,
                 'available_items' => $availableItems,
@@ -66,7 +66,6 @@ class OrderListItemsController extends Controller
             'supplier_id' => $request->supplier_id,
             'order_list_id' => $request->order_list_id,
             'item_id' => $request->item_id,
-            'available_item_id' => $request->available_item_id,
         ]);
         return redirect()->back();
     }
