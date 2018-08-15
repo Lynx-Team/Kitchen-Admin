@@ -37,7 +37,7 @@ Route::post('/item_categories/create', 'ItemCategoryController@create')->name('i
 Route::post('/item_categories/update', 'ItemCategoryController@update')->name('item_categories.update');
 Route::post('/item_categories/delete', 'ItemCategoryController@delete')->name('item_categories.delete');
 
-Route::get('/items', 'ItemController@view')->name('items.view');
+Route::get('/kitchen/{kitchen_id}/items', 'ItemController@view')->where(['kitchen_id' => '[0-9]+'])->name('items.view');
 Route::post('/items/create', 'ItemController@create')->name('items.create');
 Route::post('/items/update', 'ItemController@update')->name('items.update');
 Route::post('/items/delete', 'ItemController@delete')->name('items.delete');

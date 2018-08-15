@@ -44,7 +44,6 @@ class ItemController extends Controller
             'default_supplier_id' => $request->default_supplier,
             'category_id' => $request->category,
             'cost' => $request->cost,
-            'kitchen_id' => $request->kitchen_id,
         ]);
         return redirect()->back();
     }
