@@ -60,7 +60,6 @@ class OrderListItemsController extends Controller
     public function create(CreateOrderListItemRequest $request)
     {
         OrderListItem::create([
-            'completed' => $request->completed === 'on' ? 1 : 0,
             'quantity' => $request->quantity,
             'supplier_sort_order' => $request->supplier_sort_order,
             'kitchen_sort_order' => $request->kitchen_sort_order,
@@ -76,8 +75,6 @@ class OrderListItemsController extends Controller
     {
         $updatedFields = [];
         $item = OrderListItem::find($request->id);
-        if(Auth::user()->can('update_completed', $item))
-            $updatedFields['completed'] = $request->completed === 'on';
         if(Auth::user()->can('update_quantity', $item))
             $updatedFields['quantity'] = $request->quantity;
         if(Auth::user()->can('update_supplier_sort_order', $item))

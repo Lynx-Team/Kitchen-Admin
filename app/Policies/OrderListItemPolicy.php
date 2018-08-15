@@ -18,7 +18,7 @@ class OrderListItemPolicy
 
     public function create(User $user)
     {
-        return $user->is_kitchen;
+        return $user->is_admin;
     }
 
     public function update(User $user, OrderListItem $orderListItem)
@@ -28,12 +28,7 @@ class OrderListItemPolicy
 
     public function delete(User $user, OrderListItem $orderListItem)
     {
-        return $user->is_manager || $user->id == $orderListItem->order_list->kitchen_id;
-    }
-
-    public function update_completed(User $user, OrderListItem $orderListItem)
-    {
-        return $user->is_manager;
+        return $user->is_admin;
     }
 
     public function update_quantity(User $user, OrderListItem $orderListItem)
@@ -58,6 +53,6 @@ class OrderListItemPolicy
 
     public function finilize(User $user, OrderListItem $orderListItem)
     {
-        return $user->is_manager;
+        return $user->is_kitchen;
     }
 }

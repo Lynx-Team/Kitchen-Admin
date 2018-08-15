@@ -14,24 +14,9 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderListItemController extends Controller
 {
-
-    private function fill(Request $request)
-    {
-        return [
-            'completed' => $request->completed === 'on' ? 1 : 0,
-            'quantity' => $request->quantity,
-            'supplier_sort_order' => $request->supplier_sort_order,
-            'kitchen_sort_order' => $request->kitchen_sort_order,
-            'supplier_id' => $request->supplier_id,
-            'order_list_id' => $request->order_list_id,
-            'item_id' => $request->item_id,
-        ];
-    }
-
     public function create(CreateOrderListItemRequest $request)
     {
         OrderListItem::create([
-            'completed' => $request->completed === 'on' ? 1 : 0,
             'quantity' => $request->quantity,
             'supplier_sort_order' => $request->supplier_sort_order,
             'kitchen_sort_order' => $request->kitchen_sort_order,
@@ -46,10 +31,6 @@ class OrderListItemController extends Controller
     {
         $updatedFields = [];
         $itemToUpdate = OrderListItem::findOrFail($request->id);
-        if(Auth::user()->can('update_cost', $itemToUpdate))
-            $updatedFields['cost'] = $request->cost;
-        if(Auth::user()->can('update_completed', $itemToUpdate))
-            $updatedFields['completed'] = $request->completed === 'on';
         if(Auth::user()->can('update_quantity', $itemToUpdate))
             $updatedFields['quantity'] = $request->quantity;
         if(Auth::user()->can('update_supplier_sort_order', $itemToUpdate))

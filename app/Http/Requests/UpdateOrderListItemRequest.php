@@ -25,7 +25,6 @@ class UpdateOrderListItemRequest extends FormRequest
             'supplier_id' => 'required|exists:suppliers,id',
             'order_list_id' => 'required|exists:order_lists,id',
             'item_id' => 'required|exists:items,id',
-            'available_item_id' => 'required|exists:available_items,id'
         ];
     }
 
