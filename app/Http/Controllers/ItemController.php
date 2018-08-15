@@ -12,10 +12,14 @@ use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
-    public function view()
+    public function view(Request $request, $kitchen_id)
     {
         if (Auth::check() && Auth::user()->can('view', Item::class))
-            return view('pages.items', ['items' => Item::all(), 'suppliers' => Supplier::all(), 'categories' => ItemCategory::all()]);
+            return view('pages.items', [
+                'items' => Item::where('kitchen_id', $kitchen_id)->get(),
+                'suppliers' => Supplier::all(),
+                'categories' => ItemCategory::all()
+            ]);
         return redirect()->back();
     }
 
@@ -26,7 +30,8 @@ class ItemController extends Controller
             'full_name' => $request->full_name,
             'default_supplier_id' => $request->default_supplier,
             'category_id' => $request->category,
-            'cost' => $request->cost
+            'cost' => $request->cost,
+            'kitchen_id' => $request->kitchen_id,
         ]);
         return redirect()->back();
     }
@@ -38,7 +43,8 @@ class ItemController extends Controller
             'full_name' => $request->full_name,
             'default_supplier_id' => $request->default_supplier,
             'category_id' => $request->category,
-            'cost' => $request->cost
+            'cost' => $request->cost,
+            'kitchen_id' => $request->kitchen_id,
         ]);
         return redirect()->back();
     }

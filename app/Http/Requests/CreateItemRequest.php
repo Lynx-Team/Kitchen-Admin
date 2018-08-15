@@ -21,7 +21,8 @@ class CreateItemRequest extends FormRequest
             'full_name' => 'required|string|max:255',
             'default_supplier' => 'required|exists:suppliers,id',
             'category' => 'required|exists:item_categories,id',
-            'cost' => 'required|int|min:0'
+            'cost' => 'required|int|min:0',
+            'kitchen_id' => 'required|exists:users,id',
         ];
     }
 }
