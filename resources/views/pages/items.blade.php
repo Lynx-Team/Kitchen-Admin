@@ -60,7 +60,7 @@
                         </div>
                         <div class="form-group col">
                             <label for="new_cost">{{ __('items.cost') }}</label>
-                            <input type="number" min="0" class="form-control" name="cost" id="new_cost" placeholder="{{ __('items.cost') }}" aria-describedby="create_cost_error">
+                            <input type="number" min="0" step="0.01" class="form-control" name="cost" id="new_cost" placeholder="{{ __('items.cost') }}" aria-describedby="create_cost_error">
                             @if($errors->create->has('cost'))
                                 <p id="create_cost_error" class="form-text text-danger">
                                     {{ $errors->create->first('cost') }}
@@ -130,7 +130,7 @@
                                 @endif
                             </div>
                             <div class="form-group col">
-                                <input type="number" min="0" class="form-control" name="cost" value="{{ $item->cost }}" placeholder="{{ __('items.cost') }}" aria-describedby="update_cost_error">
+                                <input type="number" min="0" step="0.01" class="form-control" name="cost" value="{{ $item->cost }}" placeholder="{{ __('items.cost') }}" aria-describedby="update_cost_error">
                                 @if($errors->update->has('cost') && $errors->update->first('row_id') == $item->id)
                                     <p id="update_cost_error" class="form-text text-danger">
                                         {{ $errors->update->first('cost') }}
