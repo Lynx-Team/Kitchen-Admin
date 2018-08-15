@@ -35,7 +35,6 @@ class OrderListController extends Controller
         OrderList::find($request->id)->update([
             'note' => $request->note,
             'kitchen_id' => $request->kitchen,
-            'completed' => $request->completed === 'on' ? 1 : 0,
         ]);
         return redirect()->back();
     }

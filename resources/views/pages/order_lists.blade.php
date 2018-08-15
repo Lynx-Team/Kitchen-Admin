@@ -74,15 +74,6 @@
                                     </p>
                                 @endif
                             </div>
-                            <div class="form-check col">
-                                <input type="checkbox" class="form-check-input" name="completed" id="update_completed" aria-describedby="update_completed_error" {{ $order_list->completed ? 'checked' : '' }}>
-                                <label class="form-check-label" for="update_completed">{{ __('order_lists.completed') }}</label>
-                                @if($errors->update->has('completed') && $errors->update->first('row_id') == $order_list->id)
-                                    <p id="update_completed_error" class="form-text text-danger">
-                                        {{ $errors->update->first('completed') }}
-                                    </p>
-                                @endif
-                            </div>
                             <div class="form-group col">
                                 <button type="submit" class="btn btn-warning">{{ __('order_lists.update_btn') }}</button>
                                 <a role="button" class="btn btn-danger"  data-toggle="modal" data-target="#confirmDelete"
