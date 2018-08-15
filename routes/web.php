@@ -63,11 +63,6 @@ Route::get('/download_supplier_pdf/{supplier_id}', 'SuppliersPerspectiveControll
 Route::get('/send_supplier_email/{supplier_id}', 'SuppliersPerspectiveController@sendEmail')
     ->where(['supplier_id' => '[0-9]+'])->name('send_supplier_email');
 
-Route::get('/kitchen/{kitchen_id}/order_list/{order_list_id}/available_items', 'AvailableItemController@view')
-    ->where(['kitchen_id' => '[0-9]+', 'order_list_id' => '[0-9]+'])->name('available_item.view');
-Route::post('/available_item/create', 'AvailableItemController@create')->name('available_item.create');
-Route::post('/available_item/delete', 'AvailableItemController@delete')->name('available_item.delete');
-
 Route::get('/kitchen/{kitchen_id}/order_lists', 'OrderListsController@view')->where(['kitchen_id' => '[0-9]+'])->name('view_order_lists.view');
 
 Route::get('/kitchen/{kitchen_id}/order_list/{order_list_id}/kitchen_view', 'OrderListItemsController@view')
