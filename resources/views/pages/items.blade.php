@@ -10,6 +10,7 @@
                 <div class="card-body">
                     <form action="{{ route('items.create') }}" method="POST" class="row">
                         @csrf
+                        <input type="hidden" name="kitchen_id" value="{{ Request::segment(2) }}">
                         <div class="form-group col">
                             <label for="new_short_name">{{ __('items.short_name') }}</label>
                             <input type="text" class="form-control" name="short_name" id="new_short_name" placeholder="{{ __('items.short_name') }}" aria-describedby="create_short_name_error">
