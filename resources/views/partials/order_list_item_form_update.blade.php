@@ -1,5 +1,5 @@
 <form id="update_{{ $item->id }}" ondragover="event.preventDefault();" draggable="true" ondragstart="shareData(event);" ondrop="drop(event);"
-      action="{{ route('order_list_item.update')  }}" method="POST" class="row">
+      action="{{ route('order_list_item.update')  }}" method="POST" class="form_update row">
     @csrf
     <input type="hidden" name="id" value="{{ $item->id }}">
     <input type="hidden" name="item_id" value="{{ $item->item_id }}">
@@ -16,11 +16,7 @@
                     </option>
                 @endforeach
             </select>
-            @if($errors->update->has('supplier_id') && $errors->update->first('row_id') == $item->id)
-                <p id="select_sort_order_error" class="form-text text-danger">
-                    {{ $errors->update->first('supplier_id') }}
-                </p>
-            @endif
+            <p id="update_supplier_id_error" class="error form-text text-danger"></p>
         </div>
     @else
         <input type="hidden" name="supplier_id" value="{{ $item->supplier_id }}">
@@ -28,11 +24,7 @@
     @if(Auth::user()->can('update_quantity', $item))
         <div class="form-group col">
             <input type="number" class="form-control" name="quantity" min="1" value="{{ $item->quantity }}" aria-describedby="update_quantity_error">
-            @if($errors->update->has('quantity') && $errors->update->first('row_id') == $item->id)
-                <p id="update_quantity_error" class="form-text text-danger">
-                    {{ $errors->update->first('quantity') }}
-                </p>
-            @endif
+            <p id="update_quantity_error" class="error form-text text-danger"></p>
         </div>
     @else
         <input type="hidden" name="quantity" value="{{ $item->quantity }}">
@@ -40,11 +32,7 @@
     @if(Auth::user()->can('update_supplier_sort_order', $item))
         <div class="form-group col">
             <input type="number" class="form-control" name="supplier_sort_order" value="{{ $item->supplier_sort_order }}" aria-describedby="update_supplier_sort_order_error">
-            @if($errors->update->has('supplier_sort_order') && $errors->update->first('row_id') == $item->id)
-                <p id="update_supplier_sort_order_error" class="form-text text-danger">
-                    {{ $errors->update->first('supplier_sort_order') }}
-                </p>
-            @endif
+            <p id="update_supplier_sort_order_error" class="error form-text text-danger"></p>
         </div>
     @else
         <input type="hidden" name="supplier_sort_order" value="{{ $item->supplier_sort_order }}">
@@ -52,19 +40,12 @@
     @if(Auth::user()->can('update_kitchen_sort_order', $item))
         <div class="form-group col">
             <input type="number" class="form-control" name="kitchen_sort_order" value="{{ $item->kitchen_sort_order }}" aria-describedby="update_kitchen_sort_order_error">
-            @if($errors->update->has('kitchen_sort_order') && $errors->update->first('row_id') == $item->id)
-                <p id="update_kitchen_sort_order_error" class="form-text text-danger">
-                    {{ $errors->update->first('kitchen_sort_order') }}
-                </p>
-            @endif
+            <p id="update_kitchen_sort_order_error" class="error form-text text-danger"></p>
         </div>
     @else
         <input type="hidden" name="kitchen_sort_order" value="{{ $item->kitchen_sort_order }}">
     @endif
     <div class="form-group col-3">
-        @if(Auth::user()->can('update', $item))
-            <button type="submit" class="btn btn-warning">{{ __('users.update_btn') }}</button>
-        @endif
         @if(Auth::user()->can('finilize', $item))
             <a role="button" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('finilize_{{ $item->id }}').submit();">
                 {{ __('users.finilize_btn') }}
@@ -83,16 +64,12 @@
 @section('js')
     @parent
     <script>
-        var g = 1;
-        function drag(e) {
-            
-        }
         function shareData(e) {
             e.dataTransfer.setData('id', e.target.id.value);
             console.log(e.target.id.value);
         }
-        function drop(e) {
 
+        function drop(e) {
             let id = e.dataTransfer.getData('id');
             let supplier_id = $(e.target).closest('form')
                 .find('select[name="supplier_id"]>option[selected]')[0].value;

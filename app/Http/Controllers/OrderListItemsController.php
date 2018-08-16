@@ -84,7 +84,6 @@ class OrderListItemsController extends Controller
             $updatedFields['supplier_id'] = $request->supplier_id;
 
         $item->update($updatedFields);
-        return redirect()->back();
     }
 
     public function finilize(Request $request)

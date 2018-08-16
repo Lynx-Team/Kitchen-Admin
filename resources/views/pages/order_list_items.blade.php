@@ -53,9 +53,11 @@
                                 <div class="col-3 small"></div>
                             </div>
                         </div>
-
                         @yield('order_list_items')
                     @endif
+                    <div class="list-group-item">
+                        <a href="#" id="save_order_list" class="btn btn-success">Save</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -73,9 +75,27 @@
             });
 
             $('#select_item').change(function() {
-                var fields = JSON.parse($(this).val());
+                let fields = JSON.parse($(this).val());
                 $('#supplier_id').val(fields.supplier_id);
                 $('#item_id').val(fields.item_id);
+            });
+
+            $('#save_order_list').click(function() {
+                $('.form_update').each(function() {
+                    $(this).find('.error').text('');
+                    $.ajax($(this).attr('action'), {
+                        method: $(this).attr('method'),
+                        data: $(this).serialize(),
+                        success: (data) => {
+                            console.log(data);
+                        },
+                        error: (data) => {
+                            $.each(data.responseJSON.errors, (key, value) => {
+                                $(this).find(`#update_${key}_error`).text(value);
+                            });
+                        }
+                    });
+                });
             });
         });
     </script>
