@@ -86,12 +86,6 @@ class OrderListItemsController extends Controller
         $item->update($updatedFields);
     }
 
-    public function finilize(Request $request)
-    {
-        OrderListItem::find($request->id)->update(['completed' => true]);
-        return redirect()->back();
-    }
-
     public function delete(Request $request)
     {
         $orderListItem = OrderListItem::findOrFail($request->id);

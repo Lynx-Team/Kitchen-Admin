@@ -75,4 +75,3 @@ Route::get('/kitchen/{kitchen_id}/order_list/{order_list_id}/category_view', 'Or
 Route::post('/order_list_item/create', 'OrderListItemsController@create')->name('order_list_item.create');
 Route::post('/order_list_item/update', 'OrderListItemsController@update')->name('order_list_item.update');
 Route::post('/order_list_item/delete', 'OrderListItemsController@delete')->name('order_list_item.delete');
-Route::post('order_list_item/finilize', 'OrderListItemsController@finilize')->name('order_list_item.finilize');

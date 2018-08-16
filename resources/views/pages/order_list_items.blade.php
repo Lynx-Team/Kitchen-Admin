@@ -56,7 +56,7 @@
                         @yield('order_list_items')
                     @endif
                     <div class="list-group-item">
-                        <a href="#" id="save_order_list" class="btn btn-success">Save</a>
+                        <a href="#" id="save_order_list" class="btn btn-success">{{ __('order_list_items.save_btn') }}</a>
                     </div>
                 </div>
             </div>
