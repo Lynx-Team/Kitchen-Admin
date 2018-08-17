@@ -3,11 +3,11 @@
     <div class="col small">{{ __('kitchen.supplier') }}</div>
 @endif
 @if(Auth::user()->can('update_quantity', $item))
-    <div class="col small">{{ __('kitchen.quantity') }}</div>
+    <div class="col-2 small">{{ __('kitchen.quantity') }}</div>
 @endif
 @if(Auth::user()->can('update_supplier_sort_order', $item))
-    <div class="col small">{{ __('kitchen.supplier_sort_order') }}</div>
+    <div class="col-2 small">{{ __('kitchen.supplier_sort_order') }}</div>
 @endif
 @if(Auth::user()->can('update_kitchen_sort_order', $item))
-    <div class="col small">{{ __('kitchen.kitchen_sort_order') }}</div>
+    <div class="col-2 small">{{ __('kitchen.kitchen_sort_order') }}</div>
 @endif

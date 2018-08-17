@@ -22,7 +22,7 @@
         <input type="hidden" name="supplier_id" value="{{ $item->supplier_id }}">
     @endif
     @if(Auth::user()->can('update_quantity', $item))
-        <div class="form-group col">
+        <div class="form-group col-2">
             <input type="number" class="form-control" name="quantity" min="1" value="{{ $item->quantity }}" aria-describedby="update_quantity_error" {{ $readonly }}>
             <p id="update_quantity_error" class="error form-text text-danger"></p>
         </div>
@@ -30,7 +30,7 @@
         <input type="hidden" name="quantity" value="{{ $item->quantity }}">
     @endif
     @if(Auth::user()->can('update_supplier_sort_order', $item))
-        <div class="form-group col">
+        <div class="form-group col-2">
             <input type="number" class="form-control" name="supplier_sort_order" value="{{ $item->supplier_sort_order }}" aria-describedby="update_supplier_sort_order_error" {{ $readonly }}>
             <p id="update_supplier_sort_order_error" class="error form-text text-danger"></p>
         </div>
@@ -38,14 +38,14 @@
         <input type="hidden" name="supplier_sort_order" value="{{ $item->supplier_sort_order }}">
     @endif
     @if(Auth::user()->can('update_kitchen_sort_order', $item))
-        <div class="form-group col">
+        <div class="form-group col-2">
             <input type="number" class="form-control" name="kitchen_sort_order" value="{{ $item->kitchen_sort_order }}" aria-describedby="update_kitchen_sort_order_error" {{ $readonly }}>
             <p id="update_kitchen_sort_order_error" class="error form-text text-danger"></p>
         </div>
     @else
         <input type="hidden" name="kitchen_sort_order" value="{{ $item->kitchen_sort_order }}">
     @endif
-    <div class="form-group col-3">
+    <div class="form-group col-1">
         @if(Auth::user()->can('delete', $item))
             <a role="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete"
                data-title="Delete item?" data-message="Are you sure you want to delete this item?"

@@ -4,7 +4,7 @@
 
 @section('main')
     <div class="row justify-content-center mb-3">
-        <div class="col-10">
+        <div class="col-12">
             <div class="row justify-content-around">
                 <a href="{{ route('order_list_items.view', ['kitchen_id' => Request::segment(2), 'order_list_id' => Request::segment(4)]) }}" class="col-3 btn btn-primary">
                     {{ __('order_list_items.kitchen_order_btn') }}
@@ -30,7 +30,7 @@
         </div>
     @else
         <div class="row justify-content-center">
-            <div class="list-group list-group-root well col-md-10 mb-3">
+            <div class="list-group list-group-root well col-md-12 mb-3">
                 @include('partials.order_list_header', ['order_list' => $order_list])
                 <div class="list-group">
                     @if(Auth::user()->can('create', \App\OrderListItem::class))
@@ -50,7 +50,7 @@
                         <div class="list-group-item">
                             <div class="row">
                                 @include('partials.order_list_item_fields_update', ['item' => $order_list_items[0]])
-                                <div class="col-3 small"></div>
+                                <div class="col-1 small"></div>
                             </div>
                         </div>
                         @yield('order_list_items')
