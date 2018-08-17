@@ -1,4 +1,4 @@
-<form id="update_{{ $item->id }}" ondragover="event.preventDefault();" draggable="true" ondragstart="shareData(event);" ondrop="drop(event);"
+<form id="update-{{ $item->id }}" draggable="true" ondragstart="shareData(event);"
       action="{{ route('order_list_item.update')  }}" method="POST" class="form_update row">
     @csrf
     <input type="hidden" name="id" value="{{ $item->id }}">
@@ -55,23 +55,3 @@
         @endif
     </div>
 </form>
-
-@section('js')
-    @parent
-    <script>
-        function shareData(e) {
-            e.dataTransfer.setData('id', e.target.id.value);
-            console.log(e.target.id.value);
-        }
-
-        function drop(e) {
-            let id = e.dataTransfer.getData('id');
-            let supplier_id = $(e.target).closest('form')
-                .find('select[name="supplier_id"]>option[selected]')[0].value;
-            console.log(supplier_id);
-            let form = $(`#update_${id}`);
-            form.find(`select[name="supplier_id"]>option[value="${supplier_id}"]`).prop('selected', true);
-            form.submit();
-        }
-    </script>
-@endsection
