@@ -45,7 +45,7 @@
     @else
         <input type="hidden" name="kitchen_sort_order" value="{{ $item->kitchen_sort_order }}">
     @endif
-    <div class="form-group col-1">
+    <div class="form-group col-2">
         @if(Auth::user()->can('delete', $item))
             <a role="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete"
                data-title="Delete item?" data-message="Are you sure you want to delete this item?"
