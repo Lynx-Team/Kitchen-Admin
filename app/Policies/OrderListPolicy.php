@@ -34,4 +34,9 @@ class OrderListPolicy
     {
         return $user->is_admin;
     }
+
+    public function reset(User $user, OrderList $orderList)
+    {
+        return $user->is_manager;
+    }
 }

@@ -9,4 +9,5 @@ return [
     'update_btn' => 'Update',
     'finalize_btn' => 'Finalize',
     'success' => 'Success',
+    'reset_btn' => 'Reset',
 ];

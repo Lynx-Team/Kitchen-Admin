@@ -74,6 +74,20 @@
                                     </form>
                                 @endif
                         </div>
+                    @else
+                        @if(Auth::user()->can('reset', $order_list))
+                            <div class="list-group-item">
+                                <a href="#" id="reset_order_list" class="btn btn-warning"
+                                   onclick="event.preventDefault(); document.getElementById('reset_{{ $order_list->id }}').submit();">
+                                    {{ __('order_list_items.reset_btn') }}
+                                </a>
+                                <form id="reset_{{ $order_list->id }}" action="{{ route('order_lists.reset') }}"
+                                      method="POST" style="display: none;">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $order_list->id }}">
+                                </form>
+                            </div>
+                        @endif
                     @endif
                 </div>
             </div>

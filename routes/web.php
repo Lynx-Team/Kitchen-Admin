@@ -47,6 +47,7 @@ Route::post('/order_lists/create', 'OrderListController@create')->name('order_li
 Route::post('/order_lists/update', 'OrderListController@update')->name('order_lists.update');
 Route::post('/order_lists/finalize', 'OrderListController@finalize')->name('order_lists.finalize');
 Route::post('/order_lists/delete', 'OrderListController@delete')->name('order_lists.delete');
+Route::post('/order_lists/reset', 'OrderListController@reset')->name('order_lists.reset');
 
 Route::get('/kitchens', 'KitchensController@view')->name('kitchens.view');
 

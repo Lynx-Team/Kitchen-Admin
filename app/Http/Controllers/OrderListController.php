@@ -54,4 +54,16 @@ class OrderListController extends Controller
             $orderListToDelete->delete();
         return redirect()->back();
     }
+
+    public function reset(Request $request)
+    {
+        $orderList = OrderList::findOrFail($request->id);
+        if (Auth::user()->can('reset', $orderList))
+        {
+            $orderList->update(['completed' => false]);
+            foreach ($orderList->order_list_items as $item)
+                $item->update(['quantity' => 0]);
+        }
+        return redirect()->back();
+    }
 }
