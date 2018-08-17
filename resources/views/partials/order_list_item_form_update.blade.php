@@ -53,5 +53,6 @@
                 {{ __('users.delete_btn') }}
             </a>
         @endif
+        <span class="badge badge-pill badge-success ml-3" id="success-message"></span>
     </div>
 </form>

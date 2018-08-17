@@ -8,4 +8,5 @@ return [
     'save_btn' => 'Save',
     'update_btn' => 'Update',
     'finalize_btn' => 'Finalize',
+    'success' => 'Success',
 ];

@@ -100,11 +100,13 @@
             $('#save_order_list').click(function() {
                 $('.form_update').each(function() {
                     $(this).find('.error').text('');
+                    $(this).find('#success-message').text('');
+                    $('#success-message').text('');
                     $.ajax($(this).attr('action'), {
                         method: $(this).attr('method'),
                         data: $(this).serialize(),
                         success: (data) => {
-                            console.log(data);
+                            $(this).find('#success-message').text('{{ __('order_list_items.success') }}');
                         },
                         error: (data) => {
                             $.each(data.responseJSON.errors, (key, value) => {
