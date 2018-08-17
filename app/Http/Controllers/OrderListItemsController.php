@@ -73,7 +73,10 @@ class OrderListItemsController extends Controller
     public function update(UpdateOrderListItemRequest $request)
     {
         $updatedFields = [];
-        $item = OrderListItem::find($request->id);
+        $item = OrderListItem::findOrFail($request->id);
+        $orderList = OrderList::findOrFail($item->order_list_id);
+        if ($orderList->completed)
+            return;
         if(Auth::user()->can('update_quantity', $item))
             $updatedFields['quantity'] = $request->quantity;
         if(Auth::user()->can('update_supplier_sort_order', $item))

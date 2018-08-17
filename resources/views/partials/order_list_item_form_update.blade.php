@@ -9,7 +9,7 @@
     </div>
     @if(Auth::user()->can('update_supplier_id', $item))
         <div class="form-group col">
-            <select class="form-control" name="supplier_id" aria-describedby="update_supplier_id_error">
+            <select class="form-control" name="supplier_id" aria-describedby="update_supplier_id_error" {{ $readonly }}>
                 @foreach($suppliers as $supplier)
                     <option value="{{ $supplier->id }}" {{ $supplier->id == $item->supplier_id ? 'selected' : '' }}>
                         {{ $supplier->name }}
@@ -23,7 +23,7 @@
     @endif
     @if(Auth::user()->can('update_quantity', $item))
         <div class="form-group col">
-            <input type="number" class="form-control" name="quantity" min="1" value="{{ $item->quantity }}" aria-describedby="update_quantity_error">
+            <input type="number" class="form-control" name="quantity" min="1" value="{{ $item->quantity }}" aria-describedby="update_quantity_error" {{ $readonly }}>
             <p id="update_quantity_error" class="error form-text text-danger"></p>
         </div>
     @else
@@ -31,7 +31,7 @@
     @endif
     @if(Auth::user()->can('update_supplier_sort_order', $item))
         <div class="form-group col">
-            <input type="number" class="form-control" name="supplier_sort_order" value="{{ $item->supplier_sort_order }}" aria-describedby="update_supplier_sort_order_error">
+            <input type="number" class="form-control" name="supplier_sort_order" value="{{ $item->supplier_sort_order }}" aria-describedby="update_supplier_sort_order_error" {{ $readonly }}>
             <p id="update_supplier_sort_order_error" class="error form-text text-danger"></p>
         </div>
     @else
@@ -39,7 +39,7 @@
     @endif
     @if(Auth::user()->can('update_kitchen_sort_order', $item))
         <div class="form-group col">
-            <input type="number" class="form-control" name="kitchen_sort_order" value="{{ $item->kitchen_sort_order }}" aria-describedby="update_kitchen_sort_order_error">
+            <input type="number" class="form-control" name="kitchen_sort_order" value="{{ $item->kitchen_sort_order }}" aria-describedby="update_kitchen_sort_order_error" {{ $readonly }}>
             <p id="update_kitchen_sort_order_error" class="error form-text text-danger"></p>
         </div>
     @else

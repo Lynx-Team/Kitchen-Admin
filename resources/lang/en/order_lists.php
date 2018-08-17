@@ -9,5 +9,6 @@ return [
     'completed' => 'Completed',
     'update_btn' => 'Update',
     'delete_btn' => 'Delete',
-    'no_order_lists' => 'No order lists'
+    'no_order_lists' => 'No order lists',
+    'finalized' => 'Finalized'
 ];

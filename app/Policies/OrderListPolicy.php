@@ -25,7 +25,7 @@ class OrderListPolicy
         return $user->is_admin;
     }
 
-    public function update_completed(User $user, OrderList $orderList)
+    public function finalize(User $user, OrderList $orderList)
     {
         return $user->id === $orderList->kitchen_id;
     }

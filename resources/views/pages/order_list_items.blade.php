@@ -7,15 +7,15 @@
         <div class="col-10">
             <div class="row justify-content-around">
                 <a href="{{ route('order_list_items.view', ['kitchen_id' => Request::segment(2), 'order_list_id' => Request::segment(4)]) }}" class="col-3 btn btn-primary">
-                    Kitchen sort order
+                    {{ __('order_list_items.kitchen_order_btn') }}
                 </a>
                 @if(Auth::user()->is_manager)
                     <a href="{{ route('order_list_items.view_supplier', ['kitchen_id' => Request::segment(2), 'order_list_id' => Request::segment(4)]) }}" class="col-3 btn btn-primary">
-                        Supplier grouped
+                        {{ __('order_list_items.supplier_grouped_btn') }}
                     </a>
                 @endif
                 <a href="{{ route('order_list_items.view_category', ['kitchen_id' => Request::segment(2), 'order_list_id' => Request::segment(4)]) }}" class="col-3 btn btn-primary">
-                    Category grouped
+                    {{ __('order_list_items.category_grouped_btn') }}
                 </a>
             </div>
         </div>
@@ -55,9 +55,20 @@
                         </div>
                         @yield('order_list_items')
                     @endif
-                    <div class="list-group-item">
-                        <a href="#" id="save_order_list" class="btn btn-success">{{ __('order_list_items.save_btn') }}</a>
-                    </div>
+                    @if(!$order_list->completed)
+                        <div class="list-group-item">
+                                <a href="#" id="save_order_list" class="btn btn-success">{{ __('order_list_items.save_btn') }}</a>
+                                @if(Auth::user()->can('finalize', $order_list))
+                                    <a href="#" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('finalize_{{ $order_list->id }}').submit();">
+                                        {{ __('order_list_items.finalize_btn') }}
+                                    </a>
+                                    <form id="finalize_{{ $order_list->id }}" action="{{ route('order_lists.finalize')  }}" method="POST" style="display: none;">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $order_list->id }}">
+                                    </form>
+                                @endif
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
