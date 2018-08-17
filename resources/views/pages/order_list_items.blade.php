@@ -57,7 +57,13 @@
                     @endif
                     @if(!$order_list->completed)
                         <div class="list-group-item">
-                                <a href="#" id="save_order_list" class="btn btn-success">{{ __('order_list_items.save_btn') }}</a>
+                                <a href="#" id="save_order_list" class="btn btn-success">
+                                    @if(Auth::user()->is_kitchen)
+                                        {{ __('order_list_items.save_btn') }}
+                                    @else
+                                        {{ __('order_list_items.update_btn') }}
+                                    @endif
+                                </a>
                                 @if(Auth::user()->can('finalize', $order_list))
                                     <a href="#" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('finalize_{{ $order_list->id }}').submit();">
                                         {{ __('order_list_items.finalize_btn') }}

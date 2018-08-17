@@ -6,5 +6,6 @@ return [
     'supplier_grouped_btn' => 'Supplier grouped',
     'category_grouped_btn' => 'Category grouped',
     'save_btn' => 'Save',
+    'update_btn' => 'Update',
     'finalize_btn' => 'Finalize',
 ];
