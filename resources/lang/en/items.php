@@ -10,6 +10,6 @@ return [
     'cost' => 'Cost',
     'add_btn' => 'Add',
     'update_btn' => 'Update',
-    'delete_btn' => '<i class="fas fa-trash-alt"></i>',
+    'delete_btn' => 'Delete',
     'no_items' => 'No items',
 ];
