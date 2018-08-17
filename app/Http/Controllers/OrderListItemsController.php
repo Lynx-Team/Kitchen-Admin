@@ -60,7 +60,7 @@ class OrderListItemsController extends Controller
     public function create(CreateOrderListItemRequest $request)
     {
         OrderListItem::create([
-            'quantity' => $request->quantity,
+            'quantity' => 0,
             'supplier_sort_order' => $request->supplier_sort_order,
             'kitchen_sort_order' => $request->kitchen_sort_order,
             'supplier_id' => $request->supplier_id,

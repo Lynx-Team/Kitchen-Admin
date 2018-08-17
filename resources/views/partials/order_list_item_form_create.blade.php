@@ -20,14 +20,6 @@
         @endif
     </div>
     <div class="form-group col">
-        <input type="number" class="form-control" name="quantity" min="1" aria-describedby="create_quantity_error">
-        @if($errors->create->has('quantity'))
-            <p id="create_quantity_error" class="form-text text-danger">
-                {{ $errors->create->first('quantity') }}
-            </p>
-        @endif
-    </div>
-    <div class="form-group col">
         <input type="number" class="form-control" name="supplier_sort_order" aria-describedby="create_supplier_sort_order_error">
         @if($errors->create->has('supplier_sort_order'))
             <p id="create_supplier_sort_order_error" class="form-text text-danger">

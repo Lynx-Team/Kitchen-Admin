@@ -17,7 +17,6 @@ class CreateOrderListItemRequest extends FormRequest
     public function rules()
     {
         return [
-            'quantity' => 'required|integer|min:1',
             'supplier_sort_order' => 'required|integer',
             'kitchen_sort_order' => 'required|integer',
             'supplier_id' => 'required|exists:suppliers,id',
