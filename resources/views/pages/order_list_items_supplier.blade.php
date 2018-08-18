@@ -1,7 +1,7 @@
 @extends('pages.order_list_items')
 
 @section('order_list_items')
-    @php($readonly = $order_list->completed ? 'readonly' : '')
+    @php($readonly = $order_list->completed && !Auth::user()->is_manager? 'readonly' : '')
     @php($i = 0)
     @while($i < count($order_list_items))
         @php($current_supplier = $order_list_items[$i]->supplier)

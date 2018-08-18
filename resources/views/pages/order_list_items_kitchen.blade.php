@@ -1,7 +1,7 @@
 @extends('pages.order_list_items')
 
 @section('order_list_items')
-    @php($readonly = $order_list->completed ? 'readonly' : '')
+    @php($readonly = $order_list->completed && !Auth::user()->is_manager ? 'readonly' : '')
     @foreach($order_list_items as $item)
         <div class="list-group-item">
             @include('partials.order_list_item_form_update', ['item' => $item, 'suppliers' => $suppliers, 'errors' => $errors, 'readonly' => $readonly])

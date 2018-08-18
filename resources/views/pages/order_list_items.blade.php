@@ -77,6 +77,11 @@
                     @else
                         @if(Auth::user()->can('reset', $order_list))
                             <div class="list-group-item">
+                                @if(Auth::user()->is_manager)
+                                    <a href="#" id="save_order_list" class="btn btn-success">
+                                        {{ __('order_list_items.update_btn') }}
+                                    </a>
+                                @endif
                                 <a href="#" id="reset_order_list" class="btn btn-warning"
                                    onclick="event.preventDefault(); document.getElementById('reset_{{ $order_list->id }}').submit();">
                                     {{ __('order_list_items.reset_btn') }}

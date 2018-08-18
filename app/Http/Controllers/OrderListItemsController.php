@@ -75,7 +75,7 @@ class OrderListItemsController extends Controller
         $updatedFields = [];
         $item = OrderListItem::findOrFail($request->id);
         $orderList = OrderList::findOrFail($item->order_list_id);
-        if ($orderList->completed)
+        if ($orderList->completed && !Auth::user()->is_manager)
             return;
         if(Auth::user()->can('update_quantity', $item))
             $updatedFields['quantity'] = $request->quantity;
