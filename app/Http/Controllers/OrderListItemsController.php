@@ -124,7 +124,7 @@ class OrderListItemsController extends Controller
             {
                 $supplier = Supplier::findOrFail($supplierId->supplier_id);
                 $pdf = $this->generatePDF($orderListId, $orderList->note, $supplier->id);
-                Mail::to($supplier->email)->send(new SupplierMail($pdf, $supplier->name));
+                Mail::to($supplier->email)->send(new SupplierMail($pdf, $orderList->note));
             }
         }
         return redirect()->back();

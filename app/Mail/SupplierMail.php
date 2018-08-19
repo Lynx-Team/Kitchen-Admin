@@ -12,18 +12,18 @@ class SupplierMail extends Mailable
     use Queueable, SerializesModels;
 
     private $pdf;
-    private $supplier_name;
+    private $order_list_name;
 
-    public function __construct($pdf, $supplier_name)
+    public function __construct($pdf, $order_list_name)
     {
         $this->pdf = $pdf->stream();
-        $this->supplier_name = $supplier_name;
+        $this->order_list_name = $order_list_name;
     }
 
     public function build()
     {
-        return $this->text('email.supplier')
-            ->attachData($this->pdf, $this->supplier_name, [
+        return $this->subject($this->order_list_name)->text('email.supplier')
+            ->attachData($this->pdf, $this->order_list_name, [
                 'mime' => 'application/pdf',
             ]);
     }
