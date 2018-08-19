@@ -53,17 +53,6 @@ Route::get('/kitchens', 'KitchensController@view')->name('kitchens.view');
 
 Route::get('/kitchen/{kitchen_id}', 'KitchenController@view')->where(['kitchen_id' => '[0-9]+'])->name('kitchen.view');
 
-Route::get('/suppliers_view', 'SuppliersViewController@view')->name('suppliers_view.view');
-
-Route::get('/supplier/{supplier_id}', 'SuppliersPerspectiveController@view')->where(['supplier_id' => '[0-9]+'])
-    ->name('suppliers_perspective.view');
-
-Route::get('/download_supplier_pdf/{supplier_id}', 'SuppliersPerspectiveController@downloadPDF')->
-    where(['supplier_id' => '[0-9]+'])->name('download_supplier_pdf');
-
-Route::get('/send_supplier_email/{supplier_id}', 'SuppliersPerspectiveController@sendEmail')
-    ->where(['supplier_id' => '[0-9]+'])->name('send_supplier_email');
-
 Route::get('/kitchen/{kitchen_id}/order_lists', 'OrderListsController@view')->where(['kitchen_id' => '[0-9]+'])->name('view_order_lists.view');
 
 Route::get('/kitchen/{kitchen_id}/order_list/{order_list_id}/kitchen_view', 'OrderListItemsController@view')
@@ -76,3 +65,9 @@ Route::get('/kitchen/{kitchen_id}/order_list/{order_list_id}/category_view', 'Or
 Route::post('/order_list_item/create', 'OrderListItemsController@create')->name('order_list_item.create');
 Route::post('/order_list_item/update', 'OrderListItemsController@update')->name('order_list_item.update');
 Route::post('/order_list_item/delete', 'OrderListItemsController@delete')->name('order_list_item.delete');
+
+Route::get('/order_list_items/{order_list_id}/download_pdf', 'OrderListItemsController@downloadPDF')
+    ->where(['order_list_id' => '[0-9]+'])->name('order_list_items.download_pdf');
+
+Route::get('/order_list_items/{order_list_id}/send_email', 'OrderListItemsController@sendEmail')
+    ->where(['order_list_id' => '[0-9]+'])->name('order_list_items.send_email');

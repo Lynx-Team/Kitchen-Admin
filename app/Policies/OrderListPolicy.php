@@ -39,4 +39,14 @@ class OrderListPolicy
     {
         return $user->is_manager;
     }
+
+    public function download_pdf(User $user, OrderList $orderList)
+    {
+        return $user->is_manager;
+    }
+
+    public function send_email(User $user, OrderList $orderList)
+    {
+        return $user->is_manager;
+    }
 }
