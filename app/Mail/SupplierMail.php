@@ -23,7 +23,7 @@ class SupplierMail extends Mailable
     public function build()
     {
         return $this->subject($this->order_list_name)->text('email.supplier')
-            ->attachData($this->pdf, $this->order_list_name, [
+            ->attachData($this->pdf, $this->order_list_name . '.pdf', [
                 'mime' => 'application/pdf',
             ]);
     }
