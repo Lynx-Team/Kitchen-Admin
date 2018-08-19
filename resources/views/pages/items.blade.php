@@ -161,7 +161,11 @@
                 </div>
             </div>
         @empty
-            Hello
+            <div class="col">
+                <div class="alert alert-warning" role="alert">
+                    {{ __('items.no_items') }}
+                </div>
+            </div>
         @endforelse
     </div>
 @endsection
