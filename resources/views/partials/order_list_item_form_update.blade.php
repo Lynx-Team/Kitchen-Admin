@@ -23,7 +23,7 @@
     @endif
     @if(Auth::user()->can('update_quantity', $item))
         <div class="form-group col-2">
-            <input type="number" class="form-control" name="quantity" min="1" value="{{ $item->quantity }}" aria-describedby="update_quantity_error" {{ $readonly }}>
+            <input type="number" class="form-control" name="quantity" min="0" value="{{ $item->quantity }}" aria-describedby="update_quantity_error" {{ $readonly }}>
             <p id="update_quantity_error" class="error form-text text-danger"></p>
         </div>
     @else
