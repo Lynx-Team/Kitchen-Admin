@@ -14,9 +14,11 @@
                             </h5>
                         </div>
                         <div class="col-2">
-                            <a href="{{ route('items.view', ['kitchen_id' => $kitchen->id]) }}" class="btn btn-primary">
-                                Products
-                            </a>
+                            @if(Auth::user()->can('view', \App\Item::class))
+                                <a href="{{ route('items.view', ['kitchen_id' => $kitchen->id]) }}" class="btn btn-primary">
+                                    Products
+                                </a>
+                            @endif
                         </div>
                         <div class="col-2">
                             <a href="{{ route('view_order_lists.view', ['kitchen_id' => $kitchen->id]) }}" class="btn btn-success">
