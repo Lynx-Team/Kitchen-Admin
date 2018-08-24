@@ -63,11 +63,11 @@
                                 @endif
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-warning">{{ __('users.update_btn') }}</button>
+                                <button type="submit" class="btn btn-warning">{{ __('suppliers.update_btn') }}</button>
                                 <a role="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete"
                                    data-title="Delete supplier" data-message="Are you sure you want to delete this supplier?"
                                    data-form-id="delete_{{ $supplier->id }}">
-                                    {{ __('users.delete_btn') }}
+                                    {{ __('suppliers.delete_btn') }}
                                 </a>
                             </div>
                         </form>
