@@ -8,7 +8,7 @@
             </button>
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item px-3">
-                    <a class="nav-link" href="{{ route('home') }}">{{ __('header.home') }}</a>
+                    <a class="nav-link" href="{{ route('home') }}">{{ Auth::user()->name }}</a>
                 </li>
                 <li class="nav-item px-3">
                     <a class="nav-link" href="{{ route('logout') }}">{{ __('header.logout') }}</a>
