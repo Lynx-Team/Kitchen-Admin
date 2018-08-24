@@ -69,5 +69,15 @@ Route::post('/order_list_item/delete', 'OrderListItemsController@delete')->name(
 Route::get('/order_list_items/{order_list_id}/download_pdf', 'OrderListItemsController@downloadPDF')
     ->where(['order_list_id' => '[0-9]+'])->name('order_list_items.download_pdf');
 
+Route::get('/order_list/{order_list_id}/supplier/{supplier_id}/download_pdf', 'OrderListItemsController@downloadPDF')
+    ->where([
+        'order_list_id' => '[0-9]+', 'supplier_id' => '[0-9]+'
+    ])->name('supplier_order_list.download_pdf');
+
+Route::get('/order_list/{order_list_id}/supplier/{supplier_id}/send_email', 'OrderListItemsController@sendEmail')
+    ->where([
+        'supplier_id' => '[0-9]+', 'order_list_id' => '[0-9]+',
+    ])->name('supplier_order_list.send_email');
+
 Route::get('/order_list_items/{order_list_id}/send_email', 'OrderListItemsController@sendEmail')
     ->where(['order_list_id' => '[0-9]+'])->name('order_list_items.send_email');

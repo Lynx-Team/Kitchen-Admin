@@ -101,24 +101,25 @@ class OrderListItemsController extends Controller
         return redirect()->back();
     }
 
-    public function downloadPDF($orderListId)
+    public function downloadPDF($orderListId, $supplierId = null)
     {
         $orderList = OrderList::findOrFail($orderListId);
         if (Auth::check() && Auth::user()->can('download_pdf', $orderList))
         {
-            $pdf = $this->generatePDF($orderListId, $orderList->note);
+            $pdf = $this->generatePDF($orderListId, $orderList->note, $supplierId);
             return $pdf->download($orderList->note . '.pdf');
         }
         return redirect()->back();
     }
 
-    public function sendEmail($orderListId)
+    public function sendEmail($orderListId, $supplierId = null)
     {
         $orderList = OrderList::findOrFail($orderListId);
         if (Auth::check() && Auth::user()->can('send_email', $orderList))
         {
-            $supplierIds = DB::table('order_list_items')->select('supplier_id')->
-                where('order_list_id', $orderListId)->groupBy('supplier_id')->get();
+            $supplierIds = $supplierId === null ? DB::table('order_list_items')->select('supplier_id')->
+                where('order_list_id', $orderListId)->groupBy('supplier_id')->get() :
+                [ (object) ['supplier_id' => $supplierId] ];
 
             foreach($supplierIds as $supplierId)
             {

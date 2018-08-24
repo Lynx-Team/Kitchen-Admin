@@ -5,9 +5,20 @@
     @php($i = 0)
     @while($i < count($order_list_items))
         @php($current_supplier = $order_list_items[$i]->supplier)
-        <a href="#supplier-{{ $current_supplier->id }}" class="list-group-item" data-toggle="collapse">
-            <i class="fas fa-angle-right"></i> {{ $current_supplier->name }}
-        </a>
+        <div class="list-group-item d-flex justify-content-between" >
+            <div>
+                <a href="#supplier-{{ $current_supplier->id }}" data-toggle="collapse">
+                    <i class="fas fa-angle-right"></i>
+                    <span>{{ $current_supplier->name }}</span>
+                </a>
+            </div>
+            <div>
+                <a class="btn btn-primary" href="{{ route('supplier_order_list.download_pdf',
+                    [ 'supplier_id' => $current_supplier->id, 'order_list_id' => $order_list->id ]) }}">PDF</a>
+                <a class="btn btn-primary" href="{{ route('supplier_order_list.send_email',
+                    [ 'supplier_id' => $current_supplier->id, 'order_list_id' => $order_list->id ]) }}">Email</a>
+            </div>
+        </div>
         <div class="list-group-item collapse supplier-block" id="supplier-{{ $current_supplier->id }}"
              ondrop="drop(event);" ondragover="event.preventDefault();"  data-supplier-id="{{ $current_supplier->id }}">
             @while($i < count($order_list_items) && $order_list_items[$i]->supplier_id == $current_supplier->id)
