@@ -3,6 +3,11 @@
 @section('title', __('view_order_lists.title'))
 
 @section('main')
+    <div class="row justify-content-center mb-2">
+        <div class="col-10" style="text-align: center;">
+            <h1>{{ $kitchen->name }}</h1>
+        </div>
+    </div>
     @forelse($order_lists as $order_list)
         <div class="row justify-content-center mb-2">
             <div class="card col-10">
