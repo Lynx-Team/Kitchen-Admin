@@ -43,5 +43,7 @@ class LoginController extends Controller
     {
         if(Auth::user()->is_kitchen)
             return redirect()->route('view_order_lists.view', ['kitchen_id' => Auth::user()->id]);
+        else if (Auth::user()->is_admin)
+            return redirect()->route('kitchens.view');
     }
 }
