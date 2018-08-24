@@ -45,6 +45,11 @@
     @else
         <input type="hidden" name="kitchen_sort_order" value="{{ $item->kitchen_sort_order }}">
     @endif
+    @if(isset($is_show_cost) && $is_show_cost)
+        <div class="form-group col-2">
+            <input type="number" class="form-control" name="cost" value="{{ $item->item->cost * $item->quantity }}" readonly>
+        </div>
+    @endif
     <div class="form-group col-2">
         @if(Auth::user()->can('delete', $item))
             <a role="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete"

@@ -11,3 +11,7 @@
 @if(Auth::user()->can('update_kitchen_sort_order', $item))
     <div class="col-2 small">{{ __('kitchen.kitchen_sort_order') }}</div>
 @endif
+@if(isset($is_show_cost) && $is_show_cost)
+    <div class="col-2 small">Cost</div>
+@endif
+<div class="col-2 small"></div>

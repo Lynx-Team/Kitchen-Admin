@@ -1,16 +1,24 @@
 @extends('pages.order_list_items')
 
 @section('order_list_items')
+    @php($is_show_cost = true)
     @php($readonly = $order_list->completed && !Auth::user()->is_manager? 'readonly' : '')
     @php($i = 0)
     @while($i < count($order_list_items))
         @php($current_supplier = $order_list_items[$i]->supplier)
+        @php($total_cost = 0)
+        @php($j = $i)
+        @while($j < count($order_list_items) && $order_list_items[$j]->supplier_id == $current_supplier->id)
+            @php($total_cost += $order_list_items[$j]->item->cost * $order_list_items[$j]->quantity)
+            @php($j++)
+        @endwhile
         <div class="list-group-item d-flex justify-content-between" >
             <div>
                 <a href="#supplier-{{ $current_supplier->id }}" data-toggle="collapse">
                     <i class="fas fa-angle-right"></i>
                     <span>{{ $current_supplier->name }}</span>
                 </a>
+                <span class="badge badge-primary badge-pill">Total cost: {{ $total_cost }}</span>
             </div>
             <div>
                 <a class="btn btn-primary" href="{{ route('supplier_order_list.download_pdf',

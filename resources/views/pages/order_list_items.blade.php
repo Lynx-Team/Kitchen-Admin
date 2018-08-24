@@ -50,7 +50,6 @@
                         <div class="list-group-item">
                             <div class="row">
                                 @include('partials.order_list_item_fields_update', ['item' => $order_list_items[0]])
-                                <div class="col-2 small"></div>
                             </div>
                         </div>
                         @yield('order_list_items')
