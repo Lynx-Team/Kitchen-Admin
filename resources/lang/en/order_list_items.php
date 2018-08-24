@@ -10,4 +10,6 @@ return [
     'finalize_btn' => 'Finalize',
     'success' => 'Success',
     'reset_btn' => 'Reset',
+    'download_pdf' => 'Download PDF – All orders',
+    'send_email' => 'Send E-Mail',
 ];
