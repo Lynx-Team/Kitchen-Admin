@@ -2,7 +2,7 @@
 
 return [
     'num' => '#',
-    'full_name' => 'Full Name',
+    'full_name' => 'Product Name',
     'quantity' => 'Quantity',
     'cost' => 'Cost',
 ];
