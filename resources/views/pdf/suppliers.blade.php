@@ -27,6 +27,10 @@
                 @php($current_supplier = $order_list_items[$i]->supplier_id)
                 @while($i < count($order_list_items) && $order_list_items[$i]->supplier_id == $current_supplier)
                     @php($order_list_item = $order_list_items[$i])
+                    @if($order_list_item->quantity == 0)
+                        @php($i++)
+                        @continue
+                    @endif
                     <tr>
                         <td>{{ $order_list_item->item->full_name }}</td>
                         <td>{{ $order_list_item->quantity }}</td>
