@@ -21,7 +21,6 @@
             <tr>
                 <th scope="col">{{ __('supplier_pdf.full_name') }}</th>
                 <th scope="col">{{ __('supplier_pdf.quantity') }}</th>
-                <th scope="col">{{ __('supplier_pdf.cost') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -31,7 +30,6 @@
                     <tr>
                         <td>{{ $order_list_item->item->full_name }}</td>
                         <td>{{ $order_list_item->quantity }}</td>
-                        <td>{{ $order_list_item->item->cost }}</td>
                     </tr>
                     @php($i++)
                 @endwhile
