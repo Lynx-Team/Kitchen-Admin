@@ -3,8 +3,8 @@
 return [
     'title' => 'Products',
     'add_title' => 'Add Product',
-    'short_name' => 'Short name',
-    'full_name' => 'Full name',
+    'short_name' => 'Short product name',
+    'full_name' => 'Long product name',
     'default_supplier' => 'Default supplier',
     'category' => 'Category',
     'cost' => 'Cost',
