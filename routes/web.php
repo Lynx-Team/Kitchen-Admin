@@ -32,10 +32,10 @@ Route::post('/suppliers/create', 'SupplierController@create')->name('suppliers.c
 Route::post('/suppliers/update', 'SupplierController@update')->name('suppliers.update');
 Route::post('/suppliers/delete', 'SupplierController@delete')->name('suppliers.delete');
 
-Route::get('/item_categories', 'ItemCategoryController@view')->name('item_categories.view');
-Route::post('/item_categories/create', 'ItemCategoryController@create')->name('item_categories.create');
-Route::post('/item_categories/update', 'ItemCategoryController@update')->name('item_categories.update');
-Route::post('/item_categories/delete', 'ItemCategoryController@delete')->name('item_categories.delete');
+Route::get('/product_categories', 'ItemCategoryController@view')->name('item_categories.view');
+Route::post('/product_categories/create', 'ItemCategoryController@create')->name('item_categories.create');
+Route::post('/product_categories/update', 'ItemCategoryController@update')->name('item_categories.update');
+Route::post('/product_categories/delete', 'ItemCategoryController@delete')->name('item_categories.delete');
 
 Route::get('/kitchen/{kitchen_id}/items', 'ItemController@view')->where(['kitchen_id' => '[0-9]+'])->name('items.view');
 Route::post('/items/create', 'ItemController@create')->name('items.create');
