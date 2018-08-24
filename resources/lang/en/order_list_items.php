@@ -2,9 +2,9 @@
 
 return [
     'empty' => 'No order list items.',
-    'kitchen_order_btn' => 'Kitchen sort order',
+    'kitchen_order_btn' => 'Sort by Kitchen Order',
     'supplier_grouped_btn' => 'Supplier grouped',
-    'category_grouped_btn' => 'Category grouped',
+    'category_grouped_btn' => 'Sort by Category',
     'save_btn' => 'Save',
     'update_btn' => 'Update',
     'finalize_btn' => 'Finalize',
