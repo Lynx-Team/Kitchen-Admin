@@ -25,7 +25,7 @@ class OrderListController extends Controller
     {
         OrderList::create([
             'note' => $request->note,
-            'kitchen_id' => $request->kitchen,
+            'kitchen_id' => $request->kitchen_id,
         ]);
         return redirect()->back();
     }
@@ -34,7 +34,7 @@ class OrderListController extends Controller
     {
         OrderList::find($request->id)->update([
             'note' => $request->note,
-            'kitchen_id' => $request->kitchen,
+            'kitchen_id' => $request->kitchen_id,
         ]);
         return redirect()->back();
     }

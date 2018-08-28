@@ -20,7 +20,7 @@ class UpdateOrderListRequest extends FormRequest
         return [
             'id' => 'required|exists:order_lists,id',
             'note' => 'required|string|max:255',
-            'kitchen' => 'required|exists:users,id',
+            'kitchen_id' => 'required|exists:users,id',
         ];
     }
 

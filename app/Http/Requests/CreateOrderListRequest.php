@@ -18,7 +18,7 @@ class CreateOrderListRequest extends FormRequest
     {
         return [
             'note' => 'required|string|max:255',
-            'kitchen' => 'required|exists:users,id'
+            'kitchen_id' => 'required|exists:users,id'
         ];
     }
 }
