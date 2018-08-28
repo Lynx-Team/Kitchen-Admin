@@ -7,5 +7,6 @@ return [
     'items' => 'Products',
     'kitchens_view' => 'Kitchens',
     'suppliers_view' => 'Suppliers view',
-    'order_lists' => 'Order lists'
+    'order_lists' => 'Order lists',
+    'download_backup' => 'Database backup',
 ];

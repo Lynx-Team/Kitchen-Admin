@@ -84,3 +84,5 @@ Route::get('/order_list/{order_list_id}/supplier/{supplier_id}/send_email', 'Ord
 
 Route::get('/order_list_items/{order_list_id}/send_email', 'OrderListItemsController@sendEmail')
     ->where(['order_list_id' => '[0-9]+'])->name('order_list_items.send_email');
+
+Route::get('/download_backup', 'BackupController@download')->name('backup.download');
