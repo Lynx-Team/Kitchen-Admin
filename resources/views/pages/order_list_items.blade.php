@@ -3,18 +3,35 @@
 @section('title', $order_list->note)
 
 @section('main')
-    <div class="row justify-content-center mb-3">
-        <div class="col-12">
-            <div class="row justify-content-around">
-                <a href="{{ route('order_list_items.view', ['kitchen_id' => Request::segment(2), 'order_list_id' => Request::segment(4)]) }}" class="col-3 btn btn-primary">
-                    {{ __('order_list_items.kitchen_order_btn') }}
-                </a>
-                @if(Auth::user()->is_manager)
-                    <a href="{{ route('order_list_items.view_supplier', ['kitchen_id' => Request::segment(2), 'order_list_id' => Request::segment(4)]) }}" class="col-3 btn btn-primary">
+    <div class="row justify-content-around mb-3">
+        <div class="col-3">
+            <form action="{{ route('order_list_items.view', ['kitchen_id' => Request::segment(2), 'order_list_id' => Request::segment(4)]) }}" method="POST">
+                @csrf
+                <div class="row mb-2">
+                    <div class="form-check col">
+                        <input type="checkbox" class="form-check-input" id="quantity_0" name="is_hide_quantity_0" {{ $is_hide_quantity_0 == 'on' ? 'checked' : ''}}>
+                        <label class="form-check-label" for="quantity_0">Hide with "0" quantity</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="submit" class="col btn btn-primary">
+                        {{ __('order_list_items.kitchen_order_btn') }}
+                    </button>
+                </div>
+            </form>
+        </div>
+        @if(Auth::user()->is_manager)
+            <div class="col-3">
+                <div class="row">
+                    <a href="{{ route('order_list_items.view_supplier', ['kitchen_id' => Request::segment(2), 'order_list_id' => Request::segment(4)]) }}" class="col btn btn-primary">
                         {{ __('order_list_items.supplier_grouped_btn') }}
                     </a>
-                @endif
-                <a href="{{ route('order_list_items.view_category', ['kitchen_id' => Request::segment(2), 'order_list_id' => Request::segment(4)]) }}" class="col-3 btn btn-primary">
+                </div>
+            </div>
+        @endif
+        <div class="col-3">
+            <div class="row">
+                <a href="{{ route('order_list_items.view_category', ['kitchen_id' => Request::segment(2), 'order_list_id' => Request::segment(4)]) }}" class="col btn btn-primary">
                     {{ __('order_list_items.category_grouped_btn') }}
                 </a>
             </div>

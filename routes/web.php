@@ -55,7 +55,7 @@ Route::get('/kitchen/{kitchen_id}', 'KitchenController@view')->where(['kitchen_i
 
 Route::get('/kitchen/{kitchen_id}/order_lists', 'OrderListsController@view')->where(['kitchen_id' => '[0-9]+'])->name('view_order_lists.view');
 
-Route::get('/kitchen/{kitchen_id}/order_list/{order_list_id}/kitchen_view', 'OrderListItemsController@view')
+Route::post('/kitchen/{kitchen_id}/order_list/{order_list_id}/kitchen_view', 'OrderListItemsController@view')
     ->where(['kitchen_id' => '[0-9]+', 'order_list_id' => '[0-9]+'])->name('order_list_items.view');
 Route::get('/kitchen/{kitchen_id}/order_list/{order_list_id}/supplier_view', 'OrderListItemsController@view_grouped_by_supplier')
     ->where(['kitchen_id' => '[0-9]+', 'order_list_id' => '[0-9]+'])->name('order_list_items.view_supplier');

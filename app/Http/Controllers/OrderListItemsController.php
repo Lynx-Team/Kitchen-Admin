@@ -17,7 +17,7 @@ use PDF;
 
 class OrderListItemsController extends Controller
 {
-    private function _view($kitchen_id, $order_list_id, $orderListItems, $viewName)
+    private function _view($kitchen_id, $order_list_id, $orderListItems, $viewName, $is_hide_quantity_0 = false)
     {
         if (Auth::check() && OrderList::where('id', $order_list_id)->where('kitchen_id', $kitchen_id)->exists() &&
             (Auth::user()->can('view', OrderListItem::class) || (Auth::user()->is_kitchen && Auth::user()->id == $kitchen_id)))
@@ -29,6 +29,7 @@ class OrderListItemsController extends Controller
                 'available_items' => $availableItems,
                 'order_list_items' => $orderListItems,
                 'suppliers' => Supplier::all(),
+                'is_hide_quantity_0' => $is_hide_quantity_0,
             ]);
         }
         return redirect()->back();
@@ -37,8 +38,14 @@ class OrderListItemsController extends Controller
     public function view(Request $request, $kitchen_id, $order_list_id)
     {
         $orderListItems = OrderListItem::where('order_list_id', $order_list_id)->orderBy('kitchen_sort_order')
-            ->with('item')->with('supplier')->get();
-        return $this->_view($kitchen_id, $order_list_id, $orderListItems, 'pages.order_list_items_kitchen');
+            ->with('item')->with('supplier');
+
+        $is_hide_quantity_0 = $request->is_hide_quantity_0 ?? 'off';
+        if ($is_hide_quantity_0 == 'on')
+            $orderListItems = $orderListItems->where('quantity', '!=', 0);
+
+        $orderListItems = $orderListItems->get();
+        return $this->_view($kitchen_id, $order_list_id, $orderListItems, 'pages.order_list_items_kitchen', $is_hide_quantity_0);
     }
 
     public function view_categorized(Request $request, $kitchen_id, $order_list_id)
