@@ -31,6 +31,10 @@ class User extends Authenticatable
         return $this->belongsTo('App\Role');
     }
 
+    public function getIsSuperuserAttribute() {
+        return $this->role->name === 'superuser';
+    }
+
     public function getIsAdminAttribute() {
         return $this->role->name === 'admin';
     }

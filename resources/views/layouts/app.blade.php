@@ -23,6 +23,8 @@
                     @include('partials.kitchen_sidebar')
                 @elseif(Auth::user()->is_manager)
                     @include('partials.manager_sidebar')
+                @elseif(Auth::user()->is_superuser)
+                    @include('partials.superuser_sidebar')
                 @endif
             </div>
             <main class="main">
