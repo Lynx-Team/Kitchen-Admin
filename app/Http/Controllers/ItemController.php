@@ -18,7 +18,7 @@ class ItemController extends Controller
             return view('pages.items', [
                 'items' => Item::where('kitchen_id', $kitchen_id)->get(),
                 'suppliers' => Supplier::all(),
-                'categories' => ItemCategory::all()
+                'categories' => ItemCategory::where('kitchen_id', $kitchen_id)->get()
             ]);
         return redirect()->back();
     }

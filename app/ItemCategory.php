@@ -8,7 +8,7 @@ class ItemCategory extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'kitchen_id'];
 
     public function items()
     {

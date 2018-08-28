@@ -10,6 +10,7 @@
                 <div class="card-body">
                     <form action="{{ route('item_categories.create') }}" method="POST" class="row">
                         @csrf
+                        <input type="hidden" name="kitchen_id" value="{{ Request::segment(2) }}">
                         <div class="form-group col">
                             <label for="new_name">{{ __('item_categories.name') }}</label>
                             <input type="text" class="form-control" name="name" id="new_name" placeholder="{{ __('item_categories.name') }}" aria-describedby="create_name_error">
@@ -36,6 +37,7 @@
                     @forelse ($item_categories as $category)
                         <form action="{{ route('item_categories.update') }}" method="POST" class="row">
                             @csrf
+                            <input type="hidden" name="kitchen_id" value="{{ Request::segment(2) }}">
                             <input type="hidden" name="id" value="{{ $category->id }}">
                             <div class="form-group col">
                                 <input type="text" class="form-control" name="name" value="{{ $category->name }}" aria-describedby="update_name_error">

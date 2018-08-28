@@ -7,7 +7,7 @@
             <div class="row justify-content-center mb-2">
                 <div class="card col-10">
                     <div class="card-body row">
-                        <div class="col-8">
+                        <div class="col-6">
                             <h5>
                                 {{ $kitchen->name }}
                                 <span class="badge badge-primary badge-pill">Order lists: {{ $kitchen->order_lists_number }}</span>
@@ -17,6 +17,13 @@
                             @if(Auth::user()->can('view', \App\Item::class))
                                 <a href="{{ route('items.view', ['kitchen_id' => $kitchen->id]) }}" class="btn btn-primary">
                                     Products
+                                </a>
+                            @endif
+                        </div>
+                        <div class="col-2">
+                            @if(Auth::user()->can('view', \App\ItemCategory::class))
+                                <a href="{{ route('item_categories.view', ['kitchen_id' => $kitchen->id]) }}" class="btn btn-primary">
+                                    Categories
                                 </a>
                             @endif
                         </div>

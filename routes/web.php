@@ -32,7 +32,8 @@ Route::post('/suppliers/create', 'SupplierController@create')->name('suppliers.c
 Route::post('/suppliers/update', 'SupplierController@update')->name('suppliers.update');
 Route::post('/suppliers/delete', 'SupplierController@delete')->name('suppliers.delete');
 
-Route::get('/product_categories', 'ItemCategoryController@view')->name('item_categories.view');
+Route::get('/kitchen/{kitchen_id}/product_categories', 'ItemCategoryController@view')
+    ->where(['kitchen_id' => '[0-9]+'])->name('item_categories.view');
 Route::post('/product_categories/create', 'ItemCategoryController@create')->name('item_categories.create');
 Route::post('/product_categories/update', 'ItemCategoryController@update')->name('item_categories.update');
 Route::post('/product_categories/delete', 'ItemCategoryController@delete')->name('item_categories.delete');
@@ -55,8 +56,10 @@ Route::get('/kitchen/{kitchen_id}', 'KitchenController@view')->where(['kitchen_i
 
 Route::get('/kitchen/{kitchen_id}/order_lists', 'OrderListsController@view')->where(['kitchen_id' => '[0-9]+'])->name('view_order_lists.view');
 
-Route::post('/kitchen/{kitchen_id}/order_list/{order_list_id}/kitchen_view', 'OrderListItemsController@view')
-    ->where(['kitchen_id' => '[0-9]+', 'order_list_id' => '[0-9]+'])->name('order_list_items.view');
+Route::match(
+    ['get', 'post'],
+    '/kitchen/{kitchen_id}/order_list/{order_list_id}/kitchen_view', 'OrderListItemsController@view'
+)->where(['kitchen_id' => '[0-9]+', 'order_list_id' => '[0-9]+'])->name('order_list_items.view');
 Route::get('/kitchen/{kitchen_id}/order_list/{order_list_id}/supplier_view', 'OrderListItemsController@view_grouped_by_supplier')
     ->where(['kitchen_id' => '[0-9]+', 'order_list_id' => '[0-9]+'])->name('order_list_items.view_supplier');
 Route::get('/kitchen/{kitchen_id}/order_list/{order_list_id}/category_view', 'OrderListItemsController@view_categorized')
