@@ -9,4 +9,5 @@ return [
     'suppliers_view' => 'Suppliers view',
     'order_lists' => 'Order lists',
     'download_backup' => 'Database backup',
+    'mail_setup' => 'Mail setup',
 ];

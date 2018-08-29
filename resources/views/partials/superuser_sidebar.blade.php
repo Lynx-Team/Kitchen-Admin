@@ -2,6 +2,11 @@
     <ul class="nav">
         <li class="nav-title">{{ config('app.name') }}</li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('mail_setup.view') }}">
+                {{ __('sidebar.mail_setup') }}
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ route('backup.download') }}">
                 <i class="fas fa-download"></i>
                 {{ __('sidebar.download_backup') }}

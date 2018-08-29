@@ -86,3 +86,6 @@ Route::get('/order_list_items/{order_list_id}/send_email', 'OrderListItemsContro
     ->where(['order_list_id' => '[0-9]+'])->name('order_list_items.send_email');
 
 Route::get('/download_backup', 'BackupController@download')->name('backup.download');
+
+Route::get('/mail_setup', 'MailSetupController@view')->name('mail_setup.view');
+Route::post('/update_mail_config', 'MailSetupController@update')->name('mail_setup.update');
