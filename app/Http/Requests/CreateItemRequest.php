@@ -24,6 +24,7 @@ class CreateItemRequest extends FormRequest
             'cost' => 'required|numeric|min:0',
             'kitchen_id' => 'required|exists:users,id',
             'product_code' => 'required|string|max:100',
+            'unit' => 'required|string|max:100',
         ];
     }
 }

@@ -76,7 +76,7 @@
                             <div class="form-group col">
                                 <label for="new_product_code">{{ __('items.product_code') }}</label>
                                 <input type="text" min="0" class="form-control" name="product_code"
-                                       id="new_product_cost" placeholder="{{ __('items.product_code') }}" aria-describedby="create_product_code_error">
+                                       id="new_product_code" placeholder="{{ __('items.product_code') }}" aria-describedby="create_product_code_error">
                                 @if($errors->create->has('product_code'))
                                     <p id="create_product_code_error" class="form-text text-danger">
                                         {{ $errors->create->first('product_code') }}
@@ -84,9 +84,21 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group col">
-                            <label for="add_item_btn">&nbsp;</label>
-                            <button type="submit" class="btn btn-success form-control" id="add_item_btn">{{ __('items.add_btn') }}</button>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="new_unit">{{ __('items.unit') }}</label>
+                                <input type="text" min="0" class="form-control" name="unit"
+                                       id="new_unit" placeholder="{{ __('items.unit') }}" aria-describedby="create_unit_error">
+                                @if($errors->create->has('unit'))
+                                    <p id="create_unit_error" class="form-text text-danger">
+                                        {{ $errors->create->first('unit') }}
+                                    </p>
+                                @endif
+                            </div>
+                            <div class="form-group col">
+                                <label for="add_item_btn">&nbsp;</label>
+                                <button type="submit" class="btn btn-success form-control" id="add_item_btn">{{ __('items.add_btn') }}</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -115,6 +127,15 @@
                                 @if($errors->update->has('full_name') && $errors->update->first('row_id') == $item->id)
                                     <p id="update_full_name_error" class="form-text text-danger">
                                         {{ $errors->update->first('full_name') }}
+                                    </p>
+                                @endif
+                            </div>
+                            <div class="form-group row">
+                                <input type="text" class="form-control" name="unit" value="{{ $item->unit}}"
+                                       placeholder="{{ __('items.unit') }}" aria-describedby="update_unit_error">
+                                @if($errors->update->has('unit') && $errors->update->first('row_id') == $item->id)
+                                    <p id="update_unit_error" class="form-text text-danger">
+                                        {{ $errors->update->first('unit') }}
                                     </p>
                                 @endif
                             </div>

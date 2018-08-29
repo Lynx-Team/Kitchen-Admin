@@ -33,6 +33,7 @@ class ItemController extends Controller
             'cost' => $request->cost,
             'kitchen_id' => $request->kitchen_id,
             'product_code' => $request->product_code,
+            'unit' => $request->unit,
         ]);
         return redirect()->back();
     }
@@ -46,6 +47,7 @@ class ItemController extends Controller
             'category_id' => $request->category,
             'cost' => $request->cost,
             'product_code' => $request->product_code,
+            'unit' => $request->unit,
         ]);
         return redirect()->back();
     }

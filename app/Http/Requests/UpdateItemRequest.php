@@ -25,6 +25,7 @@ class UpdateItemRequest extends FormRequest
             'category' => 'required|exists:item_categories,id',
             'cost' => 'required|numeric|min:0',
             'product_code' => 'string|max:100',
+            'unit' => 'string|max:100',
         ];
     }
 

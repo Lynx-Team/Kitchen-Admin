@@ -10,7 +10,7 @@ class Item extends Model
 
     protected $fillable = [
         'short_name', 'full_name', 'default_supplier_id', 'category_id', 'cost',
-        'kitchen_id', 'product_code',
+        'kitchen_id', 'product_code', 'unit',
     ];
 
     public function category()
