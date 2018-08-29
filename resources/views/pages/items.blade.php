@@ -74,9 +74,19 @@
                                 @endif
                             </div>
                             <div class="form-group col">
-                                <label for="add_item_btn">&nbsp;</label>
-                                <button type="submit" class="btn btn-success form-control" id="add_item_btn">{{ __('items.add_btn') }}</button>
+                                <label for="new_product_code">{{ __('items.product_code') }}</label>
+                                <input type="text" min="0" class="form-control" name="product_code"
+                                       id="new_product_cost" placeholder="{{ __('items.product_code') }}" aria-describedby="create_product_code_error">
+                                @if($errors->create->has('product_code'))
+                                    <p id="create_product_code_error" class="form-text text-danger">
+                                        {{ $errors->create->first('product_code') }}
+                                    </p>
+                                @endif
                             </div>
+                        </div>
+                        <div class="form-group col">
+                            <label for="add_item_btn">&nbsp;</label>
+                            <button type="submit" class="btn btn-success form-control" id="add_item_btn">{{ __('items.add_btn') }}</button>
                         </div>
                     </form>
                 </div>
@@ -141,6 +151,15 @@
                                 @if($errors->update->has('cost') && $errors->update->first('row_id') == $item->id)
                                     <p id="update_cost_error" class="form-text text-danger">
                                         {{ $errors->update->first('cost') }}
+                                    </p>
+                                @endif
+                            </div>
+                            <div class="form-group row">
+                                <input type="text" class="form-control" name="product_code" value="{{ $item->product_code }}"
+                                       placeholder="{{ __('items.product_code') }}" aria-describedby="update_product_code_error">
+                                @if($errors->update->has('product_code') && $errors->update->first('row_id') == $item->id)
+                                    <p id="update_product_code_error" class="form-text text-danger">
+                                        {{ $errors->update->first('product_code') }}
                                     </p>
                                 @endif
                             </div>

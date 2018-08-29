@@ -12,4 +12,5 @@ return [
     'update_btn' => 'Update',
     'delete_btn' => 'Delete',
     'no_items' => 'No items',
+    'product_code' => 'Product code',
 ];

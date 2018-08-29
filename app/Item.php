@@ -8,7 +8,10 @@ class Item extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['short_name', 'full_name', 'default_supplier_id', 'category_id', 'cost', 'kitchen_id'];
+    protected $fillable = [
+        'short_name', 'full_name', 'default_supplier_id', 'category_id', 'cost',
+        'kitchen_id', 'product_code',
+    ];
 
     public function category()
     {

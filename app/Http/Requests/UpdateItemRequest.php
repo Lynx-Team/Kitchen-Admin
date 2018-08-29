@@ -24,6 +24,7 @@ class UpdateItemRequest extends FormRequest
             'default_supplier' => 'required|exists:suppliers,id',
             'category' => 'required|exists:item_categories,id',
             'cost' => 'required|numeric|min:0',
+            'product_code' => 'string|max:100',
         ];
     }
 
