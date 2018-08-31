@@ -63,11 +63,16 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request)
     {
-        User::find($request->id)->update([
+        $fieldsToUpdate = [
             'name' => $request->name,
             'email' => $request->email,
             'role_id' => $request->role
-        ]);
+        ];
+
+        if (!\is_null($request->password))
+            $fieldsToUpdate['password'] = Hash::make($request->password);
+
+        User::find($request->id)->update($fieldsToUpdate);
         return redirect()->back();
     }
 

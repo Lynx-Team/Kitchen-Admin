@@ -66,6 +66,13 @@
             <div class="card">
                 <div class="card-header">{{ __('users.title') }}</div>
                 <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col">{{ __('home.profile_name') }}</div>
+                        <div class="col">{{ __('home.profile_email') }}</div>
+                        <div class="col">{{ __('home.profile_role') }}</div>
+                        <div class="col">{{ __('users.password') }}</div>
+                        <div class="col"></div>
+                    </div>
                     @forelse ($users as $user)
                         <form action="{{ route('users.update') }}" method="POST" class="row">
                             @csrf
@@ -97,6 +104,14 @@
                                 @if($errors->update_user->has('role')  && $errors->update_user->first('row_id') == $user->id)
                                     <p id="update_role_error" class="form-text text-danger">
                                         {{ $errors->update_user->first('role') }}
+                                    </p>
+                                @endif
+                            </div>
+                            <div class="form-group col">
+                                <input type="password" class="form-control" name="password" aria-describedby="update_password_error">
+                                @if($errors->update_user->has('password')  && $errors->update_user->first('row_id') == $user->id)
+                                    <p id="update_password_error" class="form-text text-danger">
+                                        {{ $errors->update_user->first('password') }}
                                     </p>
                                 @endif
                             </div>
