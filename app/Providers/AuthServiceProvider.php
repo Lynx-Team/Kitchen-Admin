@@ -5,11 +5,13 @@ namespace App\Providers;
 use App\AvailableItem;
 use App\Item;
 use App\ItemCategory;
+use App\KitchenProfile;
 use App\OrderList;
 use App\OrderListItem;
 use App\Policies\AvailableItemPolicy;
 use App\Policies\ItemCategoryPolicy;
 use App\Policies\ItemPolicy;
+use App\Policies\KitchenProfilePolicy;
 use App\Policies\OrderListItemPolicy;
 use App\Policies\OrderListPolicy;
 use App\Policies\SupplierPolicy;
@@ -32,6 +34,7 @@ class AuthServiceProvider extends ServiceProvider
         Item::class => ItemPolicy::class,
         OrderList::class => OrderListPolicy::class,
         OrderListItem::class => OrderListItemPolicy::class,
+        KitchenProfile::class => KitchenProfilePolicy::class,
     ];
 
     /**

@@ -9,7 +9,14 @@
                     <div class="card-body row">
                         <div class="col-6">
                             <h5>
+                                @php($kitchenProfile = \App\KitchenProfile::where('kitchen_id', $kitchen->id))
+                                @if(Auth::user()->can('view', \App\KitchenProfile::class))
+                                    <a href="{{ route('kitchen_profile.view', ['id' => $kitchen->id]) }}">
+                                @endif
                                 {{ $kitchen->name }}
+                                @if(Auth::user()->can('view', \App\KitchenProfile::class))
+                                    </a>
+                                @endif
                                 <span class="badge badge-primary badge-pill">Order lists: {{ $kitchen->order_lists_number }}</span>
                             </h5>
                         </div>

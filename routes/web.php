@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return redirect('home');
 });
@@ -51,11 +40,8 @@ Route::post('/order_lists/delete', 'OrderListController@delete')->name('order_li
 Route::post('/order_lists/reset', 'OrderListController@reset')->name('order_lists.reset');
 
 Route::get('/kitchens', 'KitchensController@view')->name('kitchens.view');
-
 Route::get('/kitchen/{kitchen_id}', 'KitchenController@view')->where(['kitchen_id' => '[0-9]+'])->name('kitchen.view');
-
 Route::get('/kitchen/{kitchen_id}/order_lists', 'OrderListsController@view')->where(['kitchen_id' => '[0-9]+'])->name('view_order_lists.view');
-
 Route::match(
     ['get', 'post'],
     '/kitchen/{kitchen_id}/order_list/{order_list_id}/kitchen_view', 'OrderListItemsController@view'
@@ -89,3 +75,6 @@ Route::get('/download_backup', 'BackupController@download')->name('backup.downlo
 
 Route::get('/mail_setup', 'MailSetupController@view')->name('mail_setup.view');
 Route::post('/update_mail_config', 'MailSetupController@update')->name('mail_setup.update');
+
+Route::get('/kitchen/{kitchen_id}/profile', 'KitchenProfileController@view')->where(['kitchen_id' => '[0-9]+'])->name('kitchen_profile.view');
+Route::post('/kitchen/{kitchen_id}/update_profile', 'KitchenProfileController@update')->where(['kitchen_id' => '[0-9]+'])->name('kitchen_profile.update');

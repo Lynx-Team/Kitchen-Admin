@@ -1,20 +1,24 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: keltar
- * Date: 31.08.18
- * Time: 20:41
- */
 
 namespace App\Http\Controllers;
-
 
 use App\Http\Requests\CreateKitchenProfileRequest;
 use App\Http\Requests\UpdateKitchenProfileRequest;
 use App\KitchenProfile;
+use Illuminate\Support\Facades\Auth;
 
 class KitchenProfileController
 {
+    public function view($id)
+    {
+        if (Auth::check() && Auth::user()->can('view', KitchenProfile::class))
+        {
+            $kitchenProfile = KitchenProfile::where('kitchen_id', $id)->with('kitchen')->get();
+            return view('pages.kitchen_profile', ['kitchenProfile' => $kitchenProfile[0]]);
+        }
+        return redirect()->back();
+    }
+
     public function create(CreateKitchenProfileRequest $request)
     {
         KitchenProfile::create($request->all());
@@ -24,15 +28,6 @@ class KitchenProfileController
     public function update(UpdateKitchenProfileRequest $request)
     {
         KitchenProfile::find($request->id)->update($request->all());
-        return redirect()->back();
-    }
-
-    public function delete(Request $request)
-    {
-        $kitchenProfile = KitchenProfile::findOrFail($request->id);
-        if (Auth::user()->can('delete', $kitchenProfile))
-            $kitchenProfile->delete();
-
         return redirect()->back();
     }
 }

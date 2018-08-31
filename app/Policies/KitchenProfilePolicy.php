@@ -26,8 +26,8 @@ class KitchenProfilePolicy
 
     public function update(User $user, KitchenProfile $kitchenProfile)
     {
-        return ($user->is_admin && $user->customer()->id == $kitchenProfile->kitchen()->customer()->id) ||
-            ($user->is_customer && $kitchenProfile->kitchen()->customer()->id == $user->id);
+        return ($user->is_admin && $user->customer()->id == $kitchenProfile->kitchen->customer()->id) ||
+            ($user->is_customer && $kitchenProfile->kitchen->customer()->id == $user->id);
     }
 
     public function delete(User $user, KitchenProfile $kitchenProfile)
