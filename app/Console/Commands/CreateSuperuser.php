@@ -7,21 +7,21 @@ use App\User;
 use App\Role;
 use Illuminate\Support\Facades\Hash;
 
-class CreateAdmin extends Command
+class CreateSuperuser extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'create:admin {name} {email} {password}';
+    protected $signature = 'create:superuser {name} {email} {password}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create admin user.';
+    protected $description = 'Create superuser.';
 
     /**
      * Create a new command instance.
@@ -43,7 +43,7 @@ class CreateAdmin extends Command
         User::updateOrCreate(['email' => $this->argument('email')], [
             'name' => $this->argument('name'),
             'password' => Hash::make($this->argument('password')),
-            'role_id' => Role::where('name', 'admin')->firstOrFail()->id,
+            'role_id' => Role::where('name', 'superuser')->firstOrFail()->id,
         ]);
     }
 }
