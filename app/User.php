@@ -58,4 +58,8 @@ class User extends Authenticatable
     public function categories() {
         return $this->hasMany('App\ItemCategory');
     }
+
+    public function kitchenProfile() {
+        return $this->hasOne('App\KitchenProfile', 'kitchen_id');
+    }
 }
