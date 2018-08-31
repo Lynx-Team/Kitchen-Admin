@@ -68,6 +68,7 @@ class User extends Authenticatable
     }
 
     public function  customer() {
-        return $this->hasOne('App\CustomerWorker', 'worker_id'); //->customer
+        return $this->hasManyThrough('App\CustomerWorker', 'App\User', 'worker_id',
+            'customer_id', 'id' ,'id');
     }
 }

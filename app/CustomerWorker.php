@@ -11,10 +11,10 @@ class CustomerWorker extends Model
     protected $fillable = [ 'customer_id', 'worker_id' ];
 
     public function customer() {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'customer_id');
     }
 
     public function worker() {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'worker_id');
     }
 }
