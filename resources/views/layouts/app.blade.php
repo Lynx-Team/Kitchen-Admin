@@ -25,6 +25,8 @@
                     @include('partials.manager_sidebar')
                 @elseif(Auth::user()->is_superuser)
                     @include('partials.superuser_sidebar')
+                @elseif(Auth::user()->is_customer)
+                    @include('partials.customer_sidebar')
                 @endif
             </div>
             <main class="main">

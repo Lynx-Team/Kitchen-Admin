@@ -7,6 +7,9 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('users.view') }}">{{ __('sidebar.users') }}</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ route('backup.download') }}">
                 <i class="fas fa-download"></i>
                 {{ __('sidebar.download_backup') }}

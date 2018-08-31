@@ -31,6 +31,10 @@ class User extends Authenticatable
         return $this->belongsTo('App\Role');
     }
 
+    public function getIsCustomerAttribute() {
+        return $this->role->name === 'customer';
+    }
+
     public function getIsSuperuserAttribute() {
         return $this->role->name === 'superuser';
     }
@@ -67,8 +71,11 @@ class User extends Authenticatable
         return $this->hasMany('App\CustomerWorker', 'customer_id');
     }
 
-    public function  customer() {
-        return $this->hasManyThrough('App\CustomerWorker', 'App\User', 'worker_id',
-            'customer_id', 'id' ,'id');
+    public function worker() {
+        return $this->hasOne('App\CustomerWorker', 'worker_id');
+    }
+
+    public function customer() {
+        return $this->worker->customer()->get()[0];
     }
 }

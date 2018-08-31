@@ -11,22 +11,22 @@ class UserPolicy
 
     public function view(User $user)
     {
-        return $user->is_admin;
+        return $user->is_admin || $user->is_customer || $user->is_superuser;
     }
 
     public function create(User $user)
     {
-        return $user->is_admin;
+        return $user->is_admin || $user->is_customer || $user->is_superuser;
     }
 
     public function update(User $user, User $model)
     {
-        return $user->is_admin;
+        return $user->is_admin || $user->is_customer || ($user->is_superuser && $model->is_customer);
     }
 
     public function delete(User $user, User $model)
     {
-        return $user->is_admin;
+        return $user->is_admin || $user->is_customer || ($user->is_superuser && $model->is_customer);
     }
 
     public function update_profile(User $user, User $model)
