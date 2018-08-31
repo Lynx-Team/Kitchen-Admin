@@ -7,6 +7,7 @@ use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\KitchenProfile;
 use App\User;
 use App\Role;
 use Illuminate\Http\Request;
@@ -48,6 +49,11 @@ class UserController extends Controller
             'role_id' => $request->role,
         ]);
         $role = Role::findOrFail($request->role)->name;
+        if ($role == 'kitchen') {
+            KitchenProfile::create([
+               'kitchen_id' => $user->id,
+            ]);
+        }
         CustomerWorker::create([
            'customer_id' => $role == 'customer' ? $user->id : Auth::user()->customer()->id,
            'worker_id' => $user->id

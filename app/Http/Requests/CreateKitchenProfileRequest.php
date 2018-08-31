@@ -24,12 +24,12 @@ class CreateKitchenProfileRequest
     {
         return [
             'kitchen_id' => 'required|exists:users,id',
-            'company_name' => 'required|string|max:200',
-            'contact_name' => 'required|string|max:200',
-            'postal_address' => 'required|string|max:1024',
-            'delivery_address' => 'required|string|max:1024',
-            'phone' => 'required|string|max:50',
-            'delivery_instructions' => 'required|string',
+            'company_name' => 'string|max:200',
+            'contact_name' => 'string|max:200',
+            'postal_address' => 'string|max:1024',
+            'delivery_address' => 'string|max:1024',
+            'phone' => 'string|max:50',
+            'delivery_instructions' => 'string',
         ];
     }
 
