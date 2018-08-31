@@ -22,7 +22,7 @@ class CreateKitchenProfilesTable extends Migration
             $table->string('postal_address', 1024);
             $table->string('delivery_address', 1024);
             $table->string('phone', 50);
-            $table->multiLineString('delivery_instructions');
+            $table->string('delivery_instructions', 1024);
         });
     }
 
