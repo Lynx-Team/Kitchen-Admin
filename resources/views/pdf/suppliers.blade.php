@@ -12,6 +12,39 @@
     </style>
 </head>
 <body>
+<div class="row">
+    <div class="col-6">
+        Order from {{ $kitchen->kitchenProfile->company_name }}
+    </div>
+    <div class="col-6 float-right text-right">
+        {{ \Carbon\Carbon::now()->toDateString() }}
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-12">
+        For: {{ $kitchen->name }}
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col-12">
+        {{ $kitchen->kitchenProfile->delivery_address }}
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-12">
+        {{ $kitchen->kitchenProfile->delivery_instructions }}
+    </div>
+</div>
+
+<div class="row mt-4 mb-4">
+    <div class="col-6">
+        For order queries, please contact: {{ $kitchen->kitchenProfile->contact_name }}
+    </div>
+    <div class="col-6 float-right">
+        Phone: {{ $kitchen->kitchenProfile->phone }}
+    </div>
+</div>
 @php($i = 0)
 @while($i < count($order_list_items))
     <div class="{{ $i == 0 ? '' : 'page-break' }}">
@@ -19,7 +52,9 @@
         <table style="width: 100%;" class="table table-sm table-striped">
             <thead>
             <tr>
+                <th scope="col">{{ __('supplier_pdf.product_code') }}</th>
                 <th scope="col">{{ __('supplier_pdf.full_name') }}</th>
+                <th scope="col">{{ __('supplier_pdf.unit') }}</th>
                 <th scope="col">{{ __('supplier_pdf.quantity') }}</th>
             </tr>
             </thead>
@@ -32,7 +67,9 @@
                         @continue
                     @endif
                     <tr>
+                        <td>{{ $order_list_item->item->product_code }}</td>
                         <td>{{ $order_list_item->item->full_name }}</td>
+                        <td>{{ $order_list_item->item->unit }}</td>
                         <td>{{ $order_list_item->quantity }}</td>
                     </tr>
                     @php($i++)

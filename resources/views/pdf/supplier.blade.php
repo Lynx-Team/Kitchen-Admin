@@ -7,26 +7,57 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
+<div class="row">
+    <div class="col-6">
+        Order from {{ $kitchen->kitchenProfile->company_name }}
+    </div>
+    <div class="col-6 float-right text-right">
+        {{ \Carbon\Carbon::now()->toDateString() }}
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-12">
+        For: {{ $kitchen->name }}
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col-12">
+        {{ $kitchen->kitchenProfile->delivery_address }}
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-12">
+        {{ $kitchen->kitchenProfile->delivery_instructions }}
+    </div>
+</div>
+
+<div class="row mt-4 mb-4">
+    <div class="col-6">
+        For order queries, please contact: {{ $kitchen->kitchenProfile->contact_name }}
+    </div>
+    <div class="col-6 float-right">
+        Phone: {{ $kitchen->kitchenProfile->phone }}
+    </div>
+</div>
 <table style="width: 100%;" class="table table-striped">
     <thead>
     <tr>
-        <th scope="col">{{ __('supplier_pdf.num') }}</th>
+        <th scope="col">{{ __('supplier_pdf.product_code') }}</th>
         <th scope="col">{{ __('supplier_pdf.full_name') }}</th>
+        <th scope="col">{{ __('supplier_pdf.unit') }}</th>
         <th scope="col">{{ __('supplier_pdf.quantity') }}</th>
-        <th scope="col">{{ __('supplier_pdf.cost') }}</th>
     </tr>
     </thead>
     <tbody>
-    @php($i = 1)
-    @foreach($order_list_items as $order_list_item)
-        <tr>
-            <th scope="row">{{ $i }}</th>
-            <td>{{ $order_list_item->item->full_name }}</td>
-            <td>{{ $order_list_item->quantity }}</td>
-            <td>{{ $order_list_item->item->cost }}</td>
-        </tr>
-        @php($i++)
-    @endforeach
+        @foreach($order_list_items as $order_list_item)
+            <tr>
+                <td>{{ $order_list_item->item->product_code }}</td>
+                <td>{{ $order_list_item->item->full_name }}</td>
+                <td>{{ $order_list_item->item->unit }}</td>
+                <td>{{ $order_list_item->quantity }}</td>
+            </tr>
+        @endforeach
     </tbody>
 </table>
 </body>

@@ -9,6 +9,7 @@ use App\Mail\SupplierMail;
 use App\OrderList;
 use App\OrderListItem;
 use App\Supplier;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -113,7 +114,8 @@ class OrderListItemsController extends Controller
         $orderList = OrderList::findOrFail($orderListId);
         if (Auth::check() && Auth::user()->can('download_pdf', $orderList))
         {
-            $pdf = $this->generatePDF($orderListId, $orderList->note, $supplierId);
+            $kitchen = User::where('id', $orderList->kitchen_id)->with('kitchenProfile')->get()[0];
+            $pdf = $this->generatePDF($orderListId, $orderList->note, $kitchen, $supplierId);
             return $pdf->download($orderList->note . '.pdf');
         }
         return redirect()->back();
@@ -128,33 +130,40 @@ class OrderListItemsController extends Controller
                 where('order_list_id', $orderListId)->groupBy('supplier_id')->get() :
                 [ (object) ['supplier_id' => $supplierId] ];
 
+            $kitchen = User::where('id', $orderList->kitchen_id)->with('kitchenProfile')->get()[0];
             foreach($supplierIds as $supplierId)
             {
                 $supplier = Supplier::findOrFail($supplierId->supplier_id);
-                $pdf = $this->generatePDF($orderListId, $orderList->note, $supplier->id);
+                $pdf = $this->generatePDF($orderListId, $orderList->note, $kitchen, $supplier->id);
                 Mail::to($supplier->email)->send(new SupplierMail($pdf, $orderList->note));
             }
         }
         return redirect()->back();
     }
 
-    private function generatePDF($orderListId, $orderListName, $supplierId = null)
+    private function generatePDF($orderListId, $orderListName, $kitchen, $supplierId = null)
     {
         if (\is_null($supplierId))
         {
             $orderListItems = OrderListItem::where('order_list_id', $orderListId)->
                 with('item')->with('supplier')->orderBy('supplier_id')->orderBy('supplier_sort_order')->get();
-            return PDF::loadView('pdf.suppliers', ['order_list_name' => $orderListName,
-                'order_list_items' => $orderListItems]);
+            return PDF::loadView('pdf.suppliers', [
+                'kitchen' => $kitchen,
+                'order_list_name' => $orderListName,
+                'order_list_items' => $orderListItems
+            ]);
         }
         else
         {
             $supplier = Supplier::findOrFail($supplierId);
             $orderListItems = OrderListItem::where('order_list_id', $orderListId)->
                 where('supplier_id', $supplierId)->with('item')->orderBy('supplier_sort_order')->get();
-            return PDF::loadView('pdf.supplier', ['order_list_name' => $orderListName,
+            return PDF::loadView('pdf.supplier', [
+                'kitchen' => $kitchen,
+                'order_list_name' => $orderListName,
                 'supplier_name' => $supplier->name,
-                'order_list_items' => $orderListItems]);
+                'order_list_items' => $orderListItems
+            ]);
         }
     }
 }
