@@ -1,4 +1,7 @@
 <div class="col small">{{ __('kitchen.short_name') }}</div>
+@if(Auth::user()->is_kitchen)
+    <div class="col-2 small">{{ __('kitchen.unit') }}</div>
+@endif
 @if(Auth::user()->can('update_supplier_id', $item))
     <div class="col small">{{ __('kitchen.supplier') }}</div>
 @endif

@@ -7,6 +7,11 @@
     <div class="form-group col">
         <input type="text" class="form-control" readonly value="{{ $item->item->short_name }}">
     </div>
+    @if(Auth::user()->is_kitchen)
+        <div class="form-group col-2">
+            <input type="text" class="form-control" readonly value="{{ $item->item->unit }}">
+        </div>
+    @endif
     @if(Auth::user()->can('update_supplier_id', $item))
         <div class="form-group col">
             <select class="form-control" name="supplier_id" aria-describedby="update_supplier_id_error" {{ $readonly }}>
