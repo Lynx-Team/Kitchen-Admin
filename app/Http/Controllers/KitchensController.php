@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateSupplierRequest;
-use App\Http\Requests\UpdateSupplierRequest;
-use App\Supplier;
+use App\CustomerWorker;
+use App\Http\Requests\CreateKitchenRequest;
+use App\KitchenProfile;
+use App\Role;
 use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class KitchensController extends Controller
 {
@@ -27,6 +28,30 @@ class KitchensController extends Controller
               group by users.id, users.name");
             return view('pages.kitchens', ['kitchens' => $kitchens]);
         }
+        return redirect()->back();
+    }
+
+    public function add_new_kitchen(CreateKitchenRequest $request)
+    {
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role_id' => Role::where('name', 'kitchen')->get()[0]->id,
+        ]);
+        KitchenProfile::create([
+            'kitchen_id' => $user->id,
+            'company_name' => $request->company_name,
+            'contact_name' => $request->contact_name,
+            'postal_address' => $request->postal_address,
+            'delivery_address' => $request->delivery_address,
+            'phone' => $request->phone,
+            'delivery_instructions' => $request->delivery_instructions,
+        ]);
+        CustomerWorker::create([
+            'customer_id' => Auth::user()->customer()->id,
+            'worker_id' => $user->id,
+        ]);
         return redirect()->back();
     }
 }

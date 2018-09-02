@@ -40,6 +40,7 @@ Route::post('/order_lists/delete', 'OrderListController@delete')->name('order_li
 Route::post('/order_lists/reset', 'OrderListController@reset')->name('order_lists.reset');
 
 Route::get('/kitchens', 'KitchensController@view')->name('kitchens.view');
+Route::post('/add_new_kitchen_user', 'KitchensController@add_new_kitchen')->name('kitchens.add_new_kitchen');
 Route::get('/kitchen/{kitchen_id}', 'KitchenController@view')->where(['kitchen_id' => '[0-9]+'])->name('kitchen.view');
 Route::get('/kitchen/{kitchen_id}/order_lists', 'OrderListsController@view')->where(['kitchen_id' => '[0-9]+'])->name('view_order_lists.view');
 Route::match(
