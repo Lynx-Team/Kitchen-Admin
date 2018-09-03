@@ -4,7 +4,7 @@
     <input type="hidden" name="id" value="{{ $item->id }}">
     <input type="hidden" name="item_id" value="{{ $item->item_id }}">
     <input type="hidden" name="order_list_id" value="{{ $item->order_list_id }}">
-    <div class="form-group col">
+    <div class="form-group col-4">
         <input type="text" class="form-control" readonly value="{{ $item->item->short_name }}">
     </div>
     @if(Auth::user()->is_kitchen)

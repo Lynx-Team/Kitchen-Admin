@@ -1,4 +1,4 @@
-<div class="col small">{{ __('kitchen.short_name') }}</div>
+<div class="col-4 small">{{ __('kitchen.short_name') }}</div>
 @if(Auth::user()->is_kitchen)
     <div class="col-2 small">{{ __('kitchen.unit') }}</div>
 @endif
