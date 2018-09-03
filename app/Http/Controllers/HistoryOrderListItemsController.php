@@ -19,7 +19,8 @@ class HistoryOrderListItemsController
     {
         if (Auth::check() && Auth::user()->can('view', HistoryOrderListItem::class))
             return view('pages.reporting_items', [
-                'items' => HistoryOrderListItem::where('history_order_list_id', $historyOrderList)->get()
+                'items' => HistoryOrderListItem::where('history_order_list_id', $historyOrderList)
+                    ->orderBy('supplier_name')->get()
             ]);
 
         return redirect()->back();
