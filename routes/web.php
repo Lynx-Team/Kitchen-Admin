@@ -80,3 +80,5 @@ Route::post('/update_mail_config', 'MailSetupController@update')->name('mail_set
 
 Route::get('/kitchen/{kitchen_id}/profile', 'KitchenProfileController@view')->where(['kitchen_id' => '[0-9]+'])->name('kitchen_profile.view');
 Route::post('/kitchen/{kitchen_id}/update_profile', 'KitchenProfileController@update')->where(['kitchen_id' => '[0-9]+'])->name('kitchen_profile.update');
+
+Route::get('/kitchen/{kitchen_id}/reporting', 'HistoryOrderListController@view')->where(['kitchen_id' => '[0-9]+'])->name('reporting.view');

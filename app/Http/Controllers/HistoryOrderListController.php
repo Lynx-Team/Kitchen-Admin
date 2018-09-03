@@ -10,16 +10,16 @@ namespace App\Http\Controllers;
 
 
 use App\HistoryOrderList;
+use Illuminate\Support\Facades\Auth;
 
 class HistoryOrderListController extends Controller
 {
     public function view($kitchen_id)
     {
         if (Auth::check() && Auth::user()->can('view', HistoryOrderList::class))
-            return view('someview', [
-                'history_order_lists' => HistoryOrderList::where('kitchen_id', $kitchen_id)->get()
+            return view('pages.reporting', [
+                'reports' => HistoryOrderList::where('kitchen_id', $kitchen_id)->get()
             ]);
-
         return redirect()->back();
     }
 }

@@ -113,31 +113,30 @@
                             <span class="badge badge-primary badge-pill">Order lists: {{ $kitchen->order_lists_number }}</span>
                         </h5>
                     </div>
-                    <div class="col-2">
+                    <div class="col">
+                        <a href="{{ route('view_order_lists.view', ['kitchen_id' => $kitchen->id]) }}" class="btn btn-success float-right">
+                            View
+                        </a>
+                        @if(Auth::user()->can('view', \App\HistoryOrderList::class))
+                            <a href="{{ route('reporting.view', ['kitchen_id' => $kitchen->id]) }}" class="btn btn-primary float-right mr-2">
+                                Reporting
+                            </a>
+                        @endif
                         @if(Auth::user()->can('view', \App\Supplier::class))
-                            <a href="{{ route('suppliers.view', ['kitchen_id' => $kitchen->id]) }}" class="btn btn-primary">
+                            <a href="{{ route('suppliers.view', ['kitchen_id' => $kitchen->id]) }}" class="btn btn-primary float-right mr-2">
                                 Suppliers
                             </a>
                         @endif
-                    </div>
-                    <div class="col-2">
                         @if(Auth::user()->can('view', \App\Item::class))
-                            <a href="{{ route('items.view', ['kitchen_id' => $kitchen->id]) }}" class="btn btn-primary">
+                            <a href="{{ route('items.view', ['kitchen_id' => $kitchen->id]) }}" class="btn btn-primary float-right mr-2">
                                 Products
                             </a>
                         @endif
-                    </div>
-                    <div class="col-2">
                         @if(Auth::user()->can('view', \App\ItemCategory::class))
-                            <a href="{{ route('item_categories.view', ['kitchen_id' => $kitchen->id]) }}" class="btn btn-primary">
+                            <a href="{{ route('item_categories.view', ['kitchen_id' => $kitchen->id]) }}" class="btn btn-primary float-right mr-2">
                                 Categories
                             </a>
                         @endif
-                    </div>
-                    <div class="col-2">
-                        <a href="{{ route('view_order_lists.view', ['kitchen_id' => $kitchen->id]) }}" class="btn btn-success">
-                            View
-                        </a>
                     </div>
                 </div>
             </div>
