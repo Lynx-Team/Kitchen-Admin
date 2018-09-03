@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 
 use App\HistoryOrderListItem;
+use Illuminate\Support\Facades\Auth;
 
 class HistoryOrderListItemsController
 {
@@ -17,7 +18,7 @@ class HistoryOrderListItemsController
     public function view($kitchen_id, $historyOrderList)
     {
         if (Auth::check() && Auth::user()->can('view', HistoryOrderListItem::class))
-            return view('someview', [
+            return view('pages.reporting_items', [
                 'history_order_list_items' => HistoryOrderListItem::where('history_order_list', $historyOrderList)->get()
             ]);
 

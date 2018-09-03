@@ -78,6 +78,7 @@ class OrderListItemsController extends Controller
             'supplier_id' => $request->supplier_id,
             'order_list_id' => $request->order_list_id,
             'item_id' => $request->item_id,
+            'one_off' => $request->one_off,
         ]);
         return redirect()->back();
     }
