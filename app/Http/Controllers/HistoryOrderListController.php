@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 
 use App\HistoryOrderList;
+use App\Http\Requests\DaysIntervalRequest;
 use App\Http\Requests\UpdateDaysToKeepRequest;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +25,18 @@ class HistoryOrderListController extends Controller
                 'reports' => HistoryOrderList::where('kitchen_id', $kitchen_id)->get()
             ]);
         return redirect()->back();
+    }
+
+    public function view_interval(DaysIntervalRequest $request, $kitchen_id)
+    {
+        $startDate = $request->start_date;
+        $endDate = $request->end_date;
+
+        // TODO: make interval SQL request
+        return view('pages.reporting', [
+            'days_to_keep' => config('app.reporting.days_to_keep'),
+            'reports' => HistoryOrderList::where('kitchen_id', $kitchen_id)->get()
+        ]);
     }
 
     public function update_days_to_keep(UpdateDaysToKeepRequest $request)

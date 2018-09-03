@@ -31,15 +31,21 @@
             <div class="card">
                 <div class="card-header">{{ __('reporting.choose_interval') }}</div>
                 <div class="card-body">
-                    <form action="#" method="POST" class="row">
+                    <form action="{{ route('reporting.interval_view', ['kitchen_id' => Request::segment(2)]) }}" method="POST" class="row">
                         @csrf
                         <div class="col form-group">
                             <label>{{ __('reporting.start_date') }}</label>
                             <input type="date" class="form-control" name="start_date">
+                            @if($errors->has('start_date'))
+                                <p class="form-text text-danger">{{ $errors->first('start_date') }}</p>
+                            @endif
                         </div>
                         <div class="col form-group">
                             <label>{{ __('reporting.end_date') }}</label>
                             <input type="date" class="form-control" name="end_date">
+                            @if($errors->has('end_date'))
+                                <p class="form-text text-danger">{{ $errors->first('end_date') }}</p>
+                            @endif
                         </div>
                         <div class="col form-group">
                             <label>&nbsp;</label>

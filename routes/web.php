@@ -82,6 +82,7 @@ Route::get('/kitchen/{kitchen_id}/profile', 'KitchenProfileController@view')->wh
 Route::post('/kitchen/{kitchen_id}/update_profile', 'KitchenProfileController@update')->where(['kitchen_id' => '[0-9]+'])->name('kitchen_profile.update');
 
 Route::get('/kitchen/{kitchen_id}/reporting', 'HistoryOrderListController@view')->where(['kitchen_id' => '[0-9]+'])->name('reporting.view');
+Route::post('/kitchen/{kitchen_id}/reporting/interval', 'HistoryOrderListController@view_interval')->where(['kitchen_id' => '[0-9]+'])->name('reporting.interval_view');
 Route::post('/update_days_to_keep', 'HistoryOrderListController@update_days_to_keep')->name('reporting.update_days_to_keep');
 Route::get('/kitchen/{kitchen_id}/report/{report_id}', 'HistoryOrderListItemsController@view')
     ->where(['kitchen_id' => '[0-9]+', 'report_id' => '[0-9]+'])->name('reporting_items.view');
