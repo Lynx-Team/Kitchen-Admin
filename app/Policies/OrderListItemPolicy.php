@@ -18,7 +18,7 @@ class OrderListItemPolicy
 
     public function create(User $user)
     {
-        return $user->is_admin;
+        return $user->is_admin || $user->is_manager;
     }
 
     public function update(User $user, OrderListItem $orderListItem)

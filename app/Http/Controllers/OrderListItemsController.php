@@ -25,10 +25,11 @@ class OrderListItemsController extends Controller
         {
             $orderList = OrderList::findOrFail($order_list_id);
             $availableItems = Item::where('kitchen_id', $kitchen_id)->get();
+            $orderListItems = Auth::user()->is_kitchen ? $orderListItems->where('one_off', false) : $orderListItems;
             return view($viewName, [
                 'order_list' => $orderList,
                 'available_items' => $availableItems,
-                'order_list_items' => $orderListItems,
+                'order_list_items' => $orderListItems->get(),
                 'suppliers' => Supplier::all(),
                 'is_hide_quantity_0' => $is_hide_quantity_0,
             ]);
@@ -45,7 +46,6 @@ class OrderListItemsController extends Controller
         if ($is_hide_quantity_0 == 'on')
             $orderListItems = $orderListItems->where('quantity', '!=', 0);
 
-        $orderListItems = $orderListItems->get();
         return $this->_view($kitchen_id, $order_list_id, $orderListItems, 'pages.order_list_items_kitchen', $is_hide_quantity_0);
     }
 
@@ -54,7 +54,7 @@ class OrderListItemsController extends Controller
         $orderListItems = OrderListItem::where('order_list_id', $order_list_id)
             ->withCount(['category as category_name' => function ($q) {
                 $q->select('item_categories.name');
-            }])->orderBy('category_name')->with('item')->with('category')->with('supplier')->get();
+            }])->orderBy('category_name')->with('item')->with('category')->with('supplier');
         return $this->_view($kitchen_id, $order_list_id, $orderListItems, 'pages.order_list_items_categorized');
     }
 
@@ -65,7 +65,7 @@ class OrderListItemsController extends Controller
         $orderListItems = OrderListItem::where('order_list_id', $order_list_id)
             ->withCount(['supplier as supplier_name' => function ($q) {
                 $q->select('suppliers.name');
-            }])->orderBy('supplier_name')->with('item')->with('category')->with('supplier')->get();
+            }])->orderBy('supplier_name')->with('item')->with('category')->with('supplier');
         return $this->_view($kitchen_id, $order_list_id, $orderListItems, 'pages.order_list_items_supplier');
     }
 

@@ -1,6 +1,7 @@
 <form action="{{ route('order_list_item.create')  }}" method="POST" class="row">
     @csrf
     <input type="hidden" name="order_list_id" value="{{ $order_list_id }}">
+    <input type="hidden" name="one_off" value="{{ Auth::user()->is_manager ? 1 : 0 }}">
     @if(count($available_items) != 0)
         <input type="hidden" name="supplier_id" id="supplier_id" value="{{$available_items[0]->default_supplier_id}}">
         <input type="hidden" name="item_id" id="item_id" value="{{ $available_items[0]->id }}">

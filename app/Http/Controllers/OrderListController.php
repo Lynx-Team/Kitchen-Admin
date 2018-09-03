@@ -62,7 +62,10 @@ class OrderListController extends Controller
         {
             $orderList->update(['completed' => false]);
             foreach ($orderList->order_list_items as $item)
-                $item->update(['quantity' => 0]);
+                if ($item->one_off)
+                    $item->delete();
+                else
+                    $item->update(['quantity' => 0]);
         }
         return redirect()->back();
     }
