@@ -56,7 +56,12 @@
             @if(count($reports) !== 0)
                 <div class="list-group">
                     @foreach($reports as $report)
-                        <a href="#" class="list-group-item list-group-item-action">Test</a>
+                        <a href="{{ route('reporting_items.view', ['kitchen_id' => Request::segment(2), 'report_id' => $report->id]) }}" class="list-group-item list-group-item-action">
+                            {{ $report->note }}
+                            <span class="badge badge-pill badge-info">
+                                {{ $report->last_update_date }}
+                            </span>
+                        </a>
                     @endforeach
                 </div>
             @else
