@@ -12,11 +12,11 @@
                         @csrf
                         <div class="col form-group">
                             <label>{{ __('reporting.days_kitchen') }}</label>
-                            <input type="number" class="form-control" name="days_kitchen">
+                            <input type="number" class="form-control" name="days_kitchen" min="1">
                         </div>
                         <div class="col form-group">
                             <label>{{ __('reporting.days_supplier') }}</label>
-                            <input type="number" class="form-control" name="days_supplier">
+                            <input type="number" class="form-control" name="days_supplier" min="1">
                         </div>
                         <div class="col">
                             <label>&nbsp;</label>
