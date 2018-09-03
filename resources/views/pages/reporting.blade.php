@@ -8,17 +8,16 @@
             <div class="card">
                 <div class="card-header">{{ __('reporting.days_to_keep') }}</div>
                 <div class="card-body">
-                    <form action="#" method="POST" class="row">
+                    <form action="{{ route('reporting.update_days_to_keep') }}" method="POST" class="row justify-content-center">
                         @csrf
-                        <div class="col form-group">
-                            <label>{{ __('reporting.days_kitchen') }}</label>
-                            <input type="number" class="form-control" name="days_kitchen" min="1">
+                        <div class="col-4 form-group">
+                            <label>{{ __('reporting.days_to_keep') }}</label>
+                            <input type="number" class="form-control" name="days_to_keep" min="1" value="{{ $days_to_keep }}">
+                            @if($errors->has('days_to_keep'))
+                                <p class="form-text text-danger">{{ $errors->first('days_to_keep') }}</p>
+                            @endif
                         </div>
-                        <div class="col form-group">
-                            <label>{{ __('reporting.days_supplier') }}</label>
-                            <input type="number" class="form-control" name="days_supplier" min="1">
-                        </div>
-                        <div class="col">
+                        <div class="col-2">
                             <label>&nbsp;</label>
                             <button type="submit" class="form-control btn btn-warning">{{ __('reporting.update_days_btn') }}</button>
                         </div>

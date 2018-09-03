@@ -213,4 +213,8 @@ return [
 
     ],
 
+    'reporting' => [
+        'days_to_keep' => env('DAYS_TO_KEEP', 30),
+    ],
+
 ];
