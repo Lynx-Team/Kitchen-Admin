@@ -27,7 +27,7 @@ class SupplierPolicy
 
     public function update(User $user, Supplier $supplier)
     {
-        return $user->is_admin;
+        return $user->is_admin; // && $supplier->kitchen()->customer()->id == $user->customer()->id;
     }
 
     public function delete(User $user, Supplier $supplier)

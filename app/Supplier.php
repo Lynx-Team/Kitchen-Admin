@@ -8,7 +8,7 @@ class Supplier extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['name', 'email'];
+    protected $fillable = [ 'name', 'email', 'kitchen_id', ];
 
     public function items()
     {

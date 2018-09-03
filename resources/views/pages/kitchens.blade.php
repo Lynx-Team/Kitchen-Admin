@@ -100,7 +100,7 @@
         <div class="row justify-content-center mb-2">
             <div class="card col-10">
                 <div class="card-body row">
-                    <div class="col-6">
+                    <div class="col-4">
                         <h5>
                             @php($kitchenProfile = \App\KitchenProfile::where('kitchen_id', $kitchen->id))
                             @if(Auth::user()->can('view', \App\KitchenProfile::class))
@@ -112,6 +112,13 @@
                             @endif
                             <span class="badge badge-primary badge-pill">Order lists: {{ $kitchen->order_lists_number }}</span>
                         </h5>
+                    </div>
+                    <div class="col-2">
+                        @if(Auth::user()->can('view', \App\Supplier::class))
+                            <a href="{{ route('suppliers.view', ['kitchen_id' => $kitchen->id]) }}" class="btn btn-primary">
+                                Suppliers
+                            </a>
+                        @endif
                     </div>
                     <div class="col-2">
                         @if(Auth::user()->can('view', \App\Item::class))

@@ -16,7 +16,8 @@ Route::post('/users/delete', 'UserController@delete')->name('users.delete');
 Route::post('/users/update_profile', 'UserController@update_profile')->name('users.update_profile');
 Route::post('/users/change_password', 'UserController@change_password')->name('users.change_password');
 
-Route::get('/suppliers', 'SupplierController@view')->name('suppliers.view');
+Route::get('/kitchen/{kitchen_id}/suppliers', 'SupplierController@view')
+    ->where(['kitchen_id' => '[0-9]+'])->name('suppliers.view');
 Route::post('/suppliers/create', 'SupplierController@create')->name('suppliers.create');
 Route::post('/suppliers/update', 'SupplierController@update')->name('suppliers.update');
 Route::post('/suppliers/delete', 'SupplierController@delete')->name('suppliers.delete');

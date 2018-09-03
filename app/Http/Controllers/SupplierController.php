@@ -10,17 +10,17 @@ use Illuminate\Support\Facades\Auth;
 
 class SupplierController extends Controller
 {
-    public function view()
+    public function view($kitchenId)
     {
         if (Auth::check() && Auth::user()->can('view', Supplier::class))
-            return view('pages.suppliers', ['suppliers' => Supplier::all()]);
+            return view('pages.suppliers', ['suppliers' => Supplier::where('kitchen_id', $kitchenId)->get()]);
 
         return redirect()->back();
     }
 
     public function create(CreateSupplierRequest $request)
     {
-        Supplier::create(['name' => $request->name, 'email' => $request->email]);
+        Supplier::create($request->all());
         return redirect()->back();
     }
 
