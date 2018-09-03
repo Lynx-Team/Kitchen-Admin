@@ -78,4 +78,8 @@ class User extends Authenticatable
     public function customer() {
         return $this->worker->customer()->get()[0];
     }
+
+    public function kitchen() {
+        $this->hasMany('App\HistoryOrderList', 'kitchen_id');
+    }
 }

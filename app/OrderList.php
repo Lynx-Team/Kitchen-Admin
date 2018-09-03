@@ -24,4 +24,9 @@ class OrderList extends Model
     {
         return $this->hasMany('App\AvailableItem');
     }
+
+    public function history()
+    {
+        return $this->hasOne('App\HistoryOrderList', 'kitchen_id');
+    }
 }
